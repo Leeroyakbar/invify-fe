@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Parisienne&family=Pinyon+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Parisienne&family=Pinyon+Script&display=swap");
 
 /* =========================
    DESIGN TOKENS (Tailwind v4)
@@ -9,6 +9,8 @@
   --font-display: "Parisienne", cursive;
   --font-montserrat: "Montserrat", sans-serif;
   --font-cormorant: "Cormorant Garamond", serif;
+  --font-dancing: "Dancing Script";
+  --font-lora: "Lora";
 
   --color-faded-merlot: #814d5b;
 
@@ -39,6 +41,14 @@
     font-family: var(--font-cormorant);
   }
 
+  .font-dancing {
+    font-family: var(--font-dancing);
+  }
+
+  .font-lora {
+    font-family: var(--font-lora);
+  }
+
   .text-faded-merlot {
     color: var(--color-faded-merlot);
   }
@@ -65,5 +75,9 @@
 
   .hover\:bg-merlot-700:hover {
     background-color: var(--merlot-700);
+  }
+
+  .border-merlot-300 {
+    border-color: var(--merlot-300);
   }
 }

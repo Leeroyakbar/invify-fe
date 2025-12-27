@@ -1,17 +1,28 @@
 export interface Invitation {
-    slug : string;
-    groomName : string;
-    brideName : string;
+  slug: string
+  groomName: string
+  brideName: string
 
-    eventDate : string;
-    akadLocation : string;
-    receptionLocation : string;
+  groomPhoto: string
+  bridePhoto: string
 
-    media : Media[];
+  eventDate: string
+  akadLocation: string
+  receptionLocation: string
+
+  groomFullName: string
+  brideFullName: string
+
+  groomFather: string
+  brideMother: string
+
+  groomMother: string
+  brideFather: string
+
+  media: Media[]
 }
 
-
 export interface Media {
-    type : "IMAGE" | "VIDEO";
-    url : string;
+  type: "IMAGE" | "VIDEO"
+  url: string
 }
