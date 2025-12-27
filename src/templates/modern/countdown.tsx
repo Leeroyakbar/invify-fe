@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import type { Invitation } from "../../types/Invitation"
 import CountdownItem from "../../ui/countdownItem"
-import { stagger, fadeUp, scaleFade } from "../../motions/templateMotions"
+import { stagger, fadeUp, scaleFade } from "../../motions/cek"
 import { motion } from "framer-motion"
 
 function getTimeRemaining(targetDate: string) {
