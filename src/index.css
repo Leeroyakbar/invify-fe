@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Parisienne&family=Pinyon+Script&display=swap");
+
+/* =========================
+   DESIGN TOKENS (Tailwind v4)
+   ========================= */
+@theme {
+  --font-script: "Pinyon Script", cursive;
+  --font-display: "Parisienne", cursive;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-cormorant: "Cormorant Garamond", serif;
+
+  --color-faded-merlot: #814d5b;
+
+  --merlot-100: #f4e9ec;
+  --merlot-300: #cfa3ad;
+  --merlot-500: #814d5b;
+  --merlot-700: #5f3641;
+  --merlot-800: #45262e;
+}
+
+/* =========================
+   UTILITIES
+   ========================= */
+@layer utilities {
+  .font-script {
+    font-family: var(--font-script);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-montserrat {
+    font-family: var(--font-montserrat);
+  }
+
+  .font-cormorant {
+    font-family: var(--font-cormorant);
+  }
+
+  .text-faded-merlot {
+    color: var(--color-faded-merlot);
+  }
+
+  .bg-merlot-100 {
+    background-color: var(--merlot-100);
+  }
+  .bg-merlot-300 {
+    background-color: var(--merlot-300);
+  }
+  .bg-merlot-500 {
+    background-color: var(--merlot-500);
+  }
+  .bg-merlot-700 {
+    background-color: var(--merlot-700);
+  }
+  .bg-merlot-800 {
+    background-color: var(--merlot-800);
+  }
+
+  .hover\:bg-merlot-800:hover {
+    background-color: var(--merlot-800);
+  }
+
+  .hover\:bg-merlot-700:hover {
+    background-color: var(--merlot-700);
+  }
+}
