@@ -1,14 +1,27 @@
-import type { Invitation } from "../../types/Invitation"
+import { useRef } from "react"
+import type { TemplateProps } from "../../types/TemplateProps"
+import Announcement from "./announcement"
 import Cover from "./cover"
 
-interface Props {
-  data: Invitation
-}
+const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
+  const announcementRef = useRef<HTMLDivElement>(null)
 
-const ModernTemplate = ({ data }: Props) => {
+  const handleOpen = () => {
+    onOpen()
+
+    // scroll ke announcement
+    setTimeout(() => {
+      announcementRef.current?.scrollIntoView({
+        behavior: "smooth",
+      })
+    }, 100)
+  }
   return (
     <>
-      <Cover data={data} />
+      <Cover data={data} isOpened={isOpened} onOpen={handleOpen} />
+      <div ref={announcementRef}>
+        <Announcement data={data} />
+      </div>
     </>
   )
 }

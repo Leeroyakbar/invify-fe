@@ -1,6 +1,8 @@
+import type { ComponentType } from "react"
+import type { TemplateProps } from "../types/TemplateProps"
 import Modern from "./modern"
 
-export const TEMPLATE_MAP = {
+export const TEMPLATE_MAP: Record<string, ComponentType<TemplateProps>> = {
   modern: Modern,
 }
 
