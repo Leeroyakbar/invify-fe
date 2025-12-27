@@ -3,7 +3,7 @@ import type { Invitation } from "../../types/Invitation"
 
 export default function Announcement({ data }: { data: Invitation }) {
   return (
-    <section className="relative min-h-[100svh] flex justify-center px-6 text-center overflow-hidden">
+    <section className="relative min-h-svh flex justify-center px-6 text-center overflow-hidden">
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0 bg-[url('/modern/announcement-bg.png')] bg-cover bg-center" />
 

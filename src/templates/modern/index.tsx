@@ -2,6 +2,7 @@ import { useRef } from "react"
 import type { TemplateProps } from "../../types/TemplateProps"
 import Announcement from "./announcement"
 import Cover from "./cover"
+import Countdown from "./countdown"
 
 const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
   const announcementRef = useRef<HTMLDivElement>(null)
@@ -22,6 +23,7 @@ const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
       <div ref={announcementRef}>
         <Announcement data={data} />
       </div>
+      <Countdown data={data} />
     </>
   )
 }
