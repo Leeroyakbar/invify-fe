@@ -28,8 +28,8 @@ export default function Couple({ data }: { data: Invitation }) {
         {/* HEADER */}
         <motion.div variants={fadeUp} className="mb-10 flex flex-col items-center text-center">
           <img src={nameCard} alt="" className="w-52 mb-4" />
-          <p className="font-script text-lg md:text-6xl text-faded-merlot mb-2">Bride & Groom</p>
-          <p className="font-lora italic text-xs md:text-sm tracking-widest text-faded-merlot">Assalamualaikum Warahmatullahi Wabarakatuh</p>
+          <p className="font-script text-4xl md:text-6xl text-faded-merlot mb-2">Bride & Groom</p>
+          <p className="font-lora italic text-sm md:text-lg tracking-widest text-faded-merlot">Assalamualaikum Warahmatullahi Wabarakatuh</p>
         </motion.div>
 
         {/* GROOM */}

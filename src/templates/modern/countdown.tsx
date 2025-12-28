@@ -52,7 +52,7 @@ export default function Countdown({ data }: { data: Invitation }) {
         <motion.div className="w-px h-16 bg-white/60 mb-8" variants={fadeUp} />
 
         {/* COUNTDOWN */}
-        <motion.div className="grid grid-cols-4 gap-10" variants={fadeUp}>
+        <motion.div className="grid grid-cols-4 gap-10 pb-8" variants={fadeUp}>
           <CountdownItem label="Days" value={time.days} />
           <CountdownItem label="Hours" value={time.hours} />
           <CountdownItem label="Minutes" value={time.minutes} />
