@@ -28,14 +28,14 @@ export default function Couple({ data }: { data: Invitation }) {
         {/* HEADER */}
         <motion.div variants={fadeUp} className="mb-10 flex flex-col items-center text-center">
           <img src={nameCard} alt="" className="w-52 mb-4" />
-          <p className="font-script text-4xl md:text-6xl text-faded-merlot mb-2">Bride & Groom</p>
-          <p className="font-lora italic text-sm md:text-lg tracking-widest text-faded-merlot">Assalamualaikum Warahmatullahi Wabarakatuh</p>
+          <p className="font-script text-3xl md:text-5xl text-faded-merlot mb-2">Bride & Groom</p>
+          <p className="font-lora italic text-xs md:text-sm tracking-widest text-faded-merlot">Assalamualaikum Warahmatullahi Wabarakatuh</p>
         </motion.div>
 
         {/* GROOM */}
         <motion.div variants={scaleFade} className="mb-12">
           <img src={data.groomPhoto} alt="Groom" className="w-full rounded-[140px] border-4 border-merlot-300 mb-4" />
-          <p className="font-script text-4xl text-gold mb-2 text-faded-merlot">{data.groomFullName}</p>
+          <p className="font-script text-5xl text-gold mb-2 text-faded-merlot">{data.groomFullName}</p>
           <p className="text-sm font-serif italic text-faded-merlot leading-relaxed">
             Putra dari <br /> Bapak {data.groomFather}
             <br />&
@@ -52,7 +52,7 @@ export default function Couple({ data }: { data: Invitation }) {
         {/* BRIDE */}
         <motion.div variants={scaleFade}>
           <img src={data.bridePhoto} alt="Bride" className="w-full rounded-[140px] border-4 border-merlot-300 mb-4" />
-          <p className="font-script text-4xl text-gold mb-2 text-faded-merlot">{data.brideFullName}</p>
+          <p className="font-script text-5xl text-gold mb-2 text-faded-merlot">{data.brideFullName}</p>
           <p className="text-sm font-serif italic text-faded-merlot leading-relaxed">
             Putri dari
             <br /> Bapak {data.brideFather}
