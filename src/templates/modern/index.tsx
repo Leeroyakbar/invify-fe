@@ -4,6 +4,7 @@ import Announcement from "./announcement"
 import Cover from "./cover"
 import Countdown from "./countdown"
 import Couple from "./couple"
+import WeddingEvent from "./event"
 
 const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
   const announcementRef = useRef<HTMLDivElement>(null)
@@ -26,6 +27,7 @@ const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
       </div>
       <Countdown data={data} />
       <Couple data={data} />
+      <WeddingEvent data={data} />
     </>
   )
 }

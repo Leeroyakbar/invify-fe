@@ -14,7 +14,11 @@ export default function InvitationPage() {
   const theme = TEMPLATE_THEME[templateName]
   const [isOpened, setIsOpened] = useState(false)
 
-  const eventDate = dummyInvitation.eventDate.split("-").reverse().join(" • ")
+  const rawDate = "2027-02-27" // Contoh dari API
+  const [year, month, day] = rawDate.split("-")
+
+  // Hasilnya tetap angka dalam bentuk string
+  const eventDateFormatted = `${day} • ${month} • ${year}`
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-neutral-200">
@@ -33,7 +37,7 @@ export default function InvitationPage() {
             {dummyInvitation.groomName}
           </h1>
 
-          <p className="font-serif text-xl tracking-widest text-white">{eventDate}</p>
+          <p className="font-serif text-xl tracking-widest text-white">{eventDateFormatted}</p>
         </div>
       </div>
 

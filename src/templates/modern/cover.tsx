@@ -11,7 +11,11 @@ interface CoverSectionProps {
 }
 
 export default function Cover({ data, guestName = "Bapak/Ibu/Saudara/i", isOpened, onOpen }: CoverSectionProps) {
-  const eventDate = data.eventDate.split("-").reverse().join(" • ")
+  const rawDate = "2027-02-27" // Contoh dari API
+  const [year, month, day] = rawDate.split("-")
+
+  // Hasilnya tetap angka dalam bentuk string
+  const eventDateFormatted = `${day} • ${month} • ${year}`
 
   const handleOpen = () => {
     if (!isOpened) {
@@ -36,7 +40,7 @@ export default function Cover({ data, guestName = "Bapak/Ibu/Saudara/i", isOpene
           {data.groomName}
         </h1>
 
-        <p className="font-serif text-sm tracking-widest mb-10 text-faded-merlot">{eventDate}</p>
+        <p className="font-serif text-sm tracking-widest mb-10 text-faded-merlot">{eventDateFormatted}</p>
 
         <p className="italic text-lg mb-1 text-faded-merlot font-cormorant">Kepada Yth.</p>
         <p className="text-xl font-bold mb-10 text-faded-merlot font-cormorant">{guestName}</p>

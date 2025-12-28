@@ -8,7 +8,6 @@ export interface Invitation {
 
   eventDate: string
   akadLocation: string
-  receptionLocation: string
 
   groomFullName: string
   brideFullName: string
@@ -18,6 +17,26 @@ export interface Invitation {
 
   groomMother: string
   brideFather: string
+
+  akadTimeStart: string
+  akadTimeEnd: string
+  akadVanue: string
+  akadMapsUrl: string
+  
+  receptionDate: string
+  receptionTimeStart: string
+  receptionTimeEnd: string
+  receptionVanue: string
+  receptionLocation: string
+  receptionMapsUrl: string
+
+  ngunduhMantuDate: string
+  ngunduhMantuTimeStart: string
+  ngunduhMantuTimeEnd: string
+  ngunduhMantuVanue: string
+  ngunduhMantuLocation: string
+  ngunduhMantuMapsUrl: string
+
 
   media: Media[]
 }

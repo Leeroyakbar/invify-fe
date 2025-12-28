@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import type { Invitation } from "../../types/Invitation"
 import nameCard from "@/assets/name-card.png"
-import { stagger, fadeUp, scaleFade } from "../../motions/cek"
+import { stagger, fadeUp, scaleFade } from "../../motions/templateMotions"
 
 export default function Couple({ data }: { data: Invitation }) {
   return (
