@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import type { Invitation } from "../../types/Invitation"
 import { stagger, fadeUp, scaleFade, floatY, floatScaleRotate } from "../../motions/templateMotions"
-import flowerTop2 from "../../../public/modern/ornaments/flower-2.png"
+import flower2 from "../../../public/modern/ornaments/flower-2.png"
 import scheduleIcon from "../../../public/modern/icons/schedule.png"
 import mapIcon from "../../../public/modern/icons/map.png"
 import roseImg from "../../../public/modern/rose.png"
@@ -72,12 +72,12 @@ export default function WeddingEvent({ data }: { data: Invitation }) {
       <div className="absolute inset-0 bg-[url('/modern/event/event-bg.png')] bg-cover bg-center bg-fixed" />
 
       {/* ORNAMEN BUNGA KANAN ATAS */}
-      <motion.img src={flowerTop2} alt="" className="absolute top-0 right-0 w-62 md:w-82 translate-x-3 -translate-y-3 scale-y-[-1] z-12 pointer-events-none " variants={floatY} animate="animate" />
-      <motion.img src={flowerTop2} alt="" className="absolute top-0 left-0 w-62 md:w-82 -translate-x-3 -translate-y-3 scale-x-[-1] scale-y-[-1] z-12 pointer-events-none " variants={floatY} animate="animate" />
+      <motion.img src={flower2} alt="" className="absolute top-0 right-0 w-62 md:w-82 translate-x-3 -translate-y-3 scale-y-[-1] z-12 pointer-events-none " variants={floatY} animate="animate" />
+      <motion.img src={flower2} alt="" className="absolute top-0 left-0 w-62 md:w-82 -translate-x-3 -translate-y-3 scale-x-[-1] scale-y-[-1] z-12 pointer-events-none " variants={floatY} animate="animate" />
 
       {/* ORNAMEN BUNGA BAWAH */}
-      <motion.img src={flowerTop2} alt="" className="absolute bottom-0 left-0 w-62 md:w-82 -translate-x-2 translate-y-3 scale-x-[-1] z-11 pointer-events-none" variants={floatY} animate="animate" />
-      <motion.img src={flowerTop2} alt="" className="absolute bottom-0 right-0 w-62 md:w-82 translate-x-2 translate-y-3 scale-x-[1] z-11 pointer-events-none " variants={floatY} animate="animate" />
+      <motion.img src={flower2} alt="" className="absolute bottom-0 left-0 w-62 md:w-82 -translate-x-2 translate-y-3 scale-x-[-1] z-11 pointer-events-none" variants={floatY} animate="animate" />
+      <motion.img src={flower2} alt="" className="absolute bottom-0 right-0 w-62 md:w-82 translate-x-2 translate-y-3 scale-x-[1] z-11 pointer-events-none " variants={floatY} animate="animate" />
 
       {/* OVERLAY CARD */}
       <motion.div

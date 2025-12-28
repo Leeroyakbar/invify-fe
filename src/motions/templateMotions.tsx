@@ -1,4 +1,4 @@
-import { easeInOut, easeOut } from "framer-motion"
+import { easeIn, easeInOut, easeOut } from "framer-motion"
 import type { Variants } from "framer-motion"
 
 export const scaleFade: Variants = {
@@ -52,6 +52,41 @@ export const floatScaleRotate = {
       duration: 5,
       repeat: Infinity,
       ease: easeInOut,
+    },
+  },
+}
+
+export const expandFade: Variants = {
+  hidden: {
+    opacity: 0,
+    height: 0,
+    scale: 0.96,
+  },
+  visible: {
+    opacity: 1,
+    height: "auto",
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+}
+
+export const revealDown = {
+  hidden: {
+    height: 0,
+  },
+  visible: {
+    height: "auto",
+    transition: {
+      height: { duration: 1, ease: easeIn },
+    },
+  },
+  exit: {
+    height: 1,
+    transition: {
+      height: { duration: 1, ease: easeInOut },
     },
   },
 }

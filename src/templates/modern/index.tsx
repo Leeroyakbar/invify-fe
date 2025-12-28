@@ -6,6 +6,7 @@ import Countdown from "./countdown"
 import Couple from "./couple"
 import WeddingEvent from "./event"
 import LoveStory from "./loveStory"
+import WeddingGifts from "./weddingGifts"
 
 const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
   const announcementRef = useRef<HTMLDivElement>(null)
@@ -30,6 +31,7 @@ const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
       <Couple data={data} />
       <WeddingEvent data={data} />
       <LoveStory data={data} />
+      <WeddingGifts data={data} />
     </>
   )
 }

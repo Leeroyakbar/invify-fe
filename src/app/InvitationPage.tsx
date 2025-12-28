@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { dummyInvitation } from "../data/dummyInvitation"
 import { TEMPLATE_MAP } from "../templates"
+import AudioPlayer from "../ui/audioPlayer"
 
 const TEMPLATE_THEME = {
   modern: {
@@ -22,6 +23,8 @@ export default function InvitationPage() {
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-neutral-200">
+      <AudioPlayer src={dummyInvitation.audioUrl} />
+
       {/* LEFT — STATIC BACKGROUND + TEXT */}
       <div className={`hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-620px)] ${theme.desktopBg}`}>
         {/* overlay */}

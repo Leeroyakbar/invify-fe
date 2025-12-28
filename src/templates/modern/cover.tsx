@@ -24,7 +24,7 @@ export default function Cover({ data, guestName = "Bapak/Ibu/Saudara/i", isOpene
   }
 
   return (
-    <section className="relative min-h-[100svh] flex items-center justify-center">
+    <section className="relative min-h-svh flex items-center justify-center">
       {/* BACKGROUND KHUSUS COVER */}
       <div className="absolute inset-0 bg-[url('/modern/greeting-bg.png')] bg-cover bg-center" />
 
@@ -32,21 +32,21 @@ export default function Cover({ data, guestName = "Bapak/Ibu/Saudara/i", isOpene
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-6">
         <img src={nameCard} alt="" className="w-52 mb-2" />
 
-        <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-2 text-faded-merlot">Wedding Invitation</p>
+        <p className="text-xs max-[380px]:text-[10px] font-semibold tracking-[0.2em] uppercase mb-2 text-faded-merlot">Wedding Invitation</p>
 
-        <h1 className="font-script text-3xl md:text-[44px] text-faded-merlot mb-2 leading-tight">
+        <h1 className="font-script text-3xl md:text-[44px] max-[380px]:text-[28px] text-faded-merlot mb-2 leading-tight">
           {data.brideName}
           <span className="text-gold"> & </span>
           {data.groomName}
         </h1>
 
-        <p className="font-serif text-sm tracking-widest mb-10 text-faded-merlot">{eventDateFormatted}</p>
+        <p className="font-serif text-sm tracking-widest mb-10 max-[380px]:mb-4 text-faded-merlot">{eventDateFormatted}</p>
 
         <p className="italic text-lg mb-1 text-faded-merlot font-cormorant">Kepada Yth.</p>
-        <p className="text-xl font-bold mb-10 text-faded-merlot font-cormorant">{guestName}</p>
+        <p className="text-xl max-[380px]:text-[16px] font-bold mb-10 max-[380px]:mb-4 text-faded-merlot font-cormorant">{guestName}</p>
 
         <Button variant="primary" className="flex items-center gap-2" onClick={handleOpen}>
-          <img src={loveLetter} alt="" className="w-5 h-5" />
+          <img src={loveLetter} alt="" className="w-5 h-5 max-[380px]:w-3 max-[380px]:h-3" />
           <span className="font-montserrat">{isOpened ? "Lihat Undangan" : "Buka Undangan"}</span>
         </Button>
       </div>

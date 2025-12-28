@@ -40,7 +40,18 @@ export interface Invitation {
   storyMeet: string
   storyCommitment: string
   storyMarriage: string
+
+
+  accountNo: string
+  accountName: string
+  bankName: string
   
+  accountNo2: string
+  accountName2: string
+  bankName2: string
+
+  audioUrl: string
+
   media: Media[]
 }
 

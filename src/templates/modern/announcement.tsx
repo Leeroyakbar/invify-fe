@@ -18,9 +18,9 @@ export default function Announcement({ data }: { data: Invitation }) {
         <p className="text-xs md:text-sm font-semibold tracking-[0.3em] uppercase mt-24 mb-3 text-faded-merlot">The Wedding Of</p>
 
         <h2 className="font-script text-4xl md:text-5xl text-faded-merlot mb-3">
-          {data.groomName}
-          <span className="text-gold">&</span>
           {data.brideName}
+          <span className="text-gold">&</span>
+          {data.groomName}
         </h2>
 
         <p className="font-serif text-sm tracking-widest text-faded-merlot">{eventDateFormatted}</p>

@@ -27,7 +27,7 @@ export default function Countdown({ data }: { data: Invitation }) {
   }, [data.eventDate])
 
   return (
-    <section className="relative min-h-[100svh] flex items-center justify-center px-6 text-center bg-merlot-500 text-white overflow-hidden">
+    <section className="relative min-h-svh flex items-center justify-center px-6 text-center bg-merlot-500 text-white overflow-hidden">
       <motion.div className="flex flex-col items-center" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.4 }}>
         {/* ORNAMEN */}
         <motion.img src="/modern/rose.png" alt="" className="w-68 mb-4" variants={scaleFade} />

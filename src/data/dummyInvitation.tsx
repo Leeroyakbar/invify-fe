@@ -41,5 +41,14 @@ export const dummyInvitation: Invitation = {
   storyCommitment: "Dengan niat yang semakin kuat, kami melangkah lebih jauh. Mengikat janji, mempertemukan dua keluarga, dan menyatukan harapan untuk masa depan yang sama.",
   storyMarriage: "Kini, dengan izin Allah SWT serta restu orang tua, kami memulai perjalanan baru dalam ikatan suci pernikahan. Sebuah kisah yang akan kami jaga, selamanya.",
 
+  accountNo: "063701011564535",
+  accountName: "Lili Rahma Yani",
+  bankName: "BRI",
+
+  accountNo2: "901578649650",
+  accountName2: "Lee Roy Akbar",
+  bankName2: "SeaBank",
+
+  audioUrl: "https://www.youtube.com/watch?v=koN2k8V6f3c&list=RDkoN2k8V6f3c",
   media: [],
 }
