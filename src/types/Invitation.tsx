@@ -37,7 +37,10 @@ export interface Invitation {
   ngunduhMantuLocation: string
   ngunduhMantuMapsUrl: string
 
-
+  storyMeet: string
+  storyCommitment: string
+  storyMarriage: string
+  
   media: Media[]
 }
 

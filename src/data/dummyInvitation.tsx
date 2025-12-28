@@ -37,5 +37,9 @@ export const dummyInvitation: Invitation = {
   ngunduhMantuLocation: "Desa Pir Trans Sosa IB, Kec. Lubuk Barumun, Kab. Padang Lawas, Prov. Sumatra Utara",
   ngunduhMantuMapsUrl: "https://maps.app.goo.gl/Wucmo3s9Y6UEKJMi8",
 
+  storyMeet: "Tidak ada yang kebetulan di dunia ini. Semua telah tersusun rapi oleh Sang Maha Kuasa. Pertemuan kami di awal perjalanan ini menjadi awal dari sebuah kisah yang tak pernah kami sangka sebelumnya.",
+  storyCommitment: "Dengan niat yang semakin kuat, kami melangkah lebih jauh. Mengikat janji, mempertemukan dua keluarga, dan menyatukan harapan untuk masa depan yang sama.",
+  storyMarriage: "Kini, dengan izin Allah SWT serta restu orang tua, kami memulai perjalanan baru dalam ikatan suci pernikahan. Sebuah kisah yang akan kami jaga, selamanya.",
+
   media: [],
 }
