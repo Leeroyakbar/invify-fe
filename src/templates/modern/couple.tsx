@@ -21,7 +21,7 @@ export default function Couple({ data }: { data: Invitation }) {
           min-h-[90svh]
           bg-white/75 backdrop-blur-none
           rounded-[180px]
-          px-14 py-12 my-12
+          px-10 py-12 my-12
           flex flex-col items-center text-center
         "
       >

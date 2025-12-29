@@ -51,11 +51,5 @@ export const dummyInvitation: Invitation = {
 
   audioUrl: "https://www.youtube.com/watch?v=lnuFWMnyKk0&list=RDlnuFWMnyKk0",
 
-  images: [
-    "../../../public/modern/galery/galery-3.png",
-    "../../../public/modern/galery/galery-2.png",
-    "../../../public/modern/galery/galery-1.png",
-    "../../../public/modern/galery/galery-4.png",
-    "../../../public/modern/galery/galery-5.png",
-  ],
+  images: ["/modern/galery/galery-3.png", "/modern/galery/galery-2.png", "/modern/galery/galery-1.png", "/modern/galery/galery-4.png", "/modern/galery/galery-5.png"],
 }
