@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import type { Invitation } from "../../types/Invitation"
-import { stagger, fadeUp, scaleFade, floatY, floatScaleRotate } from "../../motions/templateMotions"
+import { stagger, fadeUp, fadeLeft, fadeRight, floatY, floatScaleRotate } from "../../motions/templateMotions"
 import flower2 from "../../../public/modern/ornaments/flower-2.png"
 import scheduleIcon from "../../../public/modern/icons/schedule.png"
 import mapIcon from "../../../public/modern/icons/map.png"
@@ -84,7 +84,7 @@ export default function WeddingEvent({ data }: { data: Invitation }) {
         variants={stagger}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.3 }}
         className="
           relative z-10
           w-full max-w-[520px]
@@ -96,7 +96,7 @@ export default function WeddingEvent({ data }: { data: Invitation }) {
         "
       >
         {/* HEADER */}
-        <motion.div variants={fadeUp} className="items-center">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.6 }} className="items-center">
           <div className="flex flex-col items-center text-center leading-none mb-4">
             <p className="font-cormorant text-4xl font-semibold -translate-x-5 uppercase text-faded-merlot mb-1">Save</p>
             <p className="font-display text-3xl text-faded-merlot -mt-2 translate-x-8">The Date</p>
@@ -104,9 +104,9 @@ export default function WeddingEvent({ data }: { data: Invitation }) {
         </motion.div>
 
         {/* EVENT LIST */}
-        <motion.div variants={stagger} className="w-full">
+        <div className="w-full">
           {/* SEKSI AKAD */}
-          <motion.div variants={scaleFade} className="relative mx-auto mt-2 mb-10 w-full max-w-[320px] px-6 py-12 text-center">
+          <motion.div variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }} className="relative mx-auto mt-2 mb-10 w-full max-w-[320px] px-6 py-12 text-center">
             {/* Background Arch */}
             <div
               className="absolute inset-0 rounded-t-full bg-white border border-merlot-300 pointer-events-none z-0 
@@ -146,7 +146,7 @@ export default function WeddingEvent({ data }: { data: Invitation }) {
           {/* RESEPSI */}
           {hasReception && (
             <>
-              <motion.div variants={scaleFade} className="relative mb-10 mx-auto w-full max-w-[320px] px-6 py-12 text-center">
+              <motion.div variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }} className="relative mb-10 mx-auto w-full max-w-[320px] px-6 py-12 text-center">
                 {/* DIVIDER */}
                 <motion.img src={roseImg} alt="" className=" absolute -top-6 left-1/2 -translate-x-1/2 -translate-y-16 w-32 z-20 pointer-events-none -rotate-6" variants={floatScaleRotate} animate="animate" />
                 {/* Background Arch */}
@@ -191,7 +191,7 @@ export default function WeddingEvent({ data }: { data: Invitation }) {
           {hasNgunduhMantu && (
             <>
               {/* Ngunduh Mantu */}
-              <motion.div variants={scaleFade} className="relative mx-auto w-full max-w-[320px] px-6 py-12 text-center">
+              <motion.div variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }} className="relative mx-auto w-full max-w-[320px] px-6 py-12 text-center">
                 {/* DIVIDER */}
                 <motion.img src={roseImg} alt="" className="absolute -top-6 left-1/2 -translate-x-1/2 -translate-y-16 w-32 z-20 pointer-events-none -rotate-6" variants={floatScaleRotate} animate="animate" />
                 {/* Background Arch */}
@@ -228,7 +228,7 @@ export default function WeddingEvent({ data }: { data: Invitation }) {
               </motion.div>
             </>
           )}
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   )

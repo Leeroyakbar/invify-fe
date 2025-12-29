@@ -85,4 +85,32 @@
   .border-merlot-300 {
     border-color: var(--merlot-300);
   }
+
+  .text-merlot-100 {
+    color: var(--merlot-100);
+  }
+  .text-merlot-300 {
+    color: var(--merlot-300);
+  }
+  .text-merlot-500 {
+    color: var(--merlot-500);
+  }
+  .text-merlot-700 {
+    color: var(--merlot-700);
+  }
+  .text-merlot-800 {
+    color: var(--merlot-800);
+  }
+
+  /* opacity helpers */
+  .text-merlot-700\/90 {
+    color: color-mix(in srgb, var(--merlot-700) 90%, transparent);
+  }
+  .text-merlot-700\/80 {
+    color: color-mix(in srgb, var(--merlot-700) 80%, transparent);
+  }
+
+  .bg-merlot-rsvp {
+    background: linear-gradient(to bottom, var(--merlot-100), color-mix(in srgb, var(--merlot-300) 40%, transparent), color-mix(in srgb, var(--merlot-300) 70%, transparent));
+  }
 }

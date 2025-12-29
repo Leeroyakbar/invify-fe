@@ -49,6 +49,13 @@ export const dummyInvitation: Invitation = {
   accountName2: "Lee Roy Akbar",
   bankName2: "SeaBank",
 
-  audioUrl: "https://www.youtube.com/watch?v=koN2k8V6f3c&list=RDkoN2k8V6f3c",
-  media: [],
+  audioUrl: "https://www.youtube.com/watch?v=lnuFWMnyKk0&list=RDlnuFWMnyKk0",
+
+  images: [
+    "../../../public/modern/galery/galery-3.png",
+    "../../../public/modern/galery/galery-2.png",
+    "../../../public/modern/galery/galery-1.png",
+    "../../../public/modern/galery/galery-4.png",
+    "../../../public/modern/galery/galery-5.png",
+  ],
 }

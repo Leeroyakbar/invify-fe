@@ -52,10 +52,5 @@ export interface Invitation {
 
   audioUrl: string
 
-  media: Media[]
-}
-
-export interface Media {
-  type: "IMAGE" | "VIDEO"
-  url: string
+  images: string[]
 }

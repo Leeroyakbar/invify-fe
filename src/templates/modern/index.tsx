@@ -7,6 +7,8 @@ import Couple from "./couple"
 import WeddingEvent from "./event"
 import LoveStory from "./loveStory"
 import WeddingGifts from "./weddingGifts"
+import GallerySection from "./galery"
+import RSVPSection from "./rsvp"
 
 const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
   const announcementRef = useRef<HTMLDivElement>(null)
@@ -32,6 +34,8 @@ const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
       <WeddingEvent data={data} />
       <LoveStory data={data} />
       <WeddingGifts data={data} />
+      <GallerySection images={data.images} />
+      <RSVPSection />
     </>
   )
 }
