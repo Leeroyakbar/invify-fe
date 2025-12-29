@@ -53,4 +53,12 @@ export interface Invitation {
   audioUrl: string
 
   images: string[]
+
+  guests: Guest[]
+}
+
+export interface Guest {
+  id: number
+  name: string
+  isAttending: boolean
 }

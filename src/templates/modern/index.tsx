@@ -36,7 +36,7 @@ const ModernTemplate = ({ data, isOpened, onOpen }: TemplateProps) => {
       <LoveStory data={data} />
       <WeddingGifts data={data} />
       <GallerySection images={data.images} />
-      <RSVPSection />
+      <RSVPSection data={data} />
       <ThankYouSection data={data} />
     </>
   )

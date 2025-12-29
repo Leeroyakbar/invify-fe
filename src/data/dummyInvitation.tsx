@@ -52,4 +52,22 @@ export const dummyInvitation: Invitation = {
   audioUrl: "https://www.youtube.com/watch?v=lnuFWMnyKk0&list=RDlnuFWMnyKk0",
 
   images: ["/modern/galery/galery-3.png", "/modern/galery/galery-2.png", "/modern/galery/galery-1.png", "/modern/galery/galery-4.png", "/modern/galery/galery-5.png"],
+
+  guests: [
+    {
+      id: 1,
+      name: "Lee Roy Akbar",
+      isAttending: true,
+    },
+    {
+      id: 2,
+      name: "Lili Rahma Yani",
+      isAttending: true,
+    },
+    {
+      id: 3,
+      name: "Lee Roy Akbar",
+      isAttending: false,
+    },
+  ],
 }

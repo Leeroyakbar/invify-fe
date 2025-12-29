@@ -1,8 +1,10 @@
 import { motion } from "framer-motion"
 import { fadeUp, scaleFade, fadeSoft } from "../../motions/templateMotions"
 import Button from "../../ui/button"
+import { BadgeCheck } from "lucide-react"
+import type { Invitation } from "../../types/Invitation"
 
-export default function RSVPSection() {
+export default function RSVPSection({ data }: { data: Invitation }) {
   return (
     <section className="relative py-24 px-4 bg-merlot-rsvp">
       {/* HEADER */}
@@ -17,19 +19,6 @@ export default function RSVPSection() {
 
       {/* CARD */}
       <motion.div variants={scaleFade} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }} className="relative mx-auto max-w-105 bg-white/70 border border-merlot-300/30 rounded-4xl p-6 shadow-lg">
-        {/* SUMMARY */}
-        <div className="mb-6 text-center">
-          <p className="text-sm font-lora text-gray-600 mb-3">59 Comments</p>
-          <div className="flex justify-center gap-4">
-            <div className="bg-green-500 font-lora text-white rounded-xl px-6 py-2 text-sm">
-              13 <br /> Hadir
-            </div>
-            <div className="bg-red-500 font-lora text-white rounded-xl px-6 py-2 text-sm">
-              39 <br /> Tidak Hadir
-            </div>
-          </div>
-        </div>
-
         {/* FORM */}
         <div className="space-y-3 mb-6">
           <input placeholder="Nama" className="w-full font-lora rounded-xl border px-4 py-2 text-sm outline-none" />
@@ -54,9 +43,12 @@ export default function RSVPSection() {
             pr-1
           "
         >
-          {[1, 2, 3, 4].map((item) => (
-            <motion.div key={item} variants={fadeSoft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white rounded-xl p-4 shadow-sm">
-              <p className="font-semibold font-lora text-sm">Lee Roy Akbar</p>
+          {data.guests.map((item) => (
+            <motion.div key={item.id} variants={fadeSoft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="bg-white rounded-xl p-4 shadow-sm">
+              <p className="font-semibold font-lora text-sm relative inline-block">
+                {item.name}
+                <BadgeCheck className="absolute -top-1 -right-4 w-4 h-4 " color={item.isAttending ? "#65b187" : "#fb2c36"} />
+              </p>
               <p className="text-xs text-gray-600 font-lora mt-1">Barakallah semoga menjadi keluarga sakinah mawaddah warohmah</p>
               <p className="text-[10px] text-gray-400 mt-2 font-lora">1 hari lalu</p>
             </motion.div>
