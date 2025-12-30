@@ -13,14 +13,15 @@ export default function LoveStorySection({ data }: Props) {
   ]
 
   return (
-    <section className="relative bg-[#F8F6F2] px-6 py-32 overflow-hidden">
+    <section className="relative bg-[#F8F6F2] px-6 py-22 overflow-hidden">
       {/* Ornament */}
       <img src="/elegant-ivory/ivory-1.png" alt="" className="pointer-events-none absolute left-0 top-0 w-52 opacity-40" />
       <img src="/elegant-ivory/ivory-1.png" alt="" className="pointer-events-none absolute right-0 bottom-0 w-52 rotate-180 opacity-40" />
 
-      <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-20 text-center font-playfair text-4xl text-[#2F3E46]">
-        Love Story
-      </motion.h2>
+      <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.5 }} className="mb-18 text-center font-playfair text-4xl text-[#2F3E46]">
+        <h2 className="font-playfair text-4xl text-[#2F3E46]">Love</h2>
+        <p className="mt-2 font-script text-4xl text-[#6B7280]">Story</p>
+      </motion.div>
 
       <div className="relative mx-auto max-w-4xl">
         {/* Garis Tengah - Hanya muncul di layar Desktop (md ke atas) */}
@@ -52,7 +53,7 @@ function TimelineItem({ title, content, isLeft, delay = 0 }: { title: string; co
       <div className={`w-full md:w-1/2 ${isLeft ? "md:text-right md:pr-16" : "md:text-left md:pl-16"}`}>
         <div className="rounded-2xl bg-white/50 p-6 shadow-sm backdrop-blur-sm md:bg-transparent md:p-0 md:shadow-none">
           <h3 className="mb-3 font-playfair text-2xl text-[#2F3E46]">{title}</h3>
-          <p className="font-inter text-sm leading-relaxed text-[#6B7280]">{content}</p>
+          <p className="font-lora text-sm leading-relaxed text-[#6B7280]">{content}</p>
         </div>
       </div>
     </motion.div>

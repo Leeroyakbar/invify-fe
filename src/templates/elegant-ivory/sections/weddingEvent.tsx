@@ -18,7 +18,7 @@ export default function WeddingEventSection({ data }: Props) {
   const akadTimeEnd = formatTime(data.akadTimeEnd)
 
   return (
-    <section className="relative h-[170vh] overflow-hidden">
+    <section className="relative min-h-svh overflow-hidden">
       {/* FIXED BACKGROUND */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed lg:bg-scroll"
@@ -31,12 +31,20 @@ export default function WeddingEventSection({ data }: Props) {
       <div className="absolute inset-0 bg-[#F8F6F2]/80" />
 
       {/* SCROLLING CONTENT */}
-      <div className="relative z-10 mx-auto max-w-xl px-6 pt-32">
-        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center font-playfair text-3xl text-[#2F3E46]">
-          Wedding Event
-        </motion.h2>
+      <div className="relative z-10 mx-auto max-w-xl px-6 pt-16 pb-16">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.5, delay: 0.1 }} className="text-center">
+          {/* Title */}
+          <h2 className="font-playfair text-4xl text-[#2F3E46]">Wedding</h2>
 
-        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.1 }} viewport={{ once: true }} className="mx-auto mt-4 max-w-md text-center font-inter text-sm text-[#6B7280]">
+          {/* Cute line + subtitle */}
+          <div className="mt-1 flex items-center justify-center gap-3 text-[#2F3E46]/80">
+            <span className="h-px w-12 bg-[#C8A97E]/60" />
+            <span className="font-display text-4xl tracking-wide">Event</span>
+            <span className="h-px w-10 bg-[#C8A97E]/60" />
+          </div>
+        </motion.div>
+
+        <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.5, delay: 0.3 }} className="mx-auto mt-4 max-w-md text-center font-lora text-sm text-[#6B7280]">
           Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
         </motion.p>
 
@@ -87,7 +95,7 @@ function EventCard({ title, date, time, venue, location, mapsUrl, delay = 0 }: E
 
       <div className="mx-auto my-4 h-px w-16 bg-[#C8A97E]/60" />
 
-      <div className="space-y-4 font-inter text-sm text-[#6B7280]">
+      <div className="space-y-4 font-lora text-sm text-[#6B7280]">
         <div className="flex justify-center items-center gap-2">
           <span>{date}</span>
         </div>
@@ -104,7 +112,7 @@ function EventCard({ title, date, time, venue, location, mapsUrl, delay = 0 }: E
         </div>
       </div>
 
-      <a href={mapsUrl} target="_blank" className="mt-6 inline-block rounded-full border border-[#C8A97E] px-6 py-2 font-inter text-sm text-[#2F3E46] transition hover:bg-[#C8A97E]/10">
+      <a href={mapsUrl} target="_blank" className="mt-6 inline-block rounded-full border border-[#C8A97E] px-6 py-2 font-lora text-sm text-[#2F3E46] transition hover:bg-[#C8A97E]/10">
         Lihat Lokasi
       </a>
     </motion.div>

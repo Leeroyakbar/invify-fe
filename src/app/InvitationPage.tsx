@@ -6,6 +6,7 @@ import AudioPlayer from "../ui/audioPlayer"
 const TEMPLATE_THEME = {
   modern: {
     desktopBg: "bg-[url('/modern/wedding-of-desk.png')] bg-cover bg-center",
+    audioColor: "text-faded-merlot",
   },
   "elegant-ivory": {
     desktopBg: "bg-[url('/modern/couple/couple-bg.jpeg')] bg-cover bg-center",
@@ -28,7 +29,7 @@ export default function InvitationPage() {
 
   const handleOpenInvitation = () => {
     setIsOpened(true)
-    setIsAudioPlaying(true) // 🔥 START AUDIO HERE
+    setIsAudioPlaying(true) 
   }
   return (
     <div className="h-screen w-screen overflow-hidden bg-neutral-200">

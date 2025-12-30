@@ -17,16 +17,39 @@ export default function WeddingGiftsSection({ data }: Props) {
   }
 
   return (
-    <section className="relative px-6 py-32">
+    <section className="relative px-6 pt-10 pb-14">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#F8F6F2] via-[#F8F6F2] to-white" />
 
+      <div className="relative z-10 mb-16 flex items-center justify-center gap-4">
+        <span className="h-px w-20 bg-[#C8A97E]/60" />
+
+        {/* Heart SVG */}
+        <svg width="18" height="16" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-70">
+          <path
+            d="M12 21s-7.5-4.7-10-8.9C-0.5 7.4 3.2 2 8 4.3
+         9.6 5.1 11 7 12 8.5
+         13 7 14.4 5.1 16 4.3
+         20.8 2 24.5 7.4 22 12.1
+         19.5 16.3 12 21 12 21z"
+            stroke="#C8A97E"
+            strokeWidth="1.4"
+            fill="none"
+          />
+        </svg>
+        <span className="h-px w-20 bg-[#C8A97E]/60" />
+      </div>
+
       <div className="relative z-10">
         {/* Title */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16 text-center">
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.5, delay: 0.1 }} className="text-center">
           <Gift className="mx-auto mb-4 text-[#C8A97E]" size={32} />
-          <h2 className="font-playfair text-3xl text-[#2F3E46]">Wedding Gifts</h2>
-          <p className="mt-3 font-inter text-sm text-[#6B7280] max-w-md mx-auto">Doa restu Anda merupakan hadiah terindah bagi kami. Namun apabila berkenan, kami menyediakan tanda kasih berikut.</p>
+          <h2 className="font-playfair text-4xl text-[#2F3E46]">Wedding</h2>
+          <p className="mt-2 font-script text-4xl text-[#6B7280]">Gifts</p>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.5, delay: 0.3 }} className="mb-16 text-center">
+          <p className="mt-3 font-lora text-sm text-[#6B7280] max-w-md mx-auto">Doa restu Anda merupakan hadiah terindah bagi kami. Namun apabila berkenan, kami menyediakan tanda kasih berikut.</p>
         </motion.div>
 
         {/* Cards */}

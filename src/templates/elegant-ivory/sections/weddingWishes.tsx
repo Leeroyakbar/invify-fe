@@ -12,27 +12,42 @@ export default function WeddingWishesSection({ data }: Props) {
   const [attendance, setAttendance] = useState<"hadir" | "tidak_hadir" | "">("")
 
   return (
-    <section className="bg-[#F8F6F2] px-6 py-32">
+    <section className="bg-[#F8F6F2] px-6 py-12">
+      <div className="mb-16 flex items-center justify-center gap-4">
+        <span className="h-px w-20 bg-[#C8A97E]/60" />
+
+        {/* Heart SVG */}
+        <img src="/elegant-ivory/star.png" className="w-8" />
+        <span className="h-px w-20 bg-[#C8A97E]/60" />
+      </div>
+
       {/* Title */}
-      <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center font-playfair text-3xl text-[#2F3E46]">
-        Wedding Wishes
-      </motion.h2>
+      <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.8 }} className="mb-12 text-center font-playfair text-3xl text-[#2F3E46]">
+        <h2 className="font-playfair text-4xl text-[#2F3E46]">Wedding</h2>
+        <p className="mt-2 font-script text-4xl text-[#6B7280]">Wishes</p>
+      </motion.div>
 
       {/* Card */}
       <div className="mx-auto max-w-xl rounded-2xl bg-white px-6 py-8 shadow-md">
         {/* Form */}
         <div className="space-y-4">
-          <input type="text" placeholder="Nama" value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#C8A97E] focus:outline-none" />
+          <input type="text" placeholder="Nama" value={name} onChange={(e) => setName(e.target.value)} className="font-lora w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#C8A97E] focus:outline-none" />
 
-          <textarea placeholder="Ucapan & doa" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#C8A97E] focus:outline-none" />
+          <textarea
+            placeholder="Ucapan & doa"
+            rows={4}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="font-lora w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#C8A97E] focus:outline-none"
+          />
 
-          <select value={attendance} onChange={(e) => setAttendance(e.target.value as "hadir" | "tidak_hadir" | "")} className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#C8A97E] focus:outline-none">
+          <select value={attendance} onChange={(e) => setAttendance(e.target.value as "hadir" | "tidak_hadir" | "")} className="font-lora w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#C8A97E] focus:outline-none">
             <option value="">Konfirmasi Kehadiran</option>
             <option value="hadir">Hadir</option>
             <option value="tidak_hadir">Tidak Hadir</option>
           </select>
 
-          <button className="w-full rounded-full bg-[#4F7C8A] py-2 text-sm text-white transition hover:bg-[#3d616d]">Kirim Ucapan</button>
+          <button className="font-lora w-full rounded-full bg-[#4F7C8A] py-2 text-sm text-white transition hover:bg-[#3d616d]">Kirim Ucapan</button>
         </div>
       </div>
 

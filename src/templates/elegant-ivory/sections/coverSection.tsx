@@ -38,21 +38,21 @@ export default function CoverSection({ data, guestName = "Bapak/Ibu/Saudara/i", 
       <div className="relative z-10 flex h-full flex-col items-center justify-between px-6 text-center text-white">
         {/* Content */}
         <div className="mt-20">
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-2 font-inter text-sm tracking-wide">
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="mb-2 font-cormorant text-xl tracking-wide">
             The Wedding of
           </motion.p>
 
-          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="font-playfair text-4xl font-semibold leading-tight md:text-5xl">
+          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }} className="font-playfair text-4xl font-semibold leading-tight md:text-5xl">
             {data.brideName} <span className="mx-1">&</span> {data.groomName}
           </motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-3 font-inter text-sm tracking-wide">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.5 }} className="mt-3 font-lora text-sm tracking-wide">
             {eventDateFormatted}
           </motion.p>
         </div>
 
         {/* Guest */}
         <div className="mb-20">
-          <p className="mb-2 text-sm font-inter opacity-90">Kepada Yth</p>
+          <p className="mb-2 text-sm font-lora opacity-90">Kepada Yth</p>
           <p className="mb-6 font-playfair text-lg">{guestName}</p>
 
           {/* Tombol dengan Animasi Swipe Up */}
@@ -61,7 +61,7 @@ export default function CoverSection({ data, guestName = "Bapak/Ibu/Saudara/i", 
             onClick={onOpen}
             initial="initial"
             whileHover="hover"
-            className="relative flex h-12 w-48 items-center justify-center overflow-hidden rounded-full bg-[#4F7C8A] font-inter text-sm font-medium text-white shadow-md transition-all hover:bg-[#3d616d]"
+            className="relative flex h-12 w-48 items-center justify-center overflow-hidden rounded-full bg-[#4F7C8A] font-lora text-sm font-medium text-white shadow-md transition-all hover:bg-[#3d616d]"
           >
             {/* Teks Utama */}
             <motion.span variants={textVariants} transition={{ duration: 0.4, ease: "easeInOut" }} className="absolute">
