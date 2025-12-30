@@ -13,7 +13,7 @@ export default function QuoteSection({
 }: QuoteSectionProps) {
   return (
     <section className="bg-white px-6 py-28 text-center">
-      <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.6, ease: easeOut, delay: 0.1 }} className="mx-auto max-w-2xl">
+      <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.5, ease: easeOut, delay: 0.1 }} className="mx-auto max-w-2xl">
         {/* Arabic Verse */}
         <p className="font-playfair text-xl leading-relaxed text-[#2F3E46] md:text-2xl">{verse}</p>
 

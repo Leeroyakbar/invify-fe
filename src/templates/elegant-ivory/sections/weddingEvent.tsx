@@ -82,7 +82,7 @@ interface EventCardProps {
 
 function EventCard({ title, date, time, venue, location, mapsUrl, delay = 0 }: EventCardProps) {
   return (
-    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay }} viewport={{ once: true }} className="rounded-2xl bg-white px-6 py-8 text-center shadow-lg">
+    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay }} viewport={{ once: false }} className="rounded-2xl bg-white px-6 py-8 text-center shadow-lg">
       <h3 className="font-playfair text-2xl text-[#2F3E46]">{title}</h3>
 
       <div className="mx-auto my-4 h-px w-16 bg-[#C8A97E]/60" />

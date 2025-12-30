@@ -20,7 +20,7 @@ export default function CountdownSection({ data }: CountdownProps) {
 
   return (
     <section className="bg-[#F8F6F2] px-6 py-20 text-center">
-      <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-playfair text-3xl text-[#2F3E46]">
+      <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="font-playfair text-3xl text-[#2F3E46]">
         We Are Getting Married
       </motion.h2>
 

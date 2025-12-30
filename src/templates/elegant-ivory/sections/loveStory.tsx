@@ -18,7 +18,7 @@ export default function LoveStorySection({ data }: Props) {
       <img src="/elegant-ivory/ivory-1.png" alt="" className="pointer-events-none absolute left-0 top-0 w-52 opacity-40" />
       <img src="/elegant-ivory/ivory-1.png" alt="" className="pointer-events-none absolute right-0 bottom-0 w-52 rotate-180 opacity-40" />
 
-      <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="mb-20 text-center font-playfair text-4xl text-[#2F3E46]">
+      <motion.h2 initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-20 text-center font-playfair text-4xl text-[#2F3E46]">
         Love Story
       </motion.h2>
 
@@ -42,7 +42,7 @@ function TimelineItem({ title, content, isLeft, delay = 0 }: { title: string; co
       initial={{ opacity: 0, x: isLeft ? -30 : 30 }} // Efek muncul dari samping
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 1, delay, ease: "easeOut" }}
-      viewport={{ once: true }}
+      viewport={{ once: false }}
       className={`relative flex w-full flex-col md:flex-row ${isLeft ? "md:justify-start" : "md:justify-end"}`}
     >
       {/* Dot - Hanya di Desktop */}
