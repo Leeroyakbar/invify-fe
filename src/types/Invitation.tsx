@@ -61,4 +61,5 @@ export interface Guest {
   id: number
   name: string
   isAttending: boolean
+  message: string
 }

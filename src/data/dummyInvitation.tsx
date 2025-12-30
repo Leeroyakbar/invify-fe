@@ -51,23 +51,68 @@ export const dummyInvitation: Invitation = {
 
   audioUrl: "https://www.youtube.com/watch?v=lnuFWMnyKk0&list=RDlnuFWMnyKk0",
 
-  images: ["/modern/galery/galery-3.png", "/modern/galery/galery-2.png", "/modern/galery/galery-1.png", "/modern/galery/galery-4.png", "/modern/galery/galery-5.png"],
+  images: ["/modern/galery/galery-4.png", "/modern/galery/galery-2.png", "/modern/galery/galery-1.png", "/modern/galery/galery-5.png", "/modern/galery/galery-3.png"],
 
   guests: [
     {
       id: 1,
       name: "Lee Roy Akbar",
       isAttending: true,
+      message: "Selamat ya! Semoga menjadi keluarga yang sakinah, mawaddah, warohmah. Lancar sampai hari H!",
     },
     {
       id: 2,
       name: "Lili Rahma Yani",
       isAttending: true,
+      message: "Barakallah! Ikut senang dengar kabarnya. Semoga cinta kalian abadi sampai ke surga-Nya.",
     },
     {
       id: 3,
-      name: "Lee Roy Akbar",
+      name: "Budi Santoso",
+      isAttending: true,
+      message: "Selamat menempuh hidup baru kawan. Semoga selalu diberikan kebahagiaan dan momongan yang saleh/salehah.",
+    },
+    {
+      id: 4,
+      name: "Siti Aminah",
       isAttending: false,
+      message: "Mohon maaf belum bisa hadir karena ada tugas di luar kota. Selamat ya, semoga acaranya lancar tanpa kendala!",
+    },
+    {
+      id: 5,
+      name: "Andi Wijaya",
+      isAttending: true,
+      message: "Akhirnya berlabuh juga! Selamat bro, semoga jadi imam yang baik dan keluarga kalian selalu diberkahi.",
+    },
+    {
+      id: 6,
+      name: "Dewi Sartika",
+      isAttending: true,
+      message: "MasyaAllah tabarakallah. Cantik dan ganteng banget pasangannya. Selamat berbahagia ya kalian!",
+    },
+    {
+      id: 7,
+      name: "Fajar Pratama",
+      isAttending: false,
+      message: "Selamat ya! Titip doa terbaik saja dari sini. Semoga menjadi pasangan yang saling melengkapi selamanya.",
+    },
+    {
+      id: 8,
+      name: "Rina Nose",
+      isAttending: true,
+      message: "Happy Wedding! Semoga cinta kalian terus tumbuh setiap harinya. Cheers for a happy life together!",
+    },
+    {
+      id: 9,
+      name: "Hendra Kurniawan",
+      isAttending: true,
+      message: "Selamat menempuh ibadah terlama. Semoga setiap harinya penuh dengan keberkahan dan rasa syukur.",
+    },
+    {
+      id: 10,
+      name: "Maya Indriati",
+      isAttending: true,
+      message: "Happy for you both! Semoga menjadi keluarga yang harmonis dan selalu rukun sampai kakek nenek.",
     },
   ],
 }
