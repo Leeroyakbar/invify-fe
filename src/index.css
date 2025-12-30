@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Alice&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Parisienne&family=Pinyon+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap");
 
 /* =========================
    DESIGN TOKENS (Tailwind v4)
@@ -12,6 +13,10 @@
   --font-dancing: "Dancing Script";
   --font-lora: "Lora";
   --font-alice: "Alice";
+
+  /* ✅ NEW (template elegant) */
+  --font-playfair: "Playfair Display", serif;
+  --font-inter: "Inter", sans-serif;
 
   --color-faded-merlot: #814d5b;
 
@@ -52,6 +57,15 @@
 
   .font-alice {
     font-family: var(--font-alice);
+  }
+
+  /* ✅ NEW */
+  .font-playfair {
+    font-family: var(--font-playfair);
+  }
+
+  .font-inter {
+    font-family: var(--font-inter);
   }
 
   .text-faded-merlot {

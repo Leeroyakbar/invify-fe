@@ -7,10 +7,13 @@ const TEMPLATE_THEME = {
   modern: {
     desktopBg: "bg-[url('/modern/wedding-of-desk.png')] bg-cover bg-center",
   },
+  "elegant-ivory": {
+    desktopBg: "bg-[url('/modern/couple/couple-bg.jpeg')] bg-cover bg-center",
+  },
 }
 
 export default function InvitationPage() {
-  const templateName = "modern"
+  const templateName = "elegant-ivory"
   const Template = TEMPLATE_MAP[templateName]
   const theme = TEMPLATE_THEME[templateName]
   const [isOpened, setIsOpened] = useState(false)
@@ -23,7 +26,7 @@ export default function InvitationPage() {
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-neutral-200">
-      <AudioPlayer src={dummyInvitation.audioUrl} />
+      {/* <AudioPlayer src={dummyInvitation.audioUrl} /> */}
 
       {/* LEFT — STATIC BACKGROUND + TEXT */}
       <div className={`hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-620px)] ${theme.desktopBg}`}>
