@@ -19,6 +19,7 @@
   --font-inter: "Inter", sans-serif;
 
   --color-faded-merlot: #814d5b;
+  --color-button-ivory: #4f7c8a;
 
   --merlot-100: #f4e9ec;
   --merlot-300: #cfa3ad;
@@ -70,6 +71,10 @@
 
   .text-faded-merlot {
     color: var(--color-faded-merlot);
+  }
+
+  .text-button-ivory {
+    color: var(--color-button-ivory);
   }
 
   .bg-merlot-100 {

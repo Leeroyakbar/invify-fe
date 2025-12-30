@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { dummyInvitation } from "../data/dummyInvitation"
 import { TEMPLATE_MAP } from "../templates"
-// import AudioPlayer from "../ui/audioPlayer"
+import AudioPlayer from "../ui/audioPlayer"
 
 const TEMPLATE_THEME = {
   modern: {
@@ -9,6 +9,7 @@ const TEMPLATE_THEME = {
   },
   "elegant-ivory": {
     desktopBg: "bg-[url('/modern/couple/couple-bg.jpeg')] bg-cover bg-center",
+    audioColor: "text-button-ivory",
   },
 }
 
@@ -17,6 +18,7 @@ export default function InvitationPage() {
   const Template = TEMPLATE_MAP[templateName]
   const theme = TEMPLATE_THEME[templateName]
   const [isOpened, setIsOpened] = useState(false)
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false)
 
   const rawDate = "2027-02-27" // Contoh dari API
   const [year, month, day] = rawDate.split("-")
@@ -24,9 +26,13 @@ export default function InvitationPage() {
   // Hasilnya tetap angka dalam bentuk string
   const eventDateFormatted = `${day} • ${month} • ${year}`
 
+  const handleOpenInvitation = () => {
+    setIsOpened(true)
+    setIsAudioPlaying(true) // 🔥 START AUDIO HERE
+  }
   return (
     <div className="h-screen w-screen overflow-hidden bg-neutral-200">
-      {/* <AudioPlayer src={dummyInvitation.audioUrl} /> */}
+      <AudioPlayer src={dummyInvitation.audioUrl} color={theme.audioColor} isPlaying={isAudioPlaying} onToggle={() => setIsAudioPlaying((prev) => !prev)} />
 
       {/* LEFT — STATIC BACKGROUND + TEXT */}
       <div className={`hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-620px)] ${theme.desktopBg}`}>
@@ -50,7 +56,7 @@ export default function InvitationPage() {
       {/* RIGHT — MOBILE SCROLL AREA */}
       <div className="ml-0 lg:ml-[calc(100%-620px)] h-screen flex justify-center">
         <div className="w-full max-w-[1200px] h-screen overflow-y-auto bg-white shadow-xl">
-          <Template data={dummyInvitation} isOpened={isOpened} onOpen={() => setIsOpened(true)} />
+          <Template data={dummyInvitation} isOpened={isOpened} onOpen={handleOpenInvitation} />
         </div>
       </div>
     </div>
