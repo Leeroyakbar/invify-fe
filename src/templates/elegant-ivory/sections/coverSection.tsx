@@ -31,7 +31,7 @@ export default function CoverSection({ data, guestName = "Bapak/Ibu/Saudara/i", 
     <section className="relative h-svh w-full overflow-hidden touch-none">
       {/* Background Image */}
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/modern/couple/love-story.jpg')" }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/50" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/20 to-black/50" />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/35" />
 

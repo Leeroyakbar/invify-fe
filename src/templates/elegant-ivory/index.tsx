@@ -2,6 +2,8 @@ import { useRef } from "react"
 import type { TemplateProps } from "../../types/TemplateProps"
 import CountdownSection from "./sections/countDown"
 import CoverSection from "./sections/coverSection"
+import BrideGroomSection from "./sections/brideGroom"
+import WeddingEventSection from "./sections/weddingEvent"
 
 export default function IvoryTemplate({ data, isOpened, onOpen }: TemplateProps) {
   const countdownRef = useRef<HTMLDivElement>(null)
@@ -23,6 +25,8 @@ export default function IvoryTemplate({ data, isOpened, onOpen }: TemplateProps)
       <div ref={countdownRef}>
         <CountdownSection data={data} />
       </div>
+      <BrideGroomSection data={data} />
+      <WeddingEventSection data={data} />
     </div>
   )
 }
