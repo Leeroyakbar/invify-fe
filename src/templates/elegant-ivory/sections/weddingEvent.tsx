@@ -1,6 +1,5 @@
 import { motion } from "framer-motion"
 import type { Invitation } from "../../../types/Invitation"
-import { MapPin, Clock } from "lucide-react"
 import { formatTime } from "../../../utils/dateUtil"
 
 interface Props {
