@@ -9,6 +9,7 @@ import LoveStorySection from "./sections/loveStory"
 import GallerySection from "./sections/galery"
 import WeddingWishesSection from "./sections/weddingWishes"
 import WeddingGiftsSection from "./sections/weddingGifts"
+import ThankYouFooterSection from "./sections/thankyou"
 
 export default function IvoryTemplate({ data, isOpened, onOpen }: TemplateProps) {
   const countdownRef = useRef<HTMLDivElement>(null)
@@ -37,6 +38,7 @@ export default function IvoryTemplate({ data, isOpened, onOpen }: TemplateProps)
       <GallerySection data={data} />
       <WeddingWishesSection data={data} />
       <WeddingGiftsSection data={data} />
+      <ThankYouFooterSection data={data} />
     </div>
   )
 }
