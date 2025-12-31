@@ -1,10 +1,12 @@
 import type { Invitation } from "../types/Invitation"
 
 export const dummyInvitation: Invitation = {
+  template: "elegant-ivory",
   slug: "/lili-lee",
   groomName: "Lee Roy",
   brideName: "Lili Rahma",
   eventDate: "2027-02-27 09:00:00",
+  eventDateFormatted: "27 • 02 • 2027",
   akadVanue: "Rumah Kediaman Mempelai Wanita",
   akadLocation: "Desa Pir Trans Sosa IB, Kec. Lubuk Barumun, Kab. Padang Lawas, Prov. Sumatra Utara",
   groomFullName: "Lee Roy Akbar",
@@ -115,4 +117,4 @@ export const dummyInvitation: Invitation = {
       message: "Happy for you both! Semoga menjadi keluarga yang harmonis dan selalu rukun sampai kakek nenek.",
     },
   ],
-}
+} satisfies Invitation

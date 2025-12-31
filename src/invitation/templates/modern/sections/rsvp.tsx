@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
-import { fadeUp, scaleFade, fadeSoft } from "../../motions/templateMotions"
-import Button from "../../ui/button"
+import { fadeUp, scaleFade, fadeSoft } from "../../../../motions/templateMotions"
+import Button from "../../../../ui/button"
 import { BadgeCheck } from "lucide-react"
-import type { Invitation } from "../../types/Invitation"
+import type { Invitation } from "../../../../types/Invitation"
 
 export default function RSVPSection({ data }: { data: Invitation }) {
   return (

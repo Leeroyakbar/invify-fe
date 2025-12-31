@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion"
-import { fadeUp, fadeSoft } from "../../motions/templateMotions"
-import type { Invitation } from "../../types/Invitation"
+import { fadeUp, fadeSoft } from "../../../../motions/templateMotions"
+import type { Invitation } from "../../../../types/Invitation"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faWhatsapp, faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { useState, useEffect } from "react"

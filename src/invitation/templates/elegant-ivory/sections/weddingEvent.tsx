@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
-import type { Invitation } from "../../../types/Invitation"
-import { formatTime } from "../../../utils/dateUtil"
+import type { Invitation } from "../../../../types/Invitation"
+import { formatTime } from "../../../../utils/dateUtil"
 
 interface Props {
   data: Invitation

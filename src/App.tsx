@@ -1,10 +1,17 @@
-import InvitationPage from "./app/InvitationPage"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import InvitationPage from "./invitation/pages/InvitationPage"
+import InvitationDemoPage from "./invitation/pages/InvitationDemoPage"
+import { dummyInvitation } from "./data/dummyInvitation"
 
-function App() {
-
+export default function App() {
   return (
-    <InvitationPage/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<InvitationPage data={dummyInvitation} />} />
+
+        {/* DEMO */}
+        <Route path="/demo/:templateKey" element={<InvitationDemoPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
-
-export default App

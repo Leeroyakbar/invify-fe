@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import type { Invitation } from "../../../types/Invitation"
+import type { Invitation } from "../../../../types/Invitation"
 import { Heart } from "lucide-react"
 
 interface Props {

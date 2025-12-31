@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { stagger, fadeUp, floatY, floatScaleRotate, revealDown } from "../../motions/templateMotions"
-import BankCard from "../../ui/bankCard"
-import flower2 from "../../../public/modern/ornaments/flower-2.png"
-import flower4 from "../../../public/modern/ornaments/flower-4.png"
-import type { Invitation } from "../../types/Invitation"
+import { stagger, fadeUp, floatY, floatScaleRotate, revealDown } from "../../../../motions/templateMotions"
+import BankCard from "../../../../ui/bankCard"
+import flower2 from "../../../../../public/modern/ornaments/flower-2.png"
+import flower4 from "../../../../../public/modern/ornaments/flower-4.png"
+import type { Invitation } from "../../../../types/Invitation"
 
 export default function WeddingGifts({ data }: { data: Invitation }) {
   const [open, setOpen] = useState(false)

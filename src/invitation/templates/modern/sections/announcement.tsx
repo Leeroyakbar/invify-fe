@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import type { Invitation } from "../../types/Invitation"
+import type { Invitation } from "../../../../types/Invitation"
 
 export default function Announcement({ data }: { data: Invitation }) {
   const rawDate = "2027-02-27" // Contoh dari API

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion"
-import { stagger, fadeUp, floatY, floatScaleRotate } from "../../motions/templateMotions"
-import type { Invitation } from "../../types/Invitation"
-import flowerTop2 from "../../../public/modern/ornaments/flower-2.png"
-import flower3 from "../../../public/modern/ornaments/flower-3.png"
+import { stagger, fadeUp, floatY, floatScaleRotate } from "../../../../motions/templateMotions"
+import type { Invitation } from "../../../../types/Invitation"
+import flowerTop2 from "../../../../../public/modern/ornaments/flower-2.png"
+import flower3 from "../../../../../public/modern/ornaments/flower-3.png"
 // import diamondIcon from "../../../public/modern/icons/diamond.png"
 
 export default function LoveStory({ data }: { data: Invitation }) {

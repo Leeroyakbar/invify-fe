@@ -1,11 +1,11 @@
 import { motion } from "framer-motion"
-import type { Invitation } from "../../types/Invitation"
-import { stagger, fadeUp, fadeLeft, fadeRight, floatY, floatScaleRotate } from "../../motions/templateMotions"
-import flower2 from "../../../public/modern/ornaments/flower-2.png"
-import scheduleIcon from "../../../public/modern/icons/schedule.png"
-import mapIcon from "../../../public/modern/icons/map.png"
-import roseImg from "../../../public/modern/rose.png"
-import Button from "../../ui/button"
+import type { Invitation } from "../../../../types/Invitation"
+import { stagger, fadeUp, fadeLeft, fadeRight, floatY, floatScaleRotate } from "../../../../motions/templateMotions"
+import flower2 from "../../../../../public/modern/ornaments/flower-2.png"
+import scheduleIcon from "../../../../../public/modern/icons/schedule.png"
+import mapIcon from "../../../../../public/modern/icons/map.png"
+import roseImg from "../../../../../public/modern/rose.png"
+import Button from "../../../../ui/button"
 
 export default function WeddingEvent({ data }: { data: Invitation }) {
   const hasReception = !!data.receptionDate

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Camera, X, Maximize2 } from "lucide-react"
-import type { Invitation } from "../../../types/Invitation"
+import type { Invitation } from "../../../../types/Invitation"
 
 type Props = {
   data: Invitation

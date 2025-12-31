@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
-import { stagger, fadeUp } from "../../motions/templateMotions"
-import { galleryFade } from "../../motions/templateMotions"
+import { stagger, fadeUp } from "../../../../motions/templateMotions"
+import { galleryFade } from "../../../../motions/templateMotions"
 
 interface GallerySectionProps {
   images: string[]

@@ -1,9 +1,9 @@
-import type { Invitation } from "../../types/Invitation"
+import type { Invitation } from "../../../../types/Invitation"
 import nameCard from "@/assets/name-card.png"
 import loveLetter from "@/assets/love-letter.png"
-import Button from "../../ui/button"
+import Button from "../../../../ui/button"
 import { motion } from "framer-motion"
-import { stagger } from "../../motions/templateMotions"
+import { stagger } from "../../../../motions/templateMotions"
 
 interface CoverSectionProps {
   data: Invitation

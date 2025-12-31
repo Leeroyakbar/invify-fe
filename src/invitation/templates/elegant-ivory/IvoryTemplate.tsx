@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import type { TemplateProps } from "../../types/TemplateProps"
+import type { TemplateProps } from "../../../types/TemplateProps"
 import CountdownSection from "./sections/countDown"
 import CoverSection from "./sections/coverSection"
 import BrideGroomSection from "./sections/brideGroom"
@@ -10,9 +10,11 @@ import GallerySection from "./sections/galery"
 import WeddingWishesSection from "./sections/weddingWishes"
 import WeddingGiftsSection from "./sections/weddingGifts"
 import ThankYouFooterSection from "./sections/thankyou"
+import { TEMPLATE_CONFIG } from "../../engine/TemplateConfig"
 
 export default function IvoryTemplate({ data, isOpened, onOpen }: TemplateProps) {
   const countdownRef = useRef<HTMLDivElement>(null)
+  const config = TEMPLATE_CONFIG[data.template]
 
   const handleOpen = () => {
     onOpen()
@@ -34,7 +36,7 @@ export default function IvoryTemplate({ data, isOpened, onOpen }: TemplateProps)
       <BrideGroomSection data={data} />
       <WeddingEventSection data={data} />
       <QuoteSection />
-      <LoveStorySection data={data} />
+      {config.sections.loveStory && <LoveStorySection data={data} />}
       <GallerySection data={data} />
       <WeddingWishesSection data={data} />
       <WeddingGiftsSection data={data} />

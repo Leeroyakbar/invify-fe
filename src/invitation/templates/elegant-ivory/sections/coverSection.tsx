@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { MailOpen } from "lucide-react" // Contoh ikon Lucide
-import type { Invitation } from "../../../types/Invitation"
+import type { Invitation } from "../../../../types/Invitation"
 
 interface CoverProps {
   data: Invitation

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import type { Invitation } from "../../../types/Invitation"
+import type { Invitation } from "../../../../types/Invitation"
 import { Copy, Gift } from "lucide-react"
 import { useState } from "react"
 

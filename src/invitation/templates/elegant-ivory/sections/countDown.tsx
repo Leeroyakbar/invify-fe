@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
-import type { Invitation } from "../../../types/Invitation"
-import { useCountdown } from "../../../hooks/useCountDown"
-import { parseEventDate } from "../../../utils/dateUtil"
+import type { Invitation } from "../../../../types/Invitation"
+import { useCountdown } from "../../../../hooks/useCountDown"
+import { parseEventDate } from "../../../../utils/dateUtil"
 
 interface CountdownProps {
   data: Invitation
