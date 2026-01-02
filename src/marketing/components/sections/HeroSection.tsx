@@ -22,10 +22,10 @@ export default function HeroSection() {
         <p className="mt-6 max-w-2xl mx-auto text-[#7A6F68]">Wujudkan undangan pernikahan impian Anda dengan desain premium, fitur lengkap, dan mudah dibagikan.</p>
 
         <div className="mt-10 flex justify-center gap-4">
-          <a href="#template" className="text-md px-6 py-3 rounded-full bg-[#D4A853] text-white shadow-lg cursor-pointer">
+          <a href="#template" className="text-sm md:text-md px-6 py-3 md:px-8 md:py-4 rounded-full bg-[#D4A853] text-white shadow-lg cursor-pointer">
             Lihat Katalog
           </a>
-          <button onClick={kirimKeWhatsApp} className={`text-md px-8 py-3 rounded-full border border-[#D4A853] text-[#D4A853] cursor-pointer hover:bg-[#D4A853] hover:text-white`}>
+          <button onClick={kirimKeWhatsApp} className={`text-sm md:text-md px-6 py-3 md:px-8 md:py-4 rounded-full border border-[#D4A853] text-[#D4A853] cursor-pointer hover:bg-[#D4A853] hover:text-white`}>
             Hubungi Kami
           </button>
         </div>
