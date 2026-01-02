@@ -15,4 +15,8 @@ export const TEMPLATE_THEME: Record<
     desktopBg: "bg-[url('/modern/couple/couple-bg.jpeg')] bg-cover bg-center",
     audioColor: "text-button-ivory",
   },
+  "arch-elegant": {
+    desktopBg: "bg-[url('/modern/couple/couple-bg.jpeg')] bg-cover bg-center",
+    audioColor: "text-button-ivory",
+  },
 }

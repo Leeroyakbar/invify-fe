@@ -1,4 +1,13 @@
 export default function HeroSection() {
+  const kirimKeWhatsApp = () => {
+    const nomorWA = "6282273366718"
+    const teks = `Halo Invify, saya ingin memesan undangan digital untuk acara pernikahan saya.`
+
+    const url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(teks)}`
+
+    window.open(url, "_blank")
+  }
+
   return (
     <section className="relative bg-gradient-to-b from-[#FFF9F4] via-[#F6E6E3] to-white">
       <div className="max-w-7xl mx-auto px-6 py-28 text-center" id="beranda">
@@ -13,8 +22,12 @@ export default function HeroSection() {
         <p className="mt-6 max-w-2xl mx-auto text-[#7A6F68]">Wujudkan undangan pernikahan impian Anda dengan desain premium, fitur lengkap, dan mudah dibagikan.</p>
 
         <div className="mt-10 flex justify-center gap-4">
-          <button className="px-4 py-2 text-sm md:text-md md:px-8 md:py-4 rounded-full bg-[#D4A853] text-white shadow-lg cursor-pointer">Lihat Template</button>
-          <button className="px-4 py-2 text-sm md:text-md md:px-8 md:py-4 rounded-full border border-[#D4A853] text-[#D4A853] cursor-pointer">Buat Undangan</button>
+          <a href="#template" className="px-4 py-2 text-sm md:text-md md:px-8 md:py-4 rounded-full bg-[#D4A853] text-white shadow-lg cursor-pointer">
+            Lihat Template
+          </a>
+          <button onClick={kirimKeWhatsApp} className={`px-4 py-2 text-sm md:text-md md:px-8 md:py-4 rounded-full border border-[#D4A853] text-[#D4A853] cursor-pointer hover:bg-[#D4A853] hover:text-white`}>
+            Hubungi Kami
+          </button>
         </div>
       </div>
     </section>

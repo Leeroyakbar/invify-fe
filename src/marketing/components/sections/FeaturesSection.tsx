@@ -58,16 +58,16 @@ export default function FeaturesSection() {
         </div>
 
         {/* FEATURES GRID */}
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
           {features.map((item, i) => (
-            <div key={i} className="group bg-white rounded-3xl p-8 border border-black/5 shadow-sm hover:-translate-y-1 hover:shadow-xl transition">
-              <div className="w-14 h-14 rounded-2xl bg-[#F6E6E3] flex items-center justify-center text-[#D4A853] group-hover:scale-110 transition">
+            <div key={i} className="group bg-white rounded-3xl p-5 md:p-8 border border-black/5 shadow-sm hover:-translate-y-1 hover:shadow-xl transition">
+              <div className="w-10 h-10 md:w-14 md:h-14 rounded-2xl bg-[#F6E6E3] flex items-center justify-center text-[#D4A853] group-hover:scale-110 transition">
                 <item.icon size={26} />
               </div>
 
-              <h3 className="mt-6 font-serif text-lg text-[#3B2F2F]">{item.title}</h3>
+              <h3 className="mt-6 font-serif text-[16px] md:text-lg text-[#3B2F2F]">{item.title}</h3>
 
-              <p className="mt-3 text-sm text-[#7A6F68] leading-relaxed">{item.desc}</p>
+              <p className="mt-3 text-[14px] text-sm text-[#7A6F68] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
