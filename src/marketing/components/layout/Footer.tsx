@@ -15,16 +15,24 @@ export default function Footer() {
           <h4 className="font-medium text-white">Menu</h4>
           <ul className="mt-4 space-y-2 text-sm text-[#E7DCD2]">
             <li>
-              <a className="hover:text-[#D4A853]">Beranda</a>
+              <a href="#beranda" className="hover:text-[#D4A853]">
+                Beranda
+              </a>
             </li>
             <li>
-              <a className="hover:text-[#D4A853]">Template</a>
+              <a href="#template" className="hover:text-[#D4A853]">
+                Template
+              </a>
             </li>
             <li>
-              <a className="hover:text-[#D4A853]">Harga</a>
+              <a href="#pricing" className="hover:text-[#D4A853]">
+                Harga
+              </a>
             </li>
             <li>
-              <a className="hover:text-[#D4A853]">Kontak</a>
+              <a href="#contact" className="hover:text-[#D4A853]">
+                Kontak
+              </a>
             </li>
           </ul>
         </div>
