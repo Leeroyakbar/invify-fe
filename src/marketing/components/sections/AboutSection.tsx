@@ -44,7 +44,7 @@ export default function AboutSection() {
         </div>
 
         {/* RIGHT FEATURES */}
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 gap-6">
           {features.map((item, i) => (
             <div key={i} className="group rounded-2xl bg-white p-6 border border-black/5 shadow-sm hover:shadow-lg transition">
               <div className="w-12 h-12 rounded-xl bg-[#F6E6E3] flex items-center justify-center text-[#D4A853] group-hover:scale-110 transition">
