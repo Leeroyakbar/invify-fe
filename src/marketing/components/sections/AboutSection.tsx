@@ -36,7 +36,9 @@ export default function AboutSection() {
             <span className="italic text-[#D4A853]">Impian</span> Anda
           </h2>
 
-          <p className="mt-6 text-[#7A6F68] leading-relaxed">Invify adalah platform undangan pernikahan digital yang membantu pasangan Indonesia menciptakan undangan elegan, modern, dan mudah dibagikan.</p>
+          <p className="mt-6 text-[#7A6F68] leading-relaxed">
+            Di Invify, kami percaya setiap kisah cinta itu unik. Kami membantu Anda merangkai undangan digital yang tidak hanya sekadar informasi, tapi menjadi kenangan indah pertama bagi tamu undangan Anda.
+          </p>
 
           <p className="mt-4 text-[#7A6F68] leading-relaxed">Dari desain premium hingga fitur interaktif seperti RSVP, galeri foto, dan peta lokasi — semua tersedia dalam satu platform.</p>
         </div>

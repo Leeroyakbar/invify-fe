@@ -1,13 +1,29 @@
 import { useState } from "react"
-import template1 from "../../../../public/elegant-ivory/template-1.png"
+import template1 from "../../../../public/templates/template-1.png"
+import template2 from "../../../../public/templates/template-2.png"
 import { Link } from "react-router-dom"
 
 const categories = ["Semua", "Elegant", "Modern", "Floral", "Minimalist"]
 
 const templates = [
-  { id: 1, title: "Modern Love", category: "Modern", popular: false, src: "/demo/modern" },
-  { id: 2, title: "Vintage Romance", category: "Elegant", popular: true, src: "/demo/elegant-ivory" },
-  { id: 3, title: "Botanical Dreams", category: "Floral", popular: false, src: "/demo/elegant-ivory" },
+  {
+    id: 1,
+    title: "Modern Love",
+    category: "Modern",
+    popular: false,
+    src: "/demo/modern",
+    img: template2,
+    urlWa: "https://api.whatsapp.com/send?phone=6282273366718&text=Halo%20Admin%2C%20saya%20ingin%20menggunakan%20template%20Modern%20Love%20untuk%20acara%20pernikahan%20saya.",
+  },
+  {
+    id: 2,
+    title: "Elegant Ivory",
+    category: "Elegant",
+    popular: true,
+    src: "/demo/elegant-ivory",
+    img: template1,
+    urlWa: "https://api.whatsapp.com/send?phone=6282273366718&text=Halo%20Admin%2C%20saya%20ingin%20menggunakan%20template%20Elegant%20Ivory%20untuk%20acara%20pernikahan%20saya.",
+  },
 ]
 
 export default function TemplatesSection() {
@@ -17,11 +33,9 @@ export default function TemplatesSection() {
 
   return (
     <section className="bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-24">
+      <div className="max-w-7xl mx-auto px-6 py-24" id="template">
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto">
-          <span className="text-sm tracking-widest text-[#D4A853]">KOLEKSI TEMPLATE</span>
-
           <h2 className="mt-4 font-serif text-4xl md:text-5xl text-[#3B2F2F]">
             Pilih Template <span className="italic text-[#D4A853]">Favorit</span> Anda
           </h2>
@@ -44,26 +58,19 @@ export default function TemplatesSection() {
         </div>
 
         {/* TEMPLATE GRID */}
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {/* Gunakan Flexbox supaya items bisa diletakkan di tengah (justify-center) */}
+        <div className="mt-16 flex flex-wrap justify-center gap-10">
           {filtered.map((tpl) => (
-            <div key={tpl.id} className="group rounded-3xl border border-black/5 shadow-sm hover:shadow-xl transition overflow-hidden bg-white">
+            <div
+              key={tpl.id}
+              className="group rounded-3xl border border-black/5 shadow-sm hover:shadow-xl transition overflow-hidden bg-white 
+                 w-full sm:w-[calc(50%-20px)] lg:w-[calc(33.333%-27px)] max-w-[400px]"
+            >
               {/* PREVIEW CONTAINER */}
               <div className="relative aspect-[3/4] flex items-center justify-center overflow-hidden">
-                {/* IMAGE SEBAGAI BACKGROUND */}
-                <img src={template1} alt={tpl.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-
-                {/* OVERLAY (Agar teks lebih mudah dibaca) */}
+                <img src={tpl.img} alt={tpl.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
-
-                {/* BADGE POPULAR */}
                 {tpl.popular && <span className="absolute top-4 right-4 z-10 bg-[#D4A853] text-white text-xs px-3 py-1 rounded-full shadow-md">Popular</span>}
-
-                {/* TEKS DI ATAS GAMBAR */}
-                <div className="relative z-10 text-center text-white px-4">
-                  <p className="text-[10px] tracking-[0.2em] uppercase opacity-90">The Wedding Of</p>
-                  <h4 className="mt-2 font-serif text-2xl">Romeo & Juliet</h4>
-                  <p className="mt-1 text-sm opacity-80">25 Desember 2025</p>
-                </div>
               </div>
 
               {/* INFO & BUTTONS */}
@@ -76,18 +83,18 @@ export default function TemplatesSection() {
                   <Link to={tpl.src} target="_blank" className="py-2.5 px-4 text-center text-sm font-medium text-[#3B2F2F] border border-[#3B2F2F]/20 rounded-xl hover:bg-[#3B2F2F] hover:text-white transition-all">
                     View Demo
                   </Link>
-
-                  <button className="py-2.5 px-4 text-sm font-medium text-white bg-[#3B2F2F] rounded-xl hover:bg-[#524343] shadow-md transition-all">Order Now</button>
+                  <button onClick={() => window.open(tpl.urlWa, "_blank")} className="py-2.5 px-4 text-sm font-medium text-white bg-[#3B2F2F] rounded-xl hover:bg-[#524343] shadow-md transition-all cursor-pointer">
+                    Order Now
+                  </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
-
         {/* CTA */}
-        <div className="mt-16 text-center">
+        {/* <div className="mt-16 text-center">
           <button className="px-10 py-4 rounded-full border border-[#D4A853] text-[#D4A853] hover:bg-[#D4A853] hover:text-white transition">Lihat Semua Template</button>
-        </div>
+        </div> */}
       </div>
     </section>
   )
