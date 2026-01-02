@@ -13,6 +13,8 @@
   --font-dancing: "Dancing Script";
   --font-lora: "Lora";
   --font-alice: "Alice";
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
 
   /* ✅ NEW (template elegant) */
   --font-playfair: "Playfair Display", serif;

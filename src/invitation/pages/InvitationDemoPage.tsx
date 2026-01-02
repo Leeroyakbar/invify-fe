@@ -6,7 +6,6 @@ import { TEMPLATE_MAP, type TemplateKey } from "../engine/TemplateRegistry"
 export default function InvitationDemoPage() {
   const { templateKey } = useParams<{ templateKey: TemplateKey }>()
 
-  // ❌ jika template tidak ada → redirect
   if (!templateKey || !(templateKey in TEMPLATE_MAP)) {
     return <Navigate to="/" replace />
   }
