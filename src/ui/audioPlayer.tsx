@@ -2,36 +2,49 @@ import { motion } from "framer-motion"
 import { Play, Pause } from "lucide-react"
 import ReactPlayer from "react-player"
 
-interface AudioPlayerProps {
-  src: string
-  color: string
-  isPlaying: boolean
-  onToggle: () => void
+interface AudioTheme {
+  variant: "modern" | "noir"
+  position: "bottom-right" | "bottom-center"
+  bg: string
+  border: string
+  iconColor: string
 }
 
-export default function AudioPlayer({ src, color, isPlaying, onToggle }: AudioPlayerProps) {
+interface AudioPlayerProps {
+  src: string
+  isPlaying: boolean
+  onToggle: () => void
+  theme: AudioTheme
+}
+
+export default function AudioPlayer({ src, isPlaying, onToggle, theme }: AudioPlayerProps) {
+  const positionClass = theme.position === "bottom-center" ? "bottom-6 left-1/2 -translate-x-1/2" : "bottom-6 right-6"
+
   return (
     <>
-      {/* AUDIO (hidden but alive) */}
-      <div className="fixed bottom-0 right-0 w-1 h-1 opacity-0 pointer-events-none overflow-hidden">
-        <ReactPlayer src={src} playing={isPlaying} loop volume={0.5} width={0} height={0} />
+      {/* AUDIO ENGINE */}
+      <div className="fixed w-1 h-1 opacity-0 pointer-events-none">
+        <ReactPlayer src={src} playing={isPlaying} loop volume={0.5} />
       </div>
 
-      {/* CONTROL BUTTON */}
+      {/* CONTROL */}
       <motion.button
         onClick={onToggle}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: isPlaying ? 1 : 0.7, scale: 1 }}
-        whileTap={{ scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: isPlaying ? 1 : 0.6, scale: 1 }}
+        whileTap={{ scale: 0.92 }}
         className={`
-          fixed bottom-6 right-6 z-[999]
+          fixed z-[999]
+          ${positionClass}
           w-12 h-12 rounded-full
-          bg-white/90 backdrop-blur shadow-lg
+          ${theme.bg}
+          ${theme.border}
+          border
+          backdrop-blur-md
           flex items-center justify-center
-          ${color}
         `}
       >
-        {isPlaying ? <Pause size={18} /> : <Play size={18} />}
+        {isPlaying ? <Pause size={16} className={theme.iconColor} /> : <Play size={16} className={theme.iconColor} />}
       </motion.button>
     </>
   )

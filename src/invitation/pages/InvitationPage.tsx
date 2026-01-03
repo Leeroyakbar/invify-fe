@@ -24,7 +24,7 @@ export default function InvitationPage({ data }: InvitationPageProps) {
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-neutral-200">
-      <AudioPlayer src={data.audioUrl} color={theme.audioColor} isPlaying={isAudioPlaying} onToggle={() => setIsAudioPlaying((prev) => !prev)} />
+      <AudioPlayer src={data.audioUrl} isPlaying={isAudioPlaying} onToggle={() => setIsAudioPlaying((prev) => !prev)} theme={theme.audio} />
 
       {/* DESKTOP LEFT */}
       <div className={`hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-520px)] ${theme.desktopBg}`}>
