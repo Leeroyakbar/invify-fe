@@ -51,8 +51,9 @@ export default function AnnouncementVideoSection({ data }: { data: Invitation })
         {/* 3. Spacer Bawah (lebih besar agar teks naik sedikit dari tengah) */}
         <div className="h-[60vh]" />
       </div>
+
       {/* SCROLL INDICATOR */}
-      <motion.a onClick={scrollToSection} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+      <motion.a onClick={scrollToSection} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center mb-10">
         {/* Panah Pertama (Atas) */}
         <motion.div
           animate={{

@@ -20,7 +20,7 @@ export default function MobileNavbar() {
         onClick={() => setOpen(true)}
         className="
           fixed top-5 right-5 z-40
-          flex flex-col gap-1.5 mr-4
+          flex flex-col gap-1.5 
         "
       >
         <span className="w-6 h-[1px] bg-white/80" />

@@ -17,6 +17,9 @@ export interface Invitation {
   groomFullName: string
   brideFullName: string
 
+  groomInstagram: string
+  brideInstagram: string
+
   groomFather: string
   brideMother: string
 
@@ -27,7 +30,7 @@ export interface Invitation {
   akadTimeEnd: string
   akadVanue: string
   akadMapsUrl: string
-  
+
   receptionDate: string
   receptionTimeStart: string
   receptionTimeEnd: string
@@ -46,11 +49,10 @@ export interface Invitation {
   storyCommitment: string
   storyMarriage: string
 
-
   accountNo: string
   accountName: string
   bankName: string
-  
+
   accountNo2: string
   accountName2: string
   bankName2: string

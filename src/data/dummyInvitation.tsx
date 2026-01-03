@@ -12,6 +12,8 @@ export const dummyInvitation: Invitation = {
   akadLocation: "Desa Pir Trans Sosa IB, Kec. Lubuk Barumun, Kab. Padang Lawas, Prov. Sumatra Utara",
   groomFullName: "Lee Roy Akbar",
   brideFullName: "Lili Rahma Yani",
+  groomInstagram: "leerykbr",
+  brideInstagram: "lilirhmyn",
 
   groomFather: "Nurwildan Edi",
   groomMother: "Almh. Meylyawati Anggia Murni Hutagalung",
