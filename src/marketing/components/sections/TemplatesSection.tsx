@@ -1,6 +1,7 @@
 import { useState } from "react"
 import template1 from "../../../../public/templates/template-1.png"
 import template2 from "../../../../public/templates/template-2.png"
+import template3 from "../../../../public/templates/template-3.png"
 import { Link } from "react-router-dom"
 
 const categories = ["Semua", "Elegant", "Modern", "Floral", "Minimalist"]
@@ -31,7 +32,7 @@ const templates = [
     category: "Elegant",
     popular: false,
     src: "/demo/classic-noir",
-    img: "/public/templates/template-3.png",
+    img: template3,
     urlWa: "https://api.whatsapp.com/send?phone=6282273366718&text=Halo%20Admin%2C%20saya%20ingin%20menggunakan%20template%20Classic%20Noir%20untuk%20acara%20pernikahan%20saya.",
   },
 ]
