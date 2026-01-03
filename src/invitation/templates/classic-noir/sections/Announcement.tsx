@@ -1,4 +1,6 @@
 import type { Invitation } from "../../../../types/Invitation"
+import { motion } from "framer-motion"
+import { ChevronDown } from "lucide-react"
 
 export default function AnnouncementVideoSection({ data }: { data: Invitation }) {
   const eventDate = new Date(data.eventDate)
@@ -11,8 +13,20 @@ export default function AnnouncementVideoSection({ data }: { data: Invitation })
 
   // Gunakan koma setelah nama hari
   const eventDateFormatted = `${eventDayName}, ${eventDay} ${eventMonth} ${eventYear}`
+
+  const scrollToSection = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const target = document.querySelector("#quote")
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // atau "center" agar posisi pas di tengah
+      })
+    }
+  }
+
   return (
-    <section className="h-screen snap-start relative overflow-hidden">
+    <section className="h-screen snap-start relative overflow-hidden" id="home">
       <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" src="/classic-noir/video-1.mp4" />
 
       {/* Overlay Atas (Gradient dari hitam ke transparan) */}
@@ -37,6 +51,40 @@ export default function AnnouncementVideoSection({ data }: { data: Invitation })
         {/* 3. Spacer Bawah (lebih besar agar teks naik sedikit dari tengah) */}
         <div className="h-[60vh]" />
       </div>
+      {/* SCROLL INDICATOR */}
+      <motion.a onClick={scrollToSection} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+        {/* Panah Pertama (Atas) */}
+        <motion.div
+          animate={{
+            y: [0, 5, 0],
+            opacity: [0.3, 1, 0.3],
+          }}
+          transition={{
+            duration: 2,
+            ease: "easeInOut",
+            repeat: Infinity,
+          }}
+        >
+          <ChevronDown className="w-6 h-6 text-white/50" strokeWidth={1} />
+        </motion.div>
+
+        {/* Panah Kedua (Bawah) - Delay sedikit agar gerakannya berurutan */}
+        <motion.div
+          animate={{
+            y: [0, 5, 0],
+            opacity: [0.3, 1, 0.3],
+          }}
+          transition={{
+            duration: 2,
+            ease: "easeInOut",
+            repeat: Infinity,
+            delay: 0.2, // Memberikan efek gelombang
+          }}
+          className="-mt-4" // Menumpuk sedikit agar terlihat rapat dan elegan
+        >
+          <ChevronDown className="w-6 h-6 text-white" strokeWidth={1.5} />
+        </motion.div>
+      </motion.a>
     </section>
   )
 }

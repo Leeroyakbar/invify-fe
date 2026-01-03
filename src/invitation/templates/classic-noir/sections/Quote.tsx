@@ -2,7 +2,7 @@ import type { Invitation } from "../../../../types/Invitation"
 
 export default function QuoteImageSection({ data }: { data: Invitation }) {
   return (
-    <section className="h-screen snap-start relative">
+    <section className="h-screen snap-start relative" id="quote">
       <img src="/classic-noir/photo-3.jpeg" className="absolute inset-0 w-full h-full object-cover" />
 
       <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
