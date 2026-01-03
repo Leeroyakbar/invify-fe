@@ -24,6 +24,16 @@ const templates = [
     img: template1,
     urlWa: "https://api.whatsapp.com/send?phone=6282273366718&text=Halo%20Admin%2C%20saya%20ingin%20menggunakan%20template%20Elegant%20Ivory%20untuk%20acara%20pernikahan%20saya.",
   },
+
+  {
+    id: 2,
+    title: "Classic Noir",
+    category: "Elegant",
+    popular: false,
+    src: "/demo/classic-noir",
+    img: "/public/templates/template-3.png",
+    urlWa: "https://api.whatsapp.com/send?phone=6282273366718&text=Halo%20Admin%2C%20saya%20ingin%20menggunakan%20template%20Classic%20Noir%20untuk%20acara%20pernikahan%20saya.",
+  },
 ]
 
 export default function TemplatesSection() {

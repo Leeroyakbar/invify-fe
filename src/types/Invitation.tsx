@@ -3,6 +3,7 @@ import type { TemplateKey } from "../invitation/engine/TemplateRegistry"
 export interface Invitation {
   template: TemplateKey
   slug: string
+  guestName: string
   groomName: string
   brideName: string
 

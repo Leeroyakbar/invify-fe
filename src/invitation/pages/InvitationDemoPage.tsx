@@ -5,7 +5,6 @@ import { TEMPLATE_MAP, type TemplateKey } from "../engine/TemplateRegistry"
 
 export default function InvitationDemoPage() {
   const { templateKey } = useParams<{ templateKey: TemplateKey }>()
-
   if (!templateKey || !(templateKey in TEMPLATE_MAP)) {
     return <Navigate to="/" replace />
   }

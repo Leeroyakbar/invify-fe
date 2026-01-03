@@ -3,6 +3,7 @@ import type { Invitation } from "../types/Invitation"
 export const dummyInvitation: Invitation = {
   template: "elegant-ivory",
   slug: "/lili-lee",
+  guestName: "Bapak/Ibu/Saudara/i",
   groomName: "Lee Roy",
   brideName: "Lili Rahma",
   eventDate: "2027-02-27 09:00:00",
@@ -51,7 +52,7 @@ export const dummyInvitation: Invitation = {
   accountName2: "Lee Roy Akbar",
   bankName2: "SeaBank",
 
-  audioUrl: "https://www.youtube.com/watch?v=lnuFWMnyKk0&list=RDlnuFWMnyKk0",
+  audioUrl: "https://www.youtube.com/watch?v=COFgTynydQE",
 
   images: ["/modern/galery/galery-4.png", "/modern/galery/galery-2.png", "/modern/galery/galery-1.png", "/modern/galery/galery-5.png", "/modern/galery/galery-3.png"],
 

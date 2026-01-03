@@ -19,4 +19,9 @@ export const TEMPLATE_THEME: Record<
     desktopBg: "bg-[url('/modern/couple/couple-bg.jpeg')] bg-cover bg-center",
     audioColor: "text-button-ivory",
   },
+
+  "classic-noir": {
+    desktopBg: "bg-[url('/classic-noir/photo-1.jpeg')] bg-cover bg-center",
+    audioColor: "text-button-ivory",
+  },
 }

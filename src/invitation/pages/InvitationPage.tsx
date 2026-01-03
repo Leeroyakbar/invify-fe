@@ -27,7 +27,7 @@ export default function InvitationPage({ data }: InvitationPageProps) {
       <AudioPlayer src={data.audioUrl} color={theme.audioColor} isPlaying={isAudioPlaying} onToggle={() => setIsAudioPlaying((prev) => !prev)} />
 
       {/* DESKTOP LEFT */}
-      <div className={`hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-620px)] ${theme.desktopBg}`}>
+      <div className={`hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-520px)] ${theme.desktopBg}`}>
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 flex flex-col items-center justify-center w-full text-center px-12">
@@ -44,7 +44,7 @@ export default function InvitationPage({ data }: InvitationPageProps) {
       </div>
 
       {/* CONTENT */}
-      <div className="ml-0 lg:ml-[calc(100%-620px)] h-screen flex justify-center">
+      <div className="ml-0 lg:ml-[calc(100%-520px)] h-screen flex justify-center">
         <div className="w-full max-w-[1200px] h-screen overflow-y-auto bg-white shadow-xl">
           <Template data={data} isOpened={isOpened} onOpen={handleOpenInvitation} />
         </div>
