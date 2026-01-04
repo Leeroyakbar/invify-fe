@@ -1,12 +1,18 @@
 import { useRef } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
 import type { TemplateProps } from "../../../types/TemplateProps"
-
-// Import Section (Kita akan buat satu per satu nanti)
 import CurtainCoverSection from "./sections/CurtainCoverSection"
 import AnnouncementSection from "./sections/AnnouncementSection"
-// Placeholder sementara untuk section berikutnya
-// import ProfileSection from "./sections/ProfileSection";
+// import ProfileSection from "./sections/ProfileSection"
+import BrideSection from "./sections/BrideSection"
+import GroomSection from "./sections/GroomSection"
+import EventSection from "./sections/EventSection"
+import LoveStorySection from "./sections/LovestorySection"
+import GallerySection from "./sections/GallerySection"
+import CountdownSection from "./sections/CountdownSection"
+import RSVPSection from "./sections/RSVPSection"
+import GiftSection from "./sections/GiftSection"
+import ClosingSection from "./sections/ClosingSection"
 
 export default function OldMoneyTemplate({ data, isOpened, onOpen }: TemplateProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -33,23 +39,21 @@ export default function OldMoneyTemplate({ data, isOpened, onOpen }: TemplatePro
         <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-[8px] tracking-[0.4em] text-stone-400 uppercase vertical-text">Progress</div>
       </div>
 
-      {/* 3. CURTAIN / COVER */}
+      {/*  CURTAIN / COVER */}
       <CurtainCoverSection data={data} isOpened={isOpened} onOpen={onOpen} />
 
       {/* 4. MAIN CONTENT CONTAINER */}
       <div ref={containerRef} className="relative z-10 h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
-        {/* SECTION 1: ANNOUNCEMENT */}
         <AnnouncementSection isOpened={isOpened} />
-
-        {/* SECTION 2: QUOTE (Coming Soon) */}
-        {/* <QuoteSection data={data} /> */}
-
-        {/* SECTION 3: BRIDE & GROOM PROFILES (Coming Soon) */}
-        {/* <ProfileSection data={data} /> */}
-
-        {/* Tambahkan section lainnya di sini nanti... */}
-
-        {/* Footer Palsu agar snap scroll terasa pas di akhir */}
+        <BrideSection data={data} />
+        <GroomSection data={data} />
+        <EventSection data={data} />
+        <LoveStorySection data={data} />
+        <GallerySection data={data} />
+        <CountdownSection data={data} />
+        <RSVPSection />
+        <GiftSection data={data} />
+        <ClosingSection data={data} />
         <div className="h-[1px] snap-end" />
       </div>
 
