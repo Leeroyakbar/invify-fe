@@ -9,17 +9,22 @@ import EventSection from "./sections/EventSection"
 import LoveStorySection from "./sections/LovestorySection"
 import CountdownSection from "./sections/Countdown"
 import RSVPSection from "./sections/RSVPSection"
+import GiftSection from "./sections/GiftSection"
+import GallerySection from "./sections/GallerySection"
+import ClosingSection from "./sections/ClosingSection"
+import ScrollProgress from "./components/ScrollProgress"
 
 export default function ClassicNoir({ data, isOpened, onOpen }: TemplateProps) {
   return (
     <div className="relative h-screen w-full bg-black text-white overflow-hidden">
       <MobileNavbar />
+      <ScrollProgress containerId="invitation-scroll" />
 
       {/* CURTAIN - Biasanya diletakkan di luar div scroll utama agar tidak ikut ter-scroll */}
       <CurtainCoverSection data={data} isOpened={isOpened} onOpen={onOpen} />
 
       {/* MAIN SCROLL CONTAINER */}
-      <div className="relative z-10 h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
+      <div id="invitation-scroll" className="relative z-10 h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
         {/* SEKSI NORMAL (Background ikut bergerak/masing-masing) */}
         <AnnouncementVideoSection data={data} isOpened={isOpened} />
         <QuoteImageSection data={data} />
@@ -50,10 +55,14 @@ export default function ClassicNoir({ data, isOpened, onOpen }: TemplateProps) {
             <div className="snap-start h-screen">
               <RSVPSection />
             </div>
+            <div className="snap-start h-screen">
+              <GiftSection data={data} />
+            </div>
           </div>
         </section>
 
-        {/* Footer atau section penutup jika ada */}
+        <GallerySection />
+        <ClosingSection data={data} />
       </div>
     </div>
   )

@@ -6,8 +6,8 @@ const MENU = [
   { label: "Couple", target: "#couple" },
   { label: "Story", target: "#story" },
   { label: "Event", target: "#event" },
-  { label: "Gallery", target: "#gallery" },
   { label: "RSVP", target: "#rsvp" },
+  { label: "Gallery", target: "#gallery" },
 ]
 
 export default function MobileNavbar() {
