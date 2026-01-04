@@ -25,7 +25,7 @@ export default function LoveStorySection({ data }: { data: Invitation }) {
   ]
 
   return (
-    <section className="h-screen snap-start flex items-center px-8 text-white relative">
+    <section className="h-screen snap-start flex items-center px-8 text-white relative" id="story">
       <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.3 }} className="max-w-lg relative">
         {/* Judul dengan tipografi Noir yang khas */}
         <motion.div variants={itemVariants} className="mb-12">

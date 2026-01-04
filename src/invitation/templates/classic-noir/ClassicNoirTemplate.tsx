@@ -8,6 +8,7 @@ import BrideSection from "./sections/BrideSection"
 import EventSection from "./sections/EventSection"
 import LoveStorySection from "./sections/LovestorySection"
 import CountdownSection from "./sections/Countdown"
+import RSVPSection from "./sections/RSVPSection"
 
 export default function ClassicNoir({ data, isOpened, onOpen }: TemplateProps) {
   return (
@@ -20,7 +21,7 @@ export default function ClassicNoir({ data, isOpened, onOpen }: TemplateProps) {
       {/* MAIN SCROLL CONTAINER */}
       <div className="relative z-10 h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
         {/* SEKSI NORMAL (Background ikut bergerak/masing-masing) */}
-        <AnnouncementVideoSection data={data} />
+        <AnnouncementVideoSection data={data} isOpened={isOpened} />
         <QuoteImageSection data={data} />
         <GroomSection data={data} />
         <BrideSection data={data} />
@@ -45,6 +46,9 @@ export default function ClassicNoir({ data, isOpened, onOpen }: TemplateProps) {
             </div>
             <div className="snap-start h-screen">
               <CountdownSection data={data} />
+            </div>
+            <div className="snap-start h-screen">
+              <RSVPSection />
             </div>
           </div>
         </section>
