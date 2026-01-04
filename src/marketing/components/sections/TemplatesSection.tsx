@@ -43,8 +43,8 @@ export default function TemplatesSection() {
   const filtered = active === "Semua" ? templates : templates.filter((t) => t.category === active)
 
   return (
-    <section className="bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-24" id="template">
+    <section id="template" className="bg-white">
+      <div className="max-w-7xl mx-auto px-6 py-24">
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="mt-4 font-serif text-4xl md:text-5xl text-[#3B2F2F]">

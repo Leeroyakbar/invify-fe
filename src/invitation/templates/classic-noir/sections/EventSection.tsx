@@ -4,7 +4,7 @@ import type { Invitation } from "../../../../types/Invitation"
 import { ChevronRight } from "lucide-react"
 export default function EventSection({ data }: { data: Invitation }) {
   return (
-    <section className="h-screen snap-start flex items-center px-8 text-white relative">
+    <section id="event" className="h-screen snap-start flex items-center px-8 text-white relative">
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.4 }} transition={{ duration: 0.8, delay: 0.2 }} variants={fadeUp} className="max-w-md w-full relative z-10">
         {/* Judul Tanggal dengan Garis Aksen */}
         <div className="mb-12">

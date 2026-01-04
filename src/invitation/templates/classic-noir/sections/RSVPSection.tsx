@@ -14,6 +14,7 @@ export default function RSVPSection() {
     { name: "Rahma & Roy", message: "Selamat atas pernikahan kalian. Semoga menjadi keluarga yang selalu penuh cinta dan kasih sayang.", isAttend: true },
     { name: "Akbar", message: "Semoga menjadi keluarga yang selalu penuh cinta dan kasih sayang.", isAttend: false },
     { name: "Yani", message: "Semoga menjadi keluarga yang selalu penuh cinta dan kasih sayang.", isAttend: false },
+    { name: "Lili Roy ", message: "Selamat Menikah ya! Semoga menjadi keluarga yang selalu penuh cinta dan kasih sayang.", isAttend: true },
   ])
 
   const [error, setError] = useState<string | null>(null)
@@ -48,10 +49,10 @@ export default function RSVPSection() {
   }
 
   return (
-    <section className="h-screen flex items-center justify-center px-6 text-white relative" id="rsvp">
-      <div className="w-full max-w-4xl grid md:grid-cols-1 gap-8 items-start">
+    <section id="rsvp" className="h-screen snap-start relative text-white px-6">
+      <div className="h-full max-w-4xl mx-auto grid grid-rows-[auto_1fr] gap-6 py-10">
         {/* SISI KIRI: FORM RSVP */}
-        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} className="bg-white/5 backdrop-blur-md p-6 border border-white/10">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="bg-white/5 backdrop-blur-md p-6 border border-white/10">
           <div className="mb-6">
             <span className="text-[9px] tracking-[0.4em] uppercase text-white/40 block mb-1">Reservation</span>
             <h2 className="font-serif text-2xl italic">RSVP</h2>
@@ -89,18 +90,15 @@ export default function RSVPSection() {
           </form>
         </motion.div>
 
-        {/* SISI KANAN: WISHES WALL (Scroll Internal) */}
-        <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} className="flex flex-col h-full max-h-[450px]">
+        {/* SISI : WISHES WALL (Scroll Internal) */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="flex flex-col min-h-0">
           <div className="mb-4">
             <h3 className="font-serif text-xl italic italic">Wishes for the Couple</h3>
             <div className="w-8 h-[1px] bg-white/30 mt-2" />
           </div>
 
           {/* AREA SCROLL INTERNAL */}
-          <div
-            className="overflow-y-auto pr-4 space-y-6 [&::-webkit-scrollbar]:width-[2px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20"
-            style={{ scrollbarWidth: "thin", scrollbarColor: "#444 transparent" }}
-          >
+          <div className="flex-1 overflow-y-auto pr-4 space-y-6 [&::-webkit-scrollbar]:w-0.5 [&::-webkit-scrollbar-thumb]:bg-white/20">
             {wishes.map((wish, index) => (
               <div key={index} className="border-l border-white/10 pl-4 py-1">
                 <div className="flex items-center gap-2 mb-1">

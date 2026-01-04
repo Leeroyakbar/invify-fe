@@ -45,8 +45,8 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="relative bg-gradient-to-b from-[#FFF9F4] to-[#F6E6E3]">
-      <div className="max-w-7xl mx-auto px-6 py-24" id="feature">
+    <section id="feature" className="relative bg-linear-to-b from-[#FFF9F4] to-[#F6E6E3]">
+      <div className="max-w-7xl mx-auto px-6 py-24">
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="mt-4 font-serif text-4xl md:text-5xl text-[#3B2F2F]">

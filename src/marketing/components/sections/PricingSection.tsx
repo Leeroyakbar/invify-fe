@@ -29,8 +29,8 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section className="relative bg-gradient-to-b from-white to-[#FFF9F4]">
-      <div className="max-w-7xl mx-auto px-6 py-24" id="pricing">
+    <section id="pricing" className="relative bg-gradient-to-b from-white to-[#FFF9F4]">
+      <div className="max-w-7xl mx-auto px-6 py-24">
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="mt-4 font-serif text-4xl md:text-5xl text-[#3B2F2F]">
