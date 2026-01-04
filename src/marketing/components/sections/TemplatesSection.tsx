@@ -2,6 +2,7 @@ import { useState } from "react"
 import template1 from "../../../../public/templates/template-1.png"
 import template2 from "../../../../public/templates/template-2.png"
 import template3 from "../../../../public/templates/template-3.png"
+import template4 from "../../../../public/templates/template-4.png"
 import { Link } from "react-router-dom"
 
 const categories = ["Semua", "Elegant", "Modern", "Floral", "Minimalist"]
@@ -9,13 +10,14 @@ const categories = ["Semua", "Elegant", "Modern", "Floral", "Minimalist"]
 const templates = [
   {
     id: 1,
-    title: "Modern Love",
-    category: "Modern",
-    popular: false,
-    src: "/demo/modern",
-    img: template2,
-    urlWa: "https://api.whatsapp.com/send?phone=6282273366718&text=Halo%20Admin%2C%20saya%20ingin%20menggunakan%20template%20Modern%20Love%20untuk%20acara%20pernikahan%20saya.",
+    title: "Old Money",
+    category: "Elegant",
+    popular: true,
+    src: "/demo/old-money",
+    img: template4,
+    urlWa: "https://api.whatsapp.com/send?phone=6282273366718&text=Halo%20Admin%2C%20saya%20ingin%20menggunakan%20template%20Old%20Money%20untuk%20acara%20pernikahan%20saya.",
   },
+
   {
     id: 2,
     title: "Elegant Ivory",
@@ -27,13 +29,23 @@ const templates = [
   },
 
   {
-    id: 2,
+    id: 3,
     title: "Classic Noir",
     category: "Elegant",
-    popular: false,
+    popular: true,
     src: "/demo/classic-noir",
     img: template3,
     urlWa: "https://api.whatsapp.com/send?phone=6282273366718&text=Halo%20Admin%2C%20saya%20ingin%20menggunakan%20template%20Classic%20Noir%20untuk%20acara%20pernikahan%20saya.",
+  },
+
+  {
+    id: 4,
+    title: "Modern Love",
+    category: "Floral",
+    popular: false,
+    src: "/demo/modern",
+    img: template2,
+    urlWa: "https://api.whatsapp.com/send?phone=6282273366718&text=Halo%20Admin%2C%20saya%20ingin%20menggunakan%20template%20Modern%20Love%20untuk%20acara%20pernikahan%20saya.",
   },
 ]
 

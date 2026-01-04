@@ -56,4 +56,15 @@ export const TEMPLATE_THEME: Record<
       iconColor: "text-white",
     },
   },
+
+  "old-money": {
+    desktopBg: "bg-[url('/classic-noir/photo-1.jpeg')] bg-cover bg-center",
+    audio: {
+      variant: "noir",
+      position: "bottom-right",
+      bg: "bg-black/10",
+      border: "border-white/40",
+      iconColor: "text-white",
+    },
+  },
 }
