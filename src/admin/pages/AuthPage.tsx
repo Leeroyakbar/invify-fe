@@ -32,6 +32,14 @@ export default function AuthPage() {
     window.history.replaceState({}, document.title)
   }
 
+  const handleAuth = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    // Nanti di sini tempat kamu menaruh logic koneksi ke Backend
+    // Untuk sekarang, kita langsung arahkan ke Dashboard
+    navigate("/admin/dashboard")
+  }
+
   return (
     <div className="min-h-screen w-full bg-[#FDFBF7] flex items-center justify-center relative overflow-hidden font-sans">
       {/* Background Decorative Blur */}
@@ -117,7 +125,11 @@ export default function AuthPage() {
                   </div>
                 )}
 
-                <button type="submit" className="w-full bg-[#D4A853] hover:bg-[#C59A45] text-white rounded-xl py-3.5 mt-4 text-sm font-bold shadow-lg shadow-[#D4A853]/20 hover:scale-[1.01] active:scale-[0.99] transition-all">
+                <button
+                  type="submit"
+                  onClick={handleAuth} // Panggil fungsi navigasi di sini
+                  className="w-full flex justify-center items-center bg-[#D4A853] hover:bg-[#C59A45] text-white rounded-xl py-3.5 mt-4 text-sm font-bold shadow-lg shadow-[#D4A853]/20 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer"
+                >
                   {isLogin ? "Masuk" : "Daftar"}
                 </button>
               </form>
