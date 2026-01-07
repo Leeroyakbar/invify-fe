@@ -9,7 +9,7 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative bg-gradient-to-b from-[#FFF9F4] via-[#F6E6E3] to-white">
+    <section className="relative bg-linear-to-b from-[#FFF9F4] via-[#F6E6E3] to-white">
       <div className="max-w-7xl mx-auto px-6 py-28 text-center" id="beranda">
         <span className="inline-block px-4 py-2 rounded-full bg-[#F6E6E3] text-sm text-[#7A6F68]">✨ Platform Undangan Digital #1 Mandailing</span>
 

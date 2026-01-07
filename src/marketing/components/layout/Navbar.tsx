@@ -40,7 +40,7 @@ export default function Navbar() {
           </Link>
 
           {/* Tombol Daftar - mengarahkan ke Auth dengan state isLogin: false */}
-          <Link to="/auth" state={{ initialLogin: true }} className="px-5 py-2.5 rounded-full bg-[#D4A853] text-white text-sm font-medium shadow-sm hover:bg-[#C59A45] transition-all cursor-pointer">
+          <Link to="/auth" state={{ initialLogin: false }} className="px-5 py-2.5 rounded-full bg-[#D4A853] text-white text-sm font-medium shadow-sm hover:bg-[#C59A45] transition-all cursor-pointer">
             Daftar Gratis
           </Link>
         </div>
@@ -54,7 +54,7 @@ export default function Navbar() {
       </div>
 
       {/* MOBILE MENU DROPDOWN */}
-      <div className={`md:hidden bg-white border-b border-black/5 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
+      <div className={`md:hidden bg-white border-b border-black/5 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-125 opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="px-6 py-6 flex flex-col gap-4">
           {navLinks.map((link) => (
             <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="text-lg text-[#7A6F68] hover:text-[#D4A853]">
@@ -62,9 +62,14 @@ export default function Navbar() {
             </a>
           ))}
           <hr className="border-black/5 my-2" />
-          <div className="flex flex-col gap-3">
-            <button className="w-full py-3 text-[#3B2F2F] font-medium border border-black/10 rounded-xl">Masuk</button>
-            <button className="w-full py-3 bg-[#D4A853] text-white font-medium rounded-xl shadow-md">Daftar Gratis</button>
+          <div className="flex flex-col gap-3 w-full px-4">
+            <Link to="/auth" state={{ initialLogin: true }} className="w-full py-3.5 text-[#3B2F2F] font-semibold border border-stone-200 rounded-xl text-center active:bg-stone-50 transition-colors shadow-sm">
+              Masuk
+            </Link>
+
+            <Link to="/auth" state={{ initialLogin: false }} className="w-full py-3.5 bg-[#D4A853] text-white font-bold rounded-xl shadow-lg shadow-[#D4A853]/20 text-center active:scale-[0.98] transition-all">
+              Daftar Gratis
+            </Link>
           </div>
         </div>
       </div>
