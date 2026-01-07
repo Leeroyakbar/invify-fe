@@ -1,6 +1,7 @@
 "use client" // Pastikan tambahkan ini jika menggunakan Next.js App Router
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -33,8 +34,15 @@ export default function Navbar() {
 
         {/* RIGHT BUTTONS (Desktop) */}
         <div className="hidden md:flex items-center gap-4">
-          <button className="text-sm text-[#7A6F68] hover:text-[#3B2F2F]">Masuk</button>
-          <button className="px-5 py-2.5 rounded-full bg-[#D4A853] text-white text-sm font-medium shadow-sm hover:bg-[#C59A45] transition-all">Daftar Gratis</button>
+          {/* Tombol Masuk - mengarahkan ke Auth dengan state isLogin: true */}
+          <Link to="/auth" state={{ initialLogin: true }} className="text-sm text-[#7A6F68] hover:text-[#3B2F2F] cursor-pointer">
+            Masuk
+          </Link>
+
+          {/* Tombol Daftar - mengarahkan ke Auth dengan state isLogin: false */}
+          <Link to="/auth" state={{ initialLogin: true }} className="px-5 py-2.5 rounded-full bg-[#D4A853] text-white text-sm font-medium shadow-sm hover:bg-[#C59A45] transition-all cursor-pointer">
+            Daftar Gratis
+          </Link>
         </div>
 
         {/* MOBILE HAMBURGER BUTTON */}
