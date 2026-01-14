@@ -8,6 +8,8 @@ import LandingPage from "./marketing/pages/LandingPage"
 import AuthPage from "./admin/pages/AuthPage"
 import AdminLayout from "./admin/components/AdminLayout"
 import DashboardPage from "./admin/pages/DashboardPage"
+import UsersPage from "./admin/pages/UserPage"
+import AdminInvitationPage from "./admin/pages/AdminInvitationPage"
 
 export default function App() {
   return (
@@ -20,14 +22,14 @@ export default function App() {
 
         {/* --- ADMIN ROUTES (Nested) --- */}
         {/* Semua route di bawah ini akan otomatis menggunakan AdminLayout */}
-        <Route path="/admin" element={<AdminLayout children={<DashboardPage />} />}>
+        <Route path="/admin" element={<AdminLayout />}>
           {/* Redirect /admin ke /admin/dashboard */}
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="dashboard" element={<DashboardPage />} />
 
           {/* Placeholder untuk menu lainnya agar tidak error saat diklik */}
-          <Route path="pengguna" element={<div className="p-8">Halaman Pengguna (Coming Soon)</div>} />
-          <Route path="undangan" element={<div className="p-8">Halaman Undangan (Coming Soon)</div>} />
+          <Route path="users" element={<UsersPage />} />
+          <Route path="invitations" element={<AdminInvitationPage />} />
           <Route path="template" element={<div className="p-8">Halaman Template (Coming Soon)</div>} />
           <Route path="transaksi" element={<div className="p-8">Halaman Transaksi (Coming Soon)</div>} />
           <Route path="laporan" element={<div className="p-8">Halaman Laporan (Coming Soon)</div>} />

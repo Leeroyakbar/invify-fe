@@ -19,8 +19,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* LOGO */}
         <div className="flex items-center gap-2 font-serif text-xl text-[#3B2F2F]">
-          <div className="w-8 h-8 rounded-full bg-[#D4A853] flex items-center justify-center text-white">♥</div>
-          <span className="font-bold">Invify</span>
+          <img src="/logo-without-text-3.png" alt="" className="w-6" />
+          <span className="font-bold ">Invify</span>
         </div>
 
         {/* DESKTOP NAV */}

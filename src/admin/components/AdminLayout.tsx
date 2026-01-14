@@ -1,19 +1,19 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { LayoutDashboard, Users, Mail, Palette, Receipt, BarChart3, Settings, LogOut, ChevronLeft, Heart } from "lucide-react"
-import { Link, useLocation } from "react-router-dom"
+import { LayoutDashboard, Users, Mail, Palette, Receipt, BarChart3, Settings, LogOut, ChevronLeft } from "lucide-react"
+import { Link, Outlet, useLocation } from "react-router-dom"
 
 const menuItems = [
   { name: "Dashboard", icon: LayoutDashboard, path: "/admin/dashboard" },
-  { name: "Pengguna", icon: Users, path: "/admin/pengguna" },
-  { name: "Undangan", icon: Mail, path: "/admin/undangan" },
+  { name: "Pengguna", icon: Users, path: "/admin/users" },
+  { name: "Undangan", icon: Mail, path: "/admin/invitations" },
   { name: "Template", icon: Palette, path: "/admin/template" },
   { name: "Transaksi", icon: Receipt, path: "/admin/transaksi" },
   { name: "Laporan", icon: BarChart3, path: "/admin/laporan" },
   { name: "Pengaturan", icon: Settings, path: "/admin/pengaturan" },
 ]
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const location = useLocation()
 
@@ -26,8 +26,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <AnimatePresence mode="wait">
             {!isCollapsed && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-[#D4A853] rounded-lg flex items-center justify-center">
-                  <Heart size={18} className="text-white fill-white" />
+                <div className="w-8 rounded-lg flex items-center justify-center">
+                  <img src="/logo-without-text-3.png" alt="" />
                 </div>
                 <span className="font-serif font-bold text-stone-800 text-lg tracking-tight">Admin Panel</span>
               </motion.div>
@@ -74,7 +74,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* MAIN CONTENT AREA */}
       <main className="flex-1 flex flex-col h-screen overflow-y-auto bg-[#FDFBF7]">
-        <div className="p-8 md:p-12">{children}</div>
+        <div className="p-8 md:p-12">
+          <Outlet />
+        </div>
       </main>
     </div>
   )

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { motion, AnimatePresence, easeOut } from "framer-motion"
-import { Mail, Lock, User, Eye, EyeOff, Heart, ArrowLeft } from "lucide-react"
+import { Mail, Lock, User, Eye, EyeOff, ArrowLeft } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 
 export default function AuthPage() {
@@ -54,8 +54,8 @@ export default function AuthPage() {
       <div className="w-full max-w-md z-10 px-6">
         {/* Logo Invify */}
         <div className="flex flex-row items-center justify-center gap-3 mb-10">
-          <div className="w-10 h-10 bg-[#D4A853] rounded-full flex items-center justify-center shadow-lg shadow-[#D4A853]/30">
-            <Heart className="text-white fill-white" size={20} />
+          <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg shadow-[#D4A853]/30">
+            <img src="/logo-without-text-3.png" alt="" />
           </div>
           <h1 className="text-3xl font-serif font-bold text-stone-800 tracking-tight">Invify</h1>
         </div>
