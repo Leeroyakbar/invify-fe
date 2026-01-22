@@ -7,7 +7,7 @@ const menuItems = [
   { name: "Dashboard", icon: LayoutDashboard, path: "/admin/dashboard" },
   { name: "Pengguna", icon: Users, path: "/admin/users" },
   { name: "Undangan", icon: Mail, path: "/admin/invitations" },
-  { name: "Template", icon: Palette, path: "/admin/template" },
+  { name: "Template", icon: Palette, path: "/admin/templates" },
   { name: "Transaksi", icon: Receipt, path: "/admin/transaksi" },
   { name: "Laporan", icon: BarChart3, path: "/admin/laporan" },
   { name: "Pengaturan", icon: Settings, path: "/admin/pengaturan" },

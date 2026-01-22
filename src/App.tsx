@@ -10,6 +10,7 @@ import AdminLayout from "./admin/components/AdminLayout"
 import DashboardPage from "./admin/pages/DashboardPage"
 import UsersPage from "./admin/pages/UserPage"
 import AdminInvitationPage from "./admin/pages/AdminInvitationPage"
+import TemplatePage from "./admin/pages/TemplatePage"
 
 export default function App() {
   return (
@@ -30,7 +31,7 @@ export default function App() {
           {/* Placeholder untuk menu lainnya agar tidak error saat diklik */}
           <Route path="users" element={<UsersPage />} />
           <Route path="invitations" element={<AdminInvitationPage />} />
-          <Route path="template" element={<div className="p-8">Halaman Template (Coming Soon)</div>} />
+          <Route path="templates" element={<TemplatePage />} />
           <Route path="transaksi" element={<div className="p-8">Halaman Transaksi (Coming Soon)</div>} />
           <Route path="laporan" element={<div className="p-8">Halaman Laporan (Coming Soon)</div>} />
           <Route path="pengaturan" element={<div className="p-8">Halaman Pengaturan (Coming Soon)</div>} />
