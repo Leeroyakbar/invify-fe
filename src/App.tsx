@@ -11,10 +11,19 @@ import DashboardPage from "./admin/pages/DashboardPage"
 import UsersPage from "./admin/pages/UserPage"
 import AdminInvitationPage from "./admin/pages/AdminInvitationPage"
 import TemplatePage from "./admin/pages/TemplatePage"
+import { Toaster } from "sonner"
 
 export default function App() {
   return (
     <BrowserRouter>
+      {/* Toaster */}
+      <Toaster
+        richColors
+        toastOptions={{
+          className: "font-sans", // Font utama toast
+          descriptionClassName: "font-serif italic", // Jika ada deskripsi
+        }}
+      />
       <Routes>
         {/* --- PUBLIC ROUTES --- */}
         <Route path="/" element={<LandingPage />} />

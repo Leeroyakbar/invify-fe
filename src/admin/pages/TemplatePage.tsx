@@ -17,7 +17,7 @@ export default function TemplatePage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const templatesData: Template[] = [
+  const [templates, setTemplates] = useState<Template[]>([
     {
       id: 1,
       name: "ELegant-Ivory",
@@ -54,9 +54,24 @@ export default function TemplatePage() {
       status: "active",
       image: "",
     },
-  ]
+  ])
 
-  const filteredData = templatesData.filter((t) => t.name.toLowerCase().includes(searchTerm.toLowerCase()) || t.category.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredData = templates.filter((t) => t.name.toLowerCase().includes(searchTerm.toLowerCase()) || t.category.toLowerCase().includes(searchTerm.toLowerCase()))
+
+  const handleAddTemplate = (newData: { name: string; category: string; image: string, price: number }) => {
+    const newEntity: Template = {
+      id: templates.length + 1,
+      name: newData.name,
+      category: newData.category,
+      price: newData.price,
+      number_used: 0,
+      status: "active",
+      image: newData.image,
+    }
+
+    setTemplates([...templates, newEntity])
+    setIsModalOpen(false)
+  }
 
   return (
     <div className="space-y-8">
@@ -90,7 +105,7 @@ export default function TemplatePage() {
         ))}
       </div>
 
-      <AddTemplateModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <AddTemplateModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleAddTemplate} />
     </div>
   )
 }
