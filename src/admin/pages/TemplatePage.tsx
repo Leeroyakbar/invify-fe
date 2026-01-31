@@ -2,6 +2,7 @@ import { useState } from "react"
 import TemplateCard from "../components/TemplateCard"
 import AddTemplateModal from "../components/AddTemplateModal"
 import { Plus, Search } from "lucide-react"
+import { toast } from "sonner"
 
 export interface Template {
   id: number
@@ -16,6 +17,7 @@ export interface Template {
 export default function TemplatePage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null)
 
   const [templates, setTemplates] = useState<Template[]>([
     {
@@ -58,19 +60,52 @@ export default function TemplatePage() {
 
   const filteredData = templates.filter((t) => t.name.toLowerCase().includes(searchTerm.toLowerCase()) || t.category.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  const handleAddTemplate = (newData: { name: string; category: string; image: string, price: number }) => {
-    const newEntity: Template = {
-      id: templates.length + 1,
-      name: newData.name,
-      category: newData.category,
-      price: newData.price,
-      number_used: 0,
-      status: "active",
-      image: newData.image,
+  const toggleStatus = (id: number, currentStatus: "active" | "inactive") => {
+    const newStatus = currentStatus === "active" ? "inactive" : "active"
+
+    // update state
+    setTemplates((prevTemplates) => prevTemplates.map((template) => (template.id === id ? { ...template, status: newStatus } : template)))
+  }
+
+  const handleDelete = (id: number) => {
+    toast("Hapus template ini?", {
+      action: {
+        label: "Hapus",
+        onClick: () => {
+          setTemplates((prev) => prev.filter((t) => t.id !== id))
+          toast.success("Template berhasil dihapus!")
+        },
+      },
+      cancel: {
+        label: "Batal",
+        onClick: () => console.log("Penghapusan dibatalkan"),
+      },
+    })
+  }
+
+  const openEditModal = (template: Template) => {
+    setSelectedTemplate(template)
+    setIsModalOpen(true)
+  }
+
+  // Tambahkan tipe untuk data dari form agar sinkron dengan Modal
+  const handleSave = (formData: { name: string; category: string; image: string; price: number }) => {
+    if (selectedTemplate) {
+      // MODE EDIT: Gunakan data lama (id, number_used, dll) dan timpa dengan data baru dari form
+      setTemplates((prev) => prev.map((t) => (t.id === selectedTemplate.id ? { ...t, ...formData } : t)))
+    } else {
+      // MODE TAMBAH: Buat objek Template lengkap untuk data baru
+      const newEntity: Template = {
+        id: Date.now(),
+        ...formData,
+        number_used: 0,
+        status: "active",
+      }
+      setTemplates((prev) => [...prev, newEntity])
     }
 
-    setTemplates([...templates, newEntity])
     setIsModalOpen(false)
+    setSelectedTemplate(null)
   }
 
   return (
@@ -85,7 +120,6 @@ export default function TemplatePage() {
           <Plus size={18} /> Tambah Template
         </button>
       </div>
-
       {/* Search Bar */}
       <div className="relative max-w-2xl">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-stone-300" size={18} />
@@ -97,15 +131,22 @@ export default function TemplatePage() {
           className="w-full bg-white border border-stone-100 rounded-2xl py-3.5 pl-12 pr-4 shadow-sm focus:outline-none focus:border-[#D4A853] transition-all"
         />
       </div>
-
       {/* Grid Card */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredData.map((item) => (
-          <TemplateCard key={item.id} item={item} />
+          <TemplateCard key={item.id} item={item} onStatusChange={toggleStatus} onDelete={handleDelete} onEdit={openEditModal} />
         ))}
       </div>
-
-      <AddTemplateModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleAddTemplate} />
+      <AddTemplateModal
+        key={selectedTemplate?.id || "new-template"}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false)
+          setSelectedTemplate(null)
+        }}
+        onSave={handleSave}
+        initialData={selectedTemplate}
+      />
     </div>
   )
 }

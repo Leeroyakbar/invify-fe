@@ -1,17 +1,52 @@
-import { motion } from "framer-motion"
-import { ImageIcon, MoreVertical } from "lucide-react"
+import { AnimatePresence, motion } from "framer-motion"
+import { Edit3, ImageIcon, MoreVertical, Trash2 } from "lucide-react"
 import { type Template } from "../pages/TemplatePage"
+import { useState } from "react";
 
-export default function TemplateCard({ item }: { item: Template }) {
+export default function TemplateCard({ item, onStatusChange, onDelete, onEdit }: { item: Template; onStatusChange: (id: number, currentStatus: "active" | "inactive") => void, onDelete: (id: number) => void, onEdit: (item: Template) => void }) {
+  const [showMenu, setShowMenu] = useState(false)
+
   return (
     <motion.div whileHover={{ y: -8 }} className="bg-white rounded-3xl border border-stone-100 shadow-sm hover:shadow-xl hover:shadow-stone-200/50 transition-all duration-300 overflow-hidden group">
       {/* Thumbnail Area */}
-      <div className="aspect-[4/3] bg-stone-100 flex items-center justify-center relative overflow-hidden">
+      <div className="aspect-4/3 bg-stone-100 flex items-center justify-center relative overflow-hidden">
         <ImageIcon className="text-stone-300 group-hover:scale-110 transition-transform duration-500" size={48} />
         <div className="absolute top-4 right-4">
-          <button className="p-2 bg-white/80 backdrop-blur-sm rounded-xl text-stone-400 hover:text-[#D4A853] shadow-sm">
+          <button 
+            onClick={() => setShowMenu(!showMenu)}
+            className="p-2 bg-white/80 backdrop-blur-sm rounded-xl text-stone-400 hover:text-[#D4A853] shadow-sm">
             <MoreVertical size={16} />
           </button>
+
+
+          {/* Floating Menu */}
+          <AnimatePresence>
+            { showMenu && (
+              <>
+                <div className="fixed inset-0" onClick={() => setShowMenu(false)} />
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  className="absolute right-0 mt-2 w-32 bg-white rounded-2xl shadow-xl border border-stone-50 overflow-hidden"
+                >
+                  <button 
+                    onClick={() => { onEdit(item); setShowMenu(false); }}
+                    className="w-full px-4 py-2.5 text-left text-xs flex items-center gap-2 hover:bg-stone-50 text-stone-600"
+                  >
+                    <Edit3 size={14} /> Edit
+                  </button>
+                  <button 
+                    onClick={() => { onDelete(item.id); setShowMenu(false); }}
+                    className="w-full px-4 py-2.5 text-left text-xs flex items-center gap-2 hover:bg-rose-50 text-rose-500"
+                  >
+                    <Trash2 size={14} /> Delete
+                  </button>
+                </motion.div>
+              </>
+            )
+            }
+          </AnimatePresence>
         </div>
       </div>
 
@@ -35,7 +70,7 @@ export default function TemplateCard({ item }: { item: Template }) {
         <div className="flex justify-between items-center pt-2">
           <span className="text-[11px] text-stone-500 font-medium">Status {item.status}</span>
           {/* Toggle Switch Simple */}
-          <div className={`w-10 h-5 rounded-full relative transition-colors cursor-pointer ${item.status === "active" ? "bg-[#D4A853]" : "bg-stone-200"}`}>
+          <div onClick={() => onStatusChange(item.id, item.status)} className={`w-10 h-5 rounded-full relative transition-colors cursor-pointer ${item.status === "active" ? "bg-[#D4A853]" : "bg-stone-200"}`}>
             <div className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-all ${item.status === "active" ? "left-6" : "left-1"}`} />
           </div>
         </div>

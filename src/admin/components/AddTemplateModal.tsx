@@ -3,12 +3,23 @@ import { X, Upload } from "lucide-react"
 import CustomDropdown from "./CustomDropdown"
 import { useRef, useState } from "react"
 import { toast } from "sonner"
+import type { Template } from "../pages/TemplatePage"
 
-export default function AddTemplateModal({ isOpen, onClose, onSave }: { isOpen: boolean; onClose: () => void; onSave: (data: { name: string; category: string; image: string; price: number }) => void }) {
-  const [name, setName] = useState("")
-  const [category, setCategory] = useState("Elegant")
-  const [price, setPrice] = useState(0)
-  const [imagePreview, setImagePreview] = useState<string | null>(null)
+export default function AddTemplateModal({
+  isOpen,
+  onClose,
+  onSave,
+  initialData,
+}: {
+  isOpen: boolean
+  onClose: () => void
+  onSave: (data: { name: string; category: string; image: string; price: number }) => void
+  initialData: Template | null
+}) {
+  const [name, setName] = useState(initialData?.name || "")
+  const [category, setCategory] = useState(initialData?.category || "Elegant")
+  const [price, setPrice] = useState(initialData?.price || 0)
+  const [imagePreview, setImagePreview] = useState<string | null>(initialData?.image || null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Handler Upload Gambar
@@ -24,22 +35,23 @@ export default function AddTemplateModal({ isOpen, onClose, onSave }: { isOpen: 
   }
 
   const handleSubmit = () => {
-    // 1. Validasi: Jika nama kosong, tampilkan toast dan BERHENTI
     if (!name) {
       toast.error("Nama template tidak boleh kosong!")
-      return // Sangat penting agar tidak lanjut ke onSave
+      return
     }
 
-    // 2. Jika valid, jalankan onSave
     onSave({ name, category, image: imagePreview || "", price })
 
-    // 3. Beri feedback sukses
-    toast.success("Template berhasil ditambahkan!")
+    toast.success(initialData ? "Template diperbarui!" : "Template berhasil ditambahkan!")
 
-    // 4. Reset form
-    setName("")
-    setImagePreview(null)
+    // Jika ini mode tambah, bersihkan state
+    if (!initialData) {
+      setName("")
+      setPrice(0)
+      setImagePreview(null)
+    }
   }
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -48,7 +60,7 @@ export default function AddTemplateModal({ isOpen, onClose, onSave }: { isOpen: 
           <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="bg-white w-full max-w-xl rounded-4xl shadow-2xl z-10">
             <div className="p-8 space-y-6">
               <div className="flex justify-between items-center">
-                <h3 className="text-2xl font-serif italic text-stone-800">Tambah Template Baru</h3>
+                <h3 className="text-2xl font-serif italic text-stone-800">{initialData ? "Edit Template" : "Tambah Template Baru"}</h3>
                 <button onClick={onClose} className="p-2 hover:bg-stone-50 rounded-full text-stone-400">
                   <X size={20} />
                 </button>
