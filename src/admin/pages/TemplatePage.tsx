@@ -88,7 +88,6 @@ export default function TemplatePage() {
     setIsModalOpen(true)
   }
 
-  // Tambahkan tipe untuk data dari form agar sinkron dengan Modal
   const handleSave = (formData: { name: string; category: string; image: string; price: number }) => {
     if (selectedTemplate) {
       // MODE EDIT: Gunakan data lama (id, number_used, dll) dan timpa dengan data baru dari form
