@@ -10,7 +10,7 @@ const menuItems = [
   { name: "Template", icon: Palette, path: "/admin/templates" },
   { name: "Transaksi", icon: Receipt, path: "/admin/transactions" },
   { name: "Laporan", icon: BarChart3, path: "/admin/reports" },
-  { name: "Pengaturan", icon: Settings, path: "/admin/pengaturan" },
+  { name: "Pengaturan", icon: Settings, path: "/admin/settings" },
 ]
 
 export default function AdminLayout() {

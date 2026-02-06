@@ -14,6 +14,7 @@ import TemplatePage from "./admin/pages/TemplatePage"
 import { Toaster } from "sonner"
 import TransactionPage from "./admin/pages/TransactionPage"
 import ReportPage from "./admin/pages/ReportPage"
+import SettingsPage from "./admin/pages/SettingPage"
 
 export default function App() {
   return (
@@ -45,7 +46,7 @@ export default function App() {
           <Route path="templates" element={<TemplatePage />} />
           <Route path="transactions" element={<TransactionPage />} />
           <Route path="reports" element={<ReportPage />} />
-          <Route path="pengaturan" element={<div className="p-8">Halaman Pengaturan (Coming Soon)</div>} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
 
         {/* --- DEMO ROUTES --- */}
