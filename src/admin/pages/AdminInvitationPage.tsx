@@ -3,6 +3,7 @@ import { useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import CustomDropdown from "../components/CustomDropdown"
 import DataTable, { type Column } from "../components/DataTable"
+import { toast } from "sonner"
 
 // 1. Definisikan Interface yang Akurat
 interface Invitation {
@@ -66,13 +67,14 @@ const columns: Column<Invitation>[] = [
 ]
 
 export default function AdminInvitationPage() {
+  const [invitations, setInvitations] = useState<Invitation[]>(invitationsData)
   const [searchTerm, setSearchTerm] = useState("")
   const [showFilters, setShowFilters] = useState(false)
   const [statusFilter, setStatusFilter] = useState("Aktif")
   const [paketFilter, setPaketFilter] = useState("Semua Paket")
 
   const filteredInvitations = useMemo(() => {
-    return invitationsData.filter((invitation) => {
+    return invitations.filter((invitation) => {
       const matchesSearch = invitation.name.toLowerCase().includes(searchTerm.toLowerCase()) || invitation.template.toLowerCase().includes(searchTerm.toLowerCase())
 
       const matchesStatus = statusFilter === "Semua Undangan" || invitation.status === statusFilter
@@ -80,13 +82,31 @@ export default function AdminInvitationPage() {
 
       return matchesSearch && matchesStatus && matchesPaket
     })
-  }, [searchTerm, statusFilter, paketFilter])
+  }, [invitations, searchTerm, statusFilter, paketFilter])
 
   function resetFilters() {
     setSearchTerm("")
     setStatusFilter("Semua Undangan")
     setPaketFilter("Semua Paket")
   }
+
+  const handleDelete = (item: Invitation) => {
+    toast(`Hapus Invitation ${item.id} ?`, {
+      description: `Data untuk ${item.name} akan dihapus permanen.`,
+      action: {
+        label: "Hapus",
+        onClick: () => {
+          setInvitations((prev) => prev.filter((t) => t.id !== item.id))
+          toast.success("Invitation Berhasil Dihapus")
+        },
+      },
+      cancel: {
+        label: "Batal",
+        onClick: () => console.log("Penghapusan Dibatalkan"),
+      },
+    })
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -149,7 +169,7 @@ export default function AdminInvitationPage() {
         columns={columns}
         data={filteredInvitations} // Pakai data yang sudah difilter
         onEdit={(inv) => console.log("Edit:", inv.name)}
-        onDelete={(inv) => confirm(`Hapus undangan ${inv.name}?`)}
+        onDelete={handleDelete}
       />
     </div>
   )

@@ -13,6 +13,7 @@ import AdminInvitationPage from "./admin/pages/AdminInvitationPage"
 import TemplatePage from "./admin/pages/TemplatePage"
 import { Toaster } from "sonner"
 import TransactionPage from "./admin/pages/TransactionPage"
+import ReportPage from "./admin/pages/ReportPage"
 
 export default function App() {
   return (
@@ -43,7 +44,7 @@ export default function App() {
           <Route path="invitations" element={<AdminInvitationPage />} />
           <Route path="templates" element={<TemplatePage />} />
           <Route path="transactions" element={<TransactionPage />} />
-          <Route path="laporan" element={<div className="p-8">Halaman Laporan (Coming Soon)</div>} />
+          <Route path="reports" element={<ReportPage />} />
           <Route path="pengaturan" element={<div className="p-8">Halaman Pengaturan (Coming Soon)</div>} />
         </Route>
 

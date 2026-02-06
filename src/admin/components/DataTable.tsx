@@ -26,7 +26,7 @@ export default function DataTable<T extends object>({ title, count, columns, dat
   const [activeMenu, setActiveMenu] = useState<number | null>(null)
 
   return (
-    <div className="bg-white rounded-3xl border border-stone-50 shadow-sm overflow-hidden font-sans">
+    <div className="bg-white rounded-3xl border border-stone-50 shadow-sm overflow-visible font-sans">
       <div className="p-6 border-b border-stone-50 flex justify-between items-center">
         <h3 className="font-serif text-lg text-stone-800 italic tracking-tight">
           {title}
@@ -34,7 +34,7 @@ export default function DataTable<T extends object>({ title, count, columns, dat
         </h3>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-visible">
         <table className="w-full text-left">
           <thead className="bg-stone-50/50 text-stone-400 text-[10px] uppercase tracking-[0.15em]">
             <tr>
