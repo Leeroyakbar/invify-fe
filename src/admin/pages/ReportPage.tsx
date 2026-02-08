@@ -111,7 +111,7 @@ export default function ReportPage() {
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie data={packageData} innerRadius={70} outerRadius={100} paddingAngle={5} dataKey="value">
-                  {packageData.map((entry, index) => (
+                  {packageData.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
