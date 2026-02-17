@@ -19,10 +19,28 @@ interface DataTableProps<T> {
   emptyText?: string
   onEdit?: (item: T) => void
   onDelete?: (item: T) => void
+  // pagination
+  currentPage: number
+  totalPages: number
+  onPageChange: (newPage: number) => void
+  loading?: boolean
 }
 
 // 3. Fungsi utama dengan constraint T harus objek
-export default function DataTable<T extends object>({ title, count, columns, data, emptyText = "Data tidak ditemukan...", onEdit, onDelete }: DataTableProps<T>) {
+export default function DataTable<T extends object>({
+  title,
+  count,
+  columns,
+  data,
+  emptyText = "Data tidak ditemukan...",
+  onEdit,
+  onDelete,
+  // --- TAMBAHKAN INI ---
+  currentPage,
+  totalPages,
+  onPageChange,
+  loading,
+}: DataTableProps<T>) {
   const [activeMenu, setActiveMenu] = useState<number | null>(null)
 
   return (
@@ -112,13 +130,22 @@ export default function DataTable<T extends object>({ title, count, columns, dat
         </table>
       </div>
 
-      {/* Footer / Pagination ... */}
       {/* FOOTER / PAGINATION */}
       <div className="p-6 border-t border-stone-50 flex justify-between items-center text-[10px] text-stone-400 uppercase tracking-widest font-bold">
-        <span>Menampilkan {data.length} data</span>
+        <span>
+          Menampilkan {data.length} dari {count} data
+        </span>
         <div className="flex gap-2">
-          <button className="px-4 py-1.5 border border-stone-100 rounded-lg hover:bg-stone-50 transition-all">Prev</button>
-          <button className="px-4 py-1.5 border border-stone-100 rounded-lg hover:bg-stone-50 transition-all">Next</button>
+          <button disabled={currentPage === 0 || loading} onClick={() => onPageChange(currentPage - 1)} className="px-4 py-1.5 border border-stone-100 rounded-lg hover:bg-stone-50 disabled:opacity-30 transition-all cursor-pointer">
+            Prev
+          </button>
+          <button
+            disabled={currentPage + 1 >= totalPages || loading}
+            onClick={() => onPageChange(currentPage + 1)}
+            className="px-4 py-1.5 border border-stone-100 rounded-lg hover:bg-stone-50 disabled:opacity-30 transition-all cursor-pointer"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

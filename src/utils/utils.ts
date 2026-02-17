@@ -14,3 +14,20 @@ export const createGoogleCalendarLink = (data: Invitation) => {
 
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`
 }
+
+export const isTokenExpired = (token: string) => {
+  if (!token) return true
+
+  try {
+    const payloadBase64 = token.split(".")[1]
+    const decodedJson = atob(payloadBase64)
+    const decoded = JSON.parse(decodedJson)
+
+    const exp = decoded.exp
+
+    return Date.now() >= exp * 1000
+  } catch (e) {
+    console.log(e)
+    return true
+  }
+}

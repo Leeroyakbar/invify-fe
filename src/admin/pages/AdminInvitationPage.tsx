@@ -165,11 +165,15 @@ export default function AdminInvitationPage() {
       {/* Table Undangan */}
       <DataTable<Invitation>
         title="Daftar Undangan"
-        count={filteredInvitations.length} // Pakai data yang sudah difilter
+        count={filteredInvitations.length}
         columns={columns}
-        data={filteredInvitations} // Pakai data yang sudah difilter
+        data={filteredInvitations}
         onEdit={(inv) => console.log("Edit:", inv.name)}
         onDelete={handleDelete}
+        // Tambahkan props di bawah ini untuk memperbaiki error:
+        currentPage={0}
+        totalPages={1}
+        onPageChange={(page) => console.log("Halaman ke:", page)}
       />
     </div>
   )

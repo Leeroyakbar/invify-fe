@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { LayoutDashboard, Users, Mail, Palette, Receipt, BarChart3, Settings, LogOut, ChevronLeft } from "lucide-react"
-import { Link, Outlet, useLocation } from "react-router-dom"
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
+import { toast } from "sonner"
+import { isTokenExpired } from "../../utils/utils"
 
 const menuItems = [
   { name: "Dashboard", icon: LayoutDashboard, path: "/admin/dashboard" },
@@ -16,7 +18,31 @@ const menuItems = [
 export default function AdminLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
+  const handleLogout = () => {
+    // 1. Hapus semua data kredensial
+    localStorage.removeItem("token")
+    localStorage.removeItem("role")
+
+    const token = localStorage.getItem("token")
+    if (token && !isTokenExpired(token)) {
+      toast.error("Sesi telah berakhir, silahkan login kembali")
+    } else {
+      toast.success("Logout Berhasil!")
+    }
+
+    // 3. Redirect ke halaman auth atau landing page
+    navigate("/auth", { replace: true })
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+
+    if (!token || isTokenExpired(token)) {
+      handleLogout()
+    }
+  }, [location.pathname])
   return (
     <div className="flex min-h-screen bg-[#FDFBF7] font-sans">
       {/* SIDEBAR */}
@@ -65,10 +91,13 @@ export default function AdminLayout() {
               </div>
             )}
           </div>
-          <Link to="/" className={`w-full flex items-center gap-3 px-3 py-3 text-rose-500 hover:bg-rose-50 rounded-xl transition-all ${isCollapsed ? "justify-center" : ""}`}>
+          <button
+            onClick={handleLogout} // Panggil fungsi logout
+            className={`w-full flex items-center gap-3 px-3 py-3 text-rose-500 hover:bg-rose-50 rounded-xl transition-all cursor-pointer ${isCollapsed ? "justify-center" : ""}`}
+          >
             <LogOut size={20} />
             {!isCollapsed && <span className="text-sm font-semibold">Keluar</span>}
-          </Link>
+          </button>
         </div>
       </motion.aside>
 

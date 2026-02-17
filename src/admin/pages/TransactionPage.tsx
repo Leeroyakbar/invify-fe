@@ -168,7 +168,17 @@ export default function TransactionPage() {
       </div>
 
       {/* TABLE SECTION */}
-      <DataTable title="Riwayat Transaksi" count={filteredTransactions.length} columns={columns} data={filteredTransactions} onEdit={handleEdit} onDelete={handleDelete} />
+      <DataTable
+        title="Riwayat Transaksi"
+        count={filteredTransactions.length}
+        columns={columns}
+        data={filteredTransactions}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        currentPage={0}
+        totalPages={1}
+        onPageChange={(page) => console.log("Halaman ke:", page)}
+      />
 
       {/* Modal Edit (Kita bisa buat komponen baru atau reuse modal yang ada) */}
       {isEditModalOpen && <EditTransactionModal key={selectedTransaction?.id || "new"} isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} initialData={selectedTransaction} onSave={handleSaveEdit} />}

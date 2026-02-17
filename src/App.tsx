@@ -15,6 +15,7 @@ import { Toaster } from "sonner"
 import TransactionPage from "./admin/pages/TransactionPage"
 import ReportPage from "./admin/pages/ReportPage"
 import SettingsPage from "./admin/pages/SettingPage"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 export default function App() {
   return (
@@ -35,18 +36,20 @@ export default function App() {
 
         {/* --- ADMIN ROUTES (Nested) --- */}
         {/* Semua route di bawah ini akan otomatis menggunakan AdminLayout */}
-        <Route path="/admin" element={<AdminLayout />}>
-          {/* Redirect /admin ke /admin/dashboard */}
-          <Route index element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="dashboard" element={<DashboardPage />} />
+        <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            {/* Redirect /admin ke /admin/dashboard */}
+            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="dashboard" element={<DashboardPage />} />
 
-          {/* Placeholder untuk menu lainnya agar tidak error saat diklik */}
-          <Route path="users" element={<UsersPage />} />
-          <Route path="invitations" element={<AdminInvitationPage />} />
-          <Route path="templates" element={<TemplatePage />} />
-          <Route path="transactions" element={<TransactionPage />} />
-          <Route path="reports" element={<ReportPage />} />
-          <Route path="settings" element={<SettingsPage />} />
+            {/* Placeholder untuk menu lainnya agar tidak error saat diklik */}
+            <Route path="users" element={<UsersPage />} />
+            <Route path="invitations" element={<AdminInvitationPage />} />
+            <Route path="templates" element={<TemplatePage />} />
+            <Route path="transactions" element={<TransactionPage />} />
+            <Route path="reports" element={<ReportPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+          </Route>
         </Route>
 
         {/* --- DEMO ROUTES --- */}

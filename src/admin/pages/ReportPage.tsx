@@ -125,7 +125,7 @@ export default function ReportPage() {
         {/* TEMPLATE TERLARIS (BAR CHART) */}
         <div className="bg-white p-8 rounded-[2.5rem] border border-stone-50 shadow-sm">
           <h3 className="font-serif text-lg text-stone-800 mb-8 italic">Template Terlaris</h3>
-          <div className="h-[300px]">
+          <div className="h-75">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart layout="vertical" data={templateData}>
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#F5F5F4" />
