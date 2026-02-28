@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import TemplateCard from "../components/TemplateCard"
 import AddTemplateModal from "../components/AddTemplateModal"
 import { Plus, Search } from "lucide-react"
 import { toast } from "sonner"
+import api from "../../api/axiosConfig"
 
 export interface Template {
   id: number
@@ -14,65 +15,82 @@ export interface Template {
   image: string
 }
 
+export interface TemplateResponse {
+  templateId: string
+  templateName: string
+  templateCategory: string
+  previewImage: string
+  price: number
+  activeStatus: number
+  usedCount: number
+  createdDate: string
+}
+
 export default function TemplatePage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null)
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateResponse | null>(null)
 
-  const [templates, setTemplates] = useState<Template[]>([
-    {
-      id: 1,
-      name: "ELegant-Ivory",
-      category: "Elegant",
-      price: 100000,
-      number_used: 1000,
-      status: "active",
-      image: "",
-    },
-    {
-      id: 2,
-      name: "Classic-Noir",
-      category: "Elegant",
-      price: 150000,
-      number_used: 1000,
-      status: "active",
-      image: "",
-    },
-    {
-      id: 3,
-      name: "Old-Money",
-      category: "Elegant",
-      price: 150000,
-      number_used: 1000,
-      status: "active",
-      image: "",
-    },
-    {
-      id: 4,
-      name: "Modern-Love",
-      category: "Floral",
-      price: 100000,
-      number_used: 1000,
-      status: "active",
-      image: "",
-    },
-  ])
+  // state template api
+  const [templates, setTemplates] = useState<TemplateResponse[]>([])
 
-  const filteredData = templates.filter((t) => t.name.toLowerCase().includes(searchTerm.toLowerCase()) || t.category.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredData = templates.filter((t) => t.templateName.toLowerCase().includes(searchTerm.toLowerCase()) || t.templateCategory.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  const toggleStatus = (id: number, currentStatus: "active" | "inactive") => {
-    const newStatus = currentStatus === "active" ? "inactive" : "active"
+  const toggleStatus = async (id: string, currentStatus: number) => {
+    const newStatus = currentStatus === 1 ? 0 : 1
 
-    // update state
-    setTemplates((prevTemplates) => prevTemplates.map((template) => (template.id === id ? { ...template, status: newStatus } : template)))
+    setTemplates((prev) => prev.map((t) => (t.templateId === id ? { ...t, activeStatus: newStatus } : t)))
+
+    try {
+      const response = await api.patch(`/api/admin/template/${id}/status?status=${newStatus}`)
+
+      if (!response.data.success) {
+        throw new Error("Gagal update")
+      }
+
+      toast.success("Status diperbarui")
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message)
+        toast.error(`Gagal: ${error.message}`)
+      } else {
+        toast.error("Terjadi kesalahan yang tidak diketahui")
+      }
+      // rollback logic...
+      setTemplates((prev) => prev.map((t) => (t.templateId === id ? { ...t, activeStatus: currentStatus } : t)))
+    }
   }
 
-  const handleDelete = (id: number) => {
+  const fetchTemplates = useCallback(async () => {
+    try {
+      const response = await api.post("/api/admin/template/get-all-templates", {
+        templateName: searchTerm,
+        templateCategory: searchTerm,
+      })
+
+      if (response.data.success) {
+        setTemplates(response.data.data)
+      }
+    } catch (error) {
+      toast.error("Gagal mengambil data template")
+      console.log(error)
+    }
+  }, [searchTerm])
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      fetchTemplates()
+    }, 500)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [fetchTemplates])
+
+  const handleDelete = (id: string) => {
     toast("Hapus template ini?", {
       action: {
         label: "Hapus",
         onClick: () => {
-          setTemplates((prev) => prev.filter((t) => t.id !== id))
+          setTemplates((prev) => prev.filter((t) => t.templateId !== id))
           toast.success("Template berhasil dihapus!")
         },
       },
@@ -83,28 +101,81 @@ export default function TemplatePage() {
     })
   }
 
-  const openEditModal = (template: Template) => {
+  const openEditModal = (template: TemplateResponse) => {
     setSelectedTemplate(template)
     setIsModalOpen(true)
   }
 
-  const handleSave = (formData: { name: string; category: string; image: string; price: number }) => {
+  const handleSave = async (formData: { templateName: string; templateCategory: string; price: number; file: File | null }) => {
     if (selectedTemplate) {
-      // MODE EDIT: Gunakan data lama (id, number_used, dll) dan timpa dengan data baru dari form
-      setTemplates((prev) => prev.map((t) => (t.id === selectedTemplate.id ? { ...t, ...formData } : t)))
-    } else {
-      // MODE TAMBAH: Buat objek Template lengkap untuk data baru
-      const newEntity: Template = {
-        id: Date.now(),
-        ...formData,
-        number_used: 0,
-        status: "active",
-      }
-      setTemplates((prev) => [...prev, newEntity])
-    }
+      // Logic Edit (bisa dikembangkan nanti dengan PUT)
+      const updatedTemplate = new FormData()
+      updatedTemplate.append("templateId", selectedTemplate.templateId)
+      updatedTemplate.append("templateName", formData.templateName)
+      updatedTemplate.append("templateCategory", formData.templateCategory.toUpperCase())
+      updatedTemplate.append("price", formData.price.toString())
 
-    setIsModalOpen(false)
-    setSelectedTemplate(null)
+      if (formData.file) {
+        updatedTemplate.append("previewImage", formData.file)
+      }
+
+      try {
+        const response = await api.put("/api/admin/template/update", updatedTemplate, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+
+        if (response.data.success) {
+          toast.success("Template berhasil diupdate!")
+          fetchTemplates()
+          setIsModalOpen(false)
+          setSelectedTemplate(null)
+        } else {
+          toast.error("Gagal update Template : ", response.data.error)
+        }
+      } catch (error) {
+        toast.error("Gagal update Template!")
+        console.log(error)
+      }
+    } else {
+      // MODE TAMBAH
+      const newData = new FormData()
+      newData.append("templateName", formData.templateName)
+      newData.append("templateCategory", formData.templateCategory.toUpperCase())
+      newData.append("price", formData.price.toString())
+
+      if (formData.file) {
+        // "previewImage" adalah nama @RequestParam di Controller Spring Boot kamu
+        newData.append("previewImage", formData.file)
+      } else {
+        toast.error("Foto preview wajib diunggah!")
+        return
+      }
+
+      try {
+        const response = await api.post("/api/admin/template/create", newData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+
+        // Perhatikan typo: response.data.sucess -> response.data.success
+        if (response.data.success) {
+          toast.success("Template berhasil ditambahkan!")
+          fetchTemplates() // Refresh list agar data baru muncul
+          setIsModalOpen(false)
+          setSelectedTemplate(null)
+        } else {
+          toast.error(response.data.error)
+        }
+      } catch (error) {
+        // Tampilkan pesan error dari backend jika ada
+        const errorMsg = "Gagal menambahkan template"
+        toast.error(errorMsg)
+        console.error(error)
+      }
+    }
   }
 
   return (
@@ -133,11 +204,11 @@ export default function TemplatePage() {
       {/* Grid Card */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredData.map((item) => (
-          <TemplateCard key={item.id} item={item} onStatusChange={toggleStatus} onDelete={handleDelete} onEdit={openEditModal} />
+          <TemplateCard key={item.templateId} item={item} onStatusChange={toggleStatus} onDelete={handleDelete} onEdit={openEditModal} />
         ))}
       </div>
       <AddTemplateModal
-        key={selectedTemplate?.id || "new-template"}
+        key={selectedTemplate?.templateId || "new-template"}
         isOpen={isModalOpen}
         onClose={() => {
           setIsModalOpen(false)

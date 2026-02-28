@@ -3,7 +3,7 @@ import { X, Upload } from "lucide-react"
 import CustomDropdown from "./CustomDropdown"
 import { useRef, useState } from "react"
 import { toast } from "sonner"
-import type { Template } from "../pages/TemplatePage"
+import type { TemplateResponse } from "../pages/TemplatePage"
 
 export default function AddTemplateModal({
   isOpen,
@@ -13,43 +13,44 @@ export default function AddTemplateModal({
 }: {
   isOpen: boolean
   onClose: () => void
-  onSave: (data: { name: string; category: string; image: string; price: number }) => void
-  initialData: Template | null
+  onSave: (data: { templateName: string; templateCategory: string; previewImage: string; price: number; file: File | null }) => void
+  initialData: TemplateResponse | null
 }) {
-  const [name, setName] = useState(initialData?.name || "")
-  const [category, setCategory] = useState(initialData?.category || "Elegant")
+  const [templateName, setTemplateName] = useState(initialData?.templateName || "")
+  const [templateCategory, setTemplateCategory] = useState(initialData?.templateCategory || "Elegant")
   const [price, setPrice] = useState(initialData?.price || 0)
-  const [imagePreview, setImagePreview] = useState<string | null>(initialData?.image || null)
+  const [previewImage, setPreviewImage] = useState(initialData?.previewImage)
   const fileInputRef = useRef<HTMLInputElement>(null)
-
+  const BE_URL = import.meta.env.VITE_API_BASE_URL
   // Handler Upload Gambar
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
+      setSelectedFile(file) // Simpan file untuk API
       const reader = new FileReader()
       reader.onloadend = () => {
-        setImagePreview(reader.result as string)
+        setPreviewImage(reader.result as string) // Hanya untuk tampilan preview di UI
       }
       reader.readAsDataURL(file)
     }
   }
 
   const handleSubmit = () => {
-    if (!name) {
+    if (!templateName) {
       toast.error("Nama template tidak boleh kosong!")
       return
     }
 
-    onSave({ name, category, image: imagePreview || "", price })
-
-    toast.success(initialData ? "Template diperbarui!" : "Template berhasil ditambahkan!")
-
-    // Jika ini mode tambah, bersihkan state
-    if (!initialData) {
-      setName("")
-      setPrice(0)
-      setImagePreview(null)
-    }
+    // Kirim objek yang konsisten dengan kebutuhan handleSave
+    onSave({
+      templateName,
+      templateCategory,
+      previewImage: "",
+      price,
+      file: selectedFile,
+    })
   }
 
   return (
@@ -75,8 +76,8 @@ export default function AddTemplateModal({
                     className="relative border-2 border-dashed border-stone-100 rounded-2xl h-40 flex flex-col items-center justify-center text-stone-400 hover:border-[#D4A853]/50 transition-all cursor-pointer overflow-hidden"
                   >
                     {" "}
-                    {imagePreview ? (
-                      <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                    {previewImage ? (
+                      <img src={`${BE_URL}${previewImage}`} alt="Preview" className="w-full h-full object-cover" />
                     ) : (
                       <>
                         <Upload size={24} className="mb-2" />
@@ -89,8 +90,8 @@ export default function AddTemplateModal({
                 <div className="space-y-1">
                   <label className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Nama Template</label>
                   <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={templateName}
+                    onChange={(e) => setTemplateName(e.target.value)}
                     className="w-full bg-stone-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-[#D4A853]/20 transition-all"
                     placeholder="Example: Modern Gold"
                   />
@@ -100,6 +101,7 @@ export default function AddTemplateModal({
                   <label className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Price</label>
                   <input
                     type="number"
+                    value={price}
                     onChange={(e) => setPrice(Number(e.target.value))}
                     className="w-full bg-stone-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-[#D4A853]/20 transition-all"
                     placeholder="Example : 100000"
@@ -107,7 +109,7 @@ export default function AddTemplateModal({
                 </div>
 
                 <div className="col-span-2 space-y-1">
-                  <CustomDropdown label="Category" options={["Elegant", "Floral", "Modern"]} value={category} onChange={setCategory} />
+                  <CustomDropdown label="Category" options={["Elegant", "Floral", "Modern"]} value={templateCategory} onChange={setTemplateCategory} />
                 </div>
               </div>
 

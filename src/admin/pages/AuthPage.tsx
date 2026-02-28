@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence, easeOut } from "framer-motion"
 import { Mail, Lock, User, Eye, EyeOff, ArrowLeft, Loader2 } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { toast } from "sonner"
 import axios, { AxiosError } from "axios"
+import { isTokenExpired } from "../../utils/utils"
 
 export default function AuthPage() {
   const location = useLocation()
@@ -84,6 +85,19 @@ export default function AuthPage() {
       toast.error("Gagal: " + errorMessage)
     }
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    const role = localStorage.getItem("role")
+
+    if (isLogin && token && !isTokenExpired(token)) {
+      if (role === "ADMIN") {
+        navigate("/admin/dashboard", { replace: true })
+      } else {
+        navigate("/", { replace: true })
+      }
+    }
+  }, [isLogin, navigate])
 
   return (
     <div className="min-h-screen w-full bg-[#FDFBF7] flex items-center justify-center relative overflow-hidden font-sans">

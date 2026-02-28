@@ -22,7 +22,6 @@ export default function CustomDropdown({ label, options, value, onChange }: Cust
           <ChevronDown size={14} className={`text-stone-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
         </button>
 
-        {/* Menu Pilihan (Floating) */}
         <AnimatePresence>
           {isOpen && (
             <>
