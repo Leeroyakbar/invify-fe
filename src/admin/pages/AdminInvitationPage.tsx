@@ -7,34 +7,12 @@ import { toast } from "sonner"
 import api from "../../api/axiosConfig"
 import { AddInvitationModal } from "../components/AddInvitationModal"
 import { type UserResponse } from "./UserPage"
-import type { TemplateResponse } from "./TemplatePage"
+import { type TemplateResponse } from "../../types/TemplateResponse"
+import { type InvitationRequest } from "../../types/InvitationRequest"
+import { type InvitationResponse } from "../../types/InvitationResponse"
 import axios from "axios"
+import type { InvitationResponseDetail } from "../../types/InvitationResponseDetail"
 
-// 1. Definisikan Interface yang Akurat
-interface InvitationResponse {
-  invitationId: string
-  coupleName: string // Sesuaikan dengan key di invitationsData
-  templateName: string
-  activeStatus: number
-  templateCategory: string
-  slug: string
-  expiredDate: string // Gunakan string karena datanya berupa "YYYY-MM-DD"
-}
-
-export interface InvitationRequest {
-  coupleName: string
-  templateId: string
-  subscriptionPlan: string
-  bridePhoto: File
-  groomPhoto: File
-  gallery: File[]
-  musicBackground: string
-  eventJson: string
-  videoBackground: File
-}
-
-// 3. Konfigurasi Kolom yang Benar
-// Pastikan Column diimport dari file DataTable atau didefinisikan ulang
 const columns: Column<InvitationResponse>[] = [
   {
     header: "Pasangan",
@@ -84,6 +62,30 @@ export default function AdminInvitationPage() {
   // FORM ADD INVITATION
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+
+  // initial data for edit
+  const [selectedInvitation, setSelectedInvitation] = useState<InvitationResponseDetail | null>(null)
+
+  const handleOpenAdd = () => {
+    setSelectedInvitation(null)
+    setIsAddModalOpen(true)
+  }
+
+  const handleOpenEdit = async (inv: InvitationResponse) => {
+    setIsLoading(true) // Tampilkan loading global jika ada
+    try {
+      const response = await api.get(`/api/admin/invitations/${inv.invitationId}`)
+      if (response.data.success) {
+        setSelectedInvitation(response.data.data) // Data detail masuk ke sini
+        setIsAddModalOpen(true)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error("Gagal mengambil data detail undangan")
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const filteredInvitations = useMemo(() => {
     return invitations.filter((invitation) => {
@@ -142,19 +144,24 @@ export default function AdminInvitationPage() {
     setIsLoading(true)
 
     try {
-      const response = await api.post("/api/admin/invitations/create", newData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      let response
+      if (selectedInvitation) {
+        // Mode UPDATE
+        response = await api.put(`/api/admin/invitations/edit/${selectedInvitation.invitationId}`, newData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+      } else {
+        // Mode CREATE
+        response = await api.post("/api/admin/invitations/create", newData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+      }
 
       if (response.data.success) {
-        toast.success("Undangan berhasil dibuat!")
+        toast.success(selectedInvitation ? "Berhasil diperbarui!" : "Berhasil dibuat!")
         fetchInvitation()
         setIsAddModalOpen(false)
       } else {
-        // Menangkap error jika status 200 tapi success: false
-        // Sesuai request kamu: pakai error dari response jika ada
         toast.error(response.data.error || "Gagal membuat undangan")
       }
     } catch (err: unknown) {
@@ -219,7 +226,7 @@ export default function AdminInvitationPage() {
           <p className="text-stone-400 text-sm font-light italic">Kelola semua undangan</p>
         </div>
         {/* Letakkan di bawah judul "Manajemen Undangan" */}
-        <button onClick={() => setIsAddModalOpen(true)} className="bg-[#D5A853] hover:bg-[#b88f46] text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-[#D5A853]/20 flex items-center gap-2">
+        <button onClick={handleOpenAdd} className="bg-[#D5A853] hover:bg-[#b88f46] text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-[#D5A853]/20 flex items-center gap-2">
           + Buat Undangan Baru
         </button>
       </div>
@@ -276,7 +283,8 @@ export default function AdminInvitationPage() {
         count={totalItems}
         columns={columns}
         data={filteredInvitations}
-        onEdit={(inv) => console.log("Edit:", inv.coupleName)}
+        onEdit={handleOpenEdit}
+        // onView={(inv) => navigate(`/admin/invitations/${inv.invitationId}?mode=view`)}
         onDelete={handleDelete}
         // Tambahkan props di bawah ini untuk memperbaiki error:
         currentPage={currentPage}
@@ -286,7 +294,9 @@ export default function AdminInvitationPage() {
 
       {/* MODAL UNTUK TAMBAH INVITATION */}
       <AddInvitationModal
+        key={selectedInvitation?.invitationId || "new-invitation"}
         isAddModalOpen={isAddModalOpen}
+        initialData={selectedInvitation}
         onClose={() => setIsAddModalOpen(false)}
         isLoading={isLoading}
         onSave={handleSave}

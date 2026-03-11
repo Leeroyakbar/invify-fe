@@ -1,11 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { X, Plus, Trash2, Loader2 } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import type { UserResponse } from "../pages/UserPage"
-import type { TemplateResponse } from "../pages/TemplatePage"
+import type { TemplateResponse } from "../../types/TemplateResponse"
 import CustomDropdownSearch from "./CustomDropdownSearch"
-import type { InvitationRequest } from "../pages/AdminInvitationPage"
+import type { InvitationRequest } from "../../types/InvitationRequest"
+import type { InvitationResponseDetail } from "../../types/InvitationResponseDetail"
+import type { EventResponse } from "../../types/EventResponse"
 
 interface EventData {
   name: string
@@ -24,30 +26,141 @@ interface AddInvitationModalProps {
   // Tambahkan props untuk data dinamis dari parent
   users: UserResponse[]
   templates: TemplateResponse[]
+  initialData: InvitationResponseDetail | null
 }
 
-export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave, users, templates }: AddInvitationModalProps) {
-  // all state untuk menyimpan data undangan baru
-  const [selectedUser, setSelectedUser] = useState<UserResponse>()
-  const [selectedTemplate, setSelectedTemplate] = useState<TemplateResponse>()
-  const [expiredDate, setExpiredDate] = useState<string>("")
-  const [selectedPlan, setSelectedPlan] = useState<string>("")
-  const [brideName, setBrideName] = useState<string>("")
-  const [groomName, setGroomName] = useState<string>("")
-  const [musicBackground, setMusicBackground] = useState<string>("")
+export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave, users, templates, initialData }: AddInvitationModalProps) {
+  const BE_URL = import.meta.env.VITE_API_BASE_URL
+  const [selectedUser, setSelectedUser] = useState<UserResponse | undefined>(() => users.find((u) => u.userId === initialData?.userId))
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateResponse | undefined>(() => templates.find((t) => t.templateId === initialData?.template?.templateId))
+  const [expiredDate, setExpiredDate] = useState(initialData?.expiredDate || "")
+  const [brideName, setBrideName] = useState(initialData?.brideName || "")
+  const [groomName, setGroomName] = useState(initialData?.groomName || "")
+  const [musicBackground, setMusicBackground] = useState(() => {
+    if (initialData?.events) {
+      return initialData?.gallery?.find((g) => g.mediaType === "BACKGROUND_MUSIC")?.mediaUrl
+    }
+  })
 
   // State Internal Form
-  const [events, setEvents] = useState<EventData[]>([{ name: "", date: "", endDate: "", location: "", address: "", mapUrl: "" }])
+  // Mapping events langsung di inisialisasi state
+  const [events, setEvents] = useState<EventData[]>(() => {
+    if (initialData?.events) {
+      return initialData.events.map((event: EventResponse) => ({
+        name: event.eventName,
+        date: event.eventDate,
+        endDate: event.eventEndDate,
+        location: event.eventLocation,
+        address: event.eventAddress,
+        mapUrl: event.eventMapUrl,
+      }))
+    }
+    return []
+  })
+
   // Di dalam komponen AddInvitationModal
-  const [groomImage, setGroomImage] = useState<string | null>(null)
-  const [brideImage, setBrideImage] = useState<string | null>(null)
-  const [galleryImages, setGalleryImages] = useState<string[]>([])
-  const [videoPreview, setVideoPreview] = useState<string | null>(null)
+  const [groomImage, setGroomImage] = useState<string | null>(() => {
+    const foundMedia = initialData?.gallery?.find((g) => g.mediaType === "GROOM_PHOTO")
+    return foundMedia?.mediaUrl || null
+  })
+  const [brideImage, setBrideImage] = useState<string | null>(() => {
+    if (initialData?.gallery) {
+      const found = initialData.gallery.find((g) => g.mediaType === "BRIDE_PHOTO")
+      return found?.mediaUrl || null
+    }
+    return null
+  })
+  const [galleryImages, setGalleryImages] = useState<string[]>(() => {
+    if (initialData?.gallery) {
+      // Ambil semua media yang tipenya GALLERY_PHOTO
+      return initialData.gallery.filter((g) => g.mediaType === "GALLERY").map((g) => g.mediaUrl)
+    }
+    return []
+  })
+  const [videoPreview, setVideoPreview] = useState<string | null>(() => {
+    if (initialData?.gallery) {
+      const found = initialData.gallery.find((g) => g.mediaType === "VIDEO_BACKGROUND")
+      return found?.mediaUrl || null
+    }
+    return null
+  })
+
+  const urlToFile = async (url: string, filename: string, mimeType: string): Promise<File> => {
+    const response = await fetch(url)
+    const data = await response.blob()
+    return new File([data], filename, { type: mimeType })
+  }
 
   const [brideFile, setBrideFile] = useState<File | null>(null)
   const [groomFile, setGroomFile] = useState<File | null>(null)
+
+  useEffect(() => {
+    const loadBrideFile = async () => {
+      if (!initialData?.gallery) return
+
+      const brideUrl = initialData.gallery.find((g) => g.mediaType === "BRIDE_PHOTO")
+
+      if (!brideUrl) return
+
+      const fileName = brideUrl.mediaUrl.split("/").pop() || `${initialData?.slug}_brideFile.png`
+
+      const file = await urlToFile(brideUrl.mediaUrl, fileName, brideUrl.contentType)
+
+      setBrideFile(file)
+    }
+
+    const loadGroomFile = async () => {
+      if (!initialData?.gallery) return
+      const groomUrl = initialData.gallery.find((g) => g.mediaType === "GROOM_PHOTO")
+
+      if (!groomUrl) return
+
+      const fileName = groomUrl.mediaUrl.split("/").pop() || `${initialData?.slug}_groomFile.png`
+
+      const file = await urlToFile(groomUrl.mediaUrl, fileName, groomUrl.contentType)
+
+      setGroomFile(file)
+    }
+
+    loadBrideFile()
+    loadGroomFile()
+  }, [initialData])
+
   const [galleryFiles, setGalleryFiles] = useState<File[]>([])
   const [videoBackground, setVideoBackground] = useState<File | null>(null)
+
+  useEffect(() => {
+    const loadGalleryFiles = async () => {
+      if (initialData?.gallery) {
+        const galleryFilesUrl = initialData.gallery.filter((g) => g.mediaType === "GALLERY")
+
+        const files = await Promise.all(
+          galleryFilesUrl.map(async (url) => {
+            const fileName = url.mediaUrl.split("/").pop() || `${initialData?.slug}_galleryFile.png`
+            return await urlToFile(url.mediaUrl, fileName, url.contentType)
+          }),
+        )
+
+        setGalleryFiles(files)
+      }
+    }
+
+    const loadVideoBackgroundFiles = async () => {
+      if (initialData?.gallery) {
+        const videoBackgroundUrl = initialData.gallery.find((g) => g.mediaType === "VIDEO_BACKGROUND")
+
+        console.log("videoBackgroundUrl", videoBackgroundUrl)
+        if (videoBackgroundUrl) {
+          const fileName = videoBackgroundUrl.mediaUrl.split("/").pop() || `${initialData?.slug}_videoBackgroundFile.mp4`
+          const file = await urlToFile(videoBackgroundUrl.mediaUrl, fileName, videoBackgroundUrl.mediaType)
+          setVideoBackground(file)
+        }
+      }
+    }
+
+    loadGalleryFiles()
+    loadVideoBackgroundFiles()
+  }, [initialData])
 
   const PLAN_CONFIG = {
     Basic: { maxPhotos: 8, allowVideo: false },
@@ -56,6 +169,7 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
   }
 
   const plans = ["Basic", "Premium", "Custom"]
+  const [selectedPlan, setSelectedPlan] = useState(() => plans.find((plan) => plan.toUpperCase() === initialData?.subscriptionPlan) || "")
 
   const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -77,16 +191,29 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
     const files = Array.from(e.target.files || [])
     const maxPhotos = selectedPlan ? PLAN_CONFIG[selectedPlan as keyof typeof PLAN_CONFIG].maxPhotos : 0
 
-    if (galleryFiles.length + files.length > maxPhotos) {
+    // 1. Validasi tipe file (Whitelist)
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
+    const validFiles = files.filter((file) => {
+      const isAllowed = allowedTypes.includes(file.type)
+      if (!isAllowed) {
+        toast.error(`File ${file.name} tidak didukung!`, {
+          description: "Gunakan format JPG, PNG, atau WebP.",
+        })
+      }
+      return isAllowed
+    })
+
+    // 2. Validasi jumlah total
+    if (galleryFiles.length + validFiles.length > maxPhotos) {
       toast.error(`Maksimal ${maxPhotos} foto untuk paket ini`)
       return
     }
 
-    setGalleryFiles((prev) => [...prev, ...files])
+    // 3. Update state dengan file yang valid saja
+    setGalleryFiles((prev) => [...prev, ...validFiles])
 
-    console.log(galleryFiles)
-    // Untuk preview
-    files.forEach((file) => {
+    // 4. Untuk preview
+    validFiles.forEach((file) => {
       const reader = new FileReader()
       reader.onloadend = () => {
         setGalleryImages((prev) => [...prev, reader.result as string])
@@ -96,7 +223,8 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
   }
 
   const removeGalleryImage = (index: number) => {
-    setGalleryImages(galleryImages.filter((_, i) => i !== index))
+    setGalleryImages((prev) => prev.filter((_, i) => i !== index))
+    setGalleryFiles((prev) => prev.filter((_, i) => i !== index))
   }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, type: "groom" | "bride") => {
@@ -140,6 +268,17 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
       setBrideFile(file)
       setBrideImage(previewUrl)
     }
+  }
+
+  const getDisplayImage = (imageString: string) => {
+    console.log("image string", imageString)
+    if (!imageString) return ""
+    // Jika imageString dimulai dengan 'blob:' atau 'data:', itu adalah preview lokal
+    if (imageString.startsWith("blob:") || imageString.startsWith("data:")) {
+      return imageString
+    }
+    // Jika tidak, berarti path dari backend
+    return `${BE_URL}${imageString}`
   }
 
   const validateYouTubeUrl = (url: string) => {
@@ -189,14 +328,15 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
 
     const formData = new FormData()
 
+    formData.append("slug", initialData?.slug ?? "")
+    formData.append("userId", selectedUser.userId)
     formData.append("coupleName", `${brideName} & ${groomName}`)
     formData.append("templateId", selectedTemplate.templateId)
-    formData.append("subscriptionPlan", selectedPlan)
+    formData.append("subscriptionPlan", selectedPlan.toUpperCase())
     formData.append("musicBackground", musicBackground)
     formData.append("expiredDate", expiredDate)
     formData.append("eventJson", JSON.stringify(events))
 
-    // Append Files
     if (brideFile) formData.append("bridePhoto", brideFile)
     if (groomFile) formData.append("groomPhoto", groomFile)
     if (videoBackground) formData.append("videoBackground", videoBackground)
@@ -205,6 +345,28 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
     })
 
     onSave(formData as unknown as InvitationRequest)
+  }
+
+  const resetForm = () => {
+    setSelectedUser(undefined)
+    setSelectedTemplate(undefined)
+    setExpiredDate("")
+    setBrideName("")
+    setGroomName("")
+    setMusicBackground(undefined)
+
+    setEvents([])
+    setBrideImage(null)
+    setGroomImage(null)
+    setGalleryImages([])
+    setVideoPreview(null)
+
+    setBrideFile(null)
+    setGroomFile(null)
+    setGalleryFiles([])
+    setVideoBackground(null)
+
+    setSelectedPlan("")
   }
 
   return (
@@ -220,10 +382,16 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
             {/* Sticky Header */}
             <div className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-stone-50 p-6 flex justify-between items-center z-10">
               <div>
-                <h2 className="text-2xl font-serif font-bold text-stone-800">New Invitation</h2>
+                <h2 className="text-2xl font-serif font-bold text-stone-800">{initialData ? "Edit Invitation" : "New Invitation"}</h2>
                 <p className="text-stone-400 text-xs italic">Konfigurasi engine undangan baru</p>
               </div>
-              <button onClick={onClose} className="p-2 hover:bg-stone-50 rounded-full text-stone-400 transition-colors">
+              <button
+                onClick={() => {
+                  resetForm()
+                  onClose()
+                }}
+                className="p-2 hover:bg-stone-50 rounded-full text-stone-400 transition-colors"
+              >
                 <X size={24} />
               </button>
             </div>
@@ -276,9 +444,21 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
                   />{" "}
                 </div>
 
-                <div className="flex flex-col gap-1.5 max-w-xs">
-                  <label className="text-xs font-bold text-stone-500 ml-1">Berlaku Hingga</label>
-                  <input type="date" value={expiredDate || ""} onChange={(e) => setExpiredDate(e.target.value)} className="bg-stone-50 border border-stone-100 rounded-xl px-4 py-2.5 text-sm focus:border-[#D5A853] outline-none" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Input Berlaku Hingga */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-bold text-stone-500 ml-1">Berlaku Hingga</label>
+                    <input type="date" value={expiredDate || ""} onChange={(e) => setExpiredDate(e.target.value)} className="bg-stone-50 border border-stone-100 rounded-xl px-4 py-2.5 text-sm focus:border-[#D5A853] outline-none" />
+                  </div>
+
+                  {/* Input Harga */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-bold text-stone-500 ml-1">Harga</label>
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-stone-400 font-bold">Rp</span>
+                      <input type="number" placeholder="0" className="w-full bg-stone-50 border border-stone-100 rounded-xl px-12 py-2.5 text-sm focus:border-[#D5A853] outline-none" />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -290,7 +470,7 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
                           className={`w-full h-full rounded-2xl border-2 overflow-hidden transition-all duration-300 flex items-center justify-center bg-white ${brideImage ? "border-[#D5A853] shadow-sm" : "border-stone-200 border-dashed hover:border-[#D5A853]"}`}
                         >
                           {brideImage ? (
-                            <img src={brideImage} alt="Bride" className="w-full h-full object-cover" />
+                            <img src={getDisplayImage(brideImage)} alt="Bride" className="w-full h-full object-cover" />
                           ) : (
                             <div className="flex flex-col items-center text-stone-300 group-hover:text-[#D5A853]">
                               <Plus size={18} />
@@ -327,7 +507,11 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
                           className={`w-full h-full rounded-2xl border-2 overflow-hidden transition-all duration-300 flex items-center justify-center bg-white ${groomImage ? "border-[#D5A853] shadow-sm" : "border-stone-200 border-dashed hover:border-[#D5A853]"}`}
                         >
                           {groomImage ? (
-                            <img src={groomImage} alt="Groom" className="w-full h-full object-cover" />
+                            <img
+                              src={getDisplayImage(groomImage)} // Gunakan helper
+                              alt="Bride"
+                              className="w-full h-full object-cover"
+                            />
                           ) : (
                             <div className="flex flex-col items-center text-stone-300 group-hover:text-[#D5A853]">
                               <Plus size={18} />
@@ -394,7 +578,7 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
                       {/* Render Existing Images */}
                       {galleryImages.map((img, index) => (
                         <div key={index} className="relative aspect-square rounded-xl overflow-hidden border-2 border-[#D5A853] group">
-                          <img src={img} className="w-full h-full object-cover" />
+                          <img src={getDisplayImage(img)} className="w-full h-full object-cover" />
                           <button onClick={() => removeGalleryImage(index)} className="absolute inset-0 bg-rose-500/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
                             <Trash2 size={16} />
                           </button>
@@ -406,7 +590,7 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
                         <label className="aspect-square rounded-xl border-2 border-dashed border-stone-200 hover:border-[#D5A853] hover:bg-[#D5A853]/5 transition-all cursor-pointer flex flex-col items-center justify-center text-stone-400 hover:text-[#D5A853]">
                           <Plus size={20} />
                           <span className="text-[9px] font-bold mt-1">ADD</span>
-                          <input type="file" multiple className="hidden" accept="image/*" onChange={handleGalleryUpload} />
+                          <input type="file" multiple className="hidden" accept=".jpg, .jpeg, .png, .webp" onChange={handleGalleryUpload} />
                         </label>
                       )}
                     </div>

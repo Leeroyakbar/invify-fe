@@ -4,6 +4,7 @@ import AddTemplateModal from "../components/AddTemplateModal"
 import { Plus, Search } from "lucide-react"
 import { toast } from "sonner"
 import api from "../../api/axiosConfig"
+import { type TemplateResponse } from "../../types/TemplateResponse"
 
 export interface Template {
   id: number
@@ -13,17 +14,6 @@ export interface Template {
   number_used: number
   status: "active" | "inactive"
   image: string
-}
-
-export interface TemplateResponse {
-  templateId: string
-  templateName: string
-  templateCategory: string
-  previewImage: string
-  price: number
-  activeStatus: number
-  usedCount: number
-  createdDate: string
 }
 
 export default function TemplatePage() {

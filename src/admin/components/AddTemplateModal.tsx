@@ -3,7 +3,7 @@ import { X, Upload } from "lucide-react"
 import CustomDropdown from "./CustomDropdown"
 import { useRef, useState } from "react"
 import { toast } from "sonner"
-import type { TemplateResponse } from "../pages/TemplatePage"
+import type { TemplateResponse } from "../../types/TemplateResponse"
 
 export default function AddTemplateModal({
   isOpen,
