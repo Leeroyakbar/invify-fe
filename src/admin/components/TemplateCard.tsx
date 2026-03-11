@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { Edit3, ImageIcon, MoreVertical, Trash2 } from "lucide-react"
-import { type TemplateResponse } from "../pages/TemplatePage"
+import { type TemplateResponse } from "../../types/TemplateResponse"
 import { useState } from "react"
 
 export default function TemplateCard({

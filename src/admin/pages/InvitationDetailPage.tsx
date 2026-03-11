@@ -3,8 +3,7 @@ import { useParams, useSearchParams, useNavigate } from "react-router-dom"
 import { ChevronLeft, Save, Edit3, Eye, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import api from "../../api/axiosConfig"
-import { InvitationRequest } from "./AdminInvitationPage"
-
+import { type InvitationResponseDetail } from "../../types/InvitationResponseDetail"
 export default function InvitationDetailPage() {
   const { id } = useParams() // Ambil ID dari URL
   const [searchParams, setSearchParams] = useSearchParams()
@@ -16,7 +15,7 @@ export default function InvitationDetailPage() {
   const [isSaving, setIsSaving] = useState(false)
 
   // State Data (Gunakan struktur yang sama dengan Modal)
-  const [formData, setFormData] = useState<any>(null)
+  const [formData, setFormData] = useState<InvitationResponseDetail | null>(null)
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -25,6 +24,7 @@ export default function InvitationDetailPage() {
         if (response.data.success) {
           setFormData(response.data.data)
         }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         toast.error("Gagal memuat detail undangan")
       } finally {
@@ -41,6 +41,7 @@ export default function InvitationDetailPage() {
       // const response = await api.put(`/api/admin/invitations/update/${id}`, data);
       toast.success("Undangan berhasil diperbarui!")
       setSearchParams({ mode: "view" }) // Balik ke mode view setelah save
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Gagal memperbarui data")
     } finally {
