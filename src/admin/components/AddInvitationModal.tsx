@@ -10,12 +10,12 @@ import type { InvitationResponseDetail } from "../../types/InvitationResponseDet
 import type { EventResponse } from "../../types/EventResponse"
 
 interface EventData {
-  name: string
-  date: string
-  endDate: string
-  location: string
-  address: string
-  mapUrl: string
+  eventName: string
+  eventDate: string
+  eventEndDate: string
+  eventLocation: string
+  eventAddress: string
+  eventMapUrl: string
 }
 
 interface AddInvitationModalProps {
@@ -36,6 +36,7 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
   const [expiredDate, setExpiredDate] = useState(initialData?.expiredDate || "")
   const [brideName, setBrideName] = useState(initialData?.brideName || "")
   const [groomName, setGroomName] = useState(initialData?.groomName || "")
+  const [price, setPrice] = useState<string>(initialData?.price?.toString() || "")
   const [musicBackground, setMusicBackground] = useState(() => {
     if (initialData?.events) {
       return initialData?.gallery?.find((g) => g.mediaType === "BACKGROUND_MUSIC")?.mediaUrl
@@ -47,12 +48,12 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
   const [events, setEvents] = useState<EventData[]>(() => {
     if (initialData?.events) {
       return initialData.events.map((event: EventResponse) => ({
-        name: event.eventName,
-        date: event.eventDate,
-        endDate: event.eventEndDate,
-        location: event.eventLocation,
-        address: event.eventAddress,
-        mapUrl: event.eventMapUrl,
+        eventName: event.eventName,
+        eventDate: event.eventDate,
+        eventEndDate: event.eventEndDate,
+        eventLocation: event.eventLocation,
+        eventAddress: event.eventAddress,
+        eventMapUrl: event.eventMapUrl,
       }))
     }
     return []
@@ -84,6 +85,22 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
     }
     return null
   })
+
+  const formatRupiah = (value: string | number) => {
+    if (!value) return ""
+    const numberString = value.toString().replace(/[^,\d]/g, "")
+    const split = numberString.split(",")
+    const sisa = split[0].length % 3
+    let rupiah = split[0].substr(0, sisa)
+    const ribuan = split[0].substr(sisa).match(/\d{3}/gi)
+
+    if (ribuan) {
+      const separator = sisa ? "." : ""
+      rupiah += separator + ribuan.join(".")
+    }
+
+    return split[1] !== undefined ? rupiah + "," + split[1] : rupiah
+  }
 
   const urlToFile = async (url: string, filename: string, mimeType: string): Promise<File> => {
     const response = await fetch(url)
@@ -170,6 +187,14 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
 
   const plans = ["Basic", "Premium", "Custom"]
   const [selectedPlan, setSelectedPlan] = useState(() => plans.find((plan) => plan.toUpperCase() === initialData?.subscriptionPlan) || "")
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Ambil hanya angkanya saja untuk disimpan di state
+    const rawValue = e.target.value.replace(/\./g, "")
+    if (!isNaN(Number(rawValue))) {
+      setPrice(rawValue)
+    }
+  }
 
   const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -298,7 +323,7 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
 
   const addEvent = () => {
     if (events.length < 3) {
-      setEvents([...events, { name: "", date: "", endDate: "", location: "", address: "", mapUrl: "" }])
+      setEvents([...events, { eventName: "", eventDate: "", eventEndDate: "", eventLocation: "", eventAddress: "", eventMapUrl: "" }])
     } else {
       toast.error("Maksimal 3 rangkaian acara")
     }
@@ -347,28 +372,6 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
     onSave(formData as unknown as InvitationRequest)
   }
 
-  const resetForm = () => {
-    setSelectedUser(undefined)
-    setSelectedTemplate(undefined)
-    setExpiredDate("")
-    setBrideName("")
-    setGroomName("")
-    setMusicBackground(undefined)
-
-    setEvents([])
-    setBrideImage(null)
-    setGroomImage(null)
-    setGalleryImages([])
-    setVideoPreview(null)
-
-    setBrideFile(null)
-    setGroomFile(null)
-    setGalleryFiles([])
-    setVideoBackground(null)
-
-    setSelectedPlan("")
-  }
-
   return (
     <AnimatePresence>
       {isAddModalOpen && (
@@ -387,7 +390,6 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
               </div>
               <button
                 onClick={() => {
-                  resetForm()
                   onClose()
                 }}
                 className="p-2 hover:bg-stone-50 rounded-full text-stone-400 transition-colors"
@@ -456,7 +458,13 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
                     <label className="text-xs font-bold text-stone-500 ml-1">Harga</label>
                     <div className="relative">
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-stone-400 font-bold">Rp</span>
-                      <input type="number" placeholder="0" className="w-full bg-stone-50 border border-stone-100 rounded-xl px-12 py-2.5 text-sm focus:border-[#D5A853] outline-none" />
+                      <input
+                        type="text" // Ubah jadi text agar bisa menampilkan titik
+                        placeholder="0"
+                        value={formatRupiah(price)} // Tampilkan yang sudah terformat
+                        onChange={handlePriceChange}
+                        className="w-full bg-stone-50 border border-stone-100 rounded-xl px-12 py-2.5 text-sm focus:border-[#D5A853] outline-none"
+                      />
                     </div>
                   </div>
                 </div>
@@ -661,8 +669,8 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
                         <div className="col-span-1 md:col-span-1 flex flex-col gap-1.5">
                           <label className="text-[10px] font-bold text-stone-400 ml-1">Nama Acara</label>
                           <input
-                            value={event.name}
-                            onChange={(e) => updateEvent(index, "name", e.target.value)}
+                            value={event.eventName}
+                            onChange={(e) => updateEvent(index, "eventName", e.target.value)}
                             placeholder="Contoh: Akad Nikah"
                             className="bg-stone-50 border border-stone-100 rounded-xl px-4 py-2 text-sm outline-none focus:border-[#D5A853]"
                           />
@@ -671,8 +679,8 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
                           <label className="text-[10px] font-bold text-stone-400 ml-1">Waktu Mulai</label>
                           <input
                             type="datetime-local"
-                            value={event.date}
-                            onChange={(e) => updateEvent(index, "date", e.target.value)}
+                            value={event.eventDate}
+                            onChange={(e) => updateEvent(index, "eventDate", e.target.value)}
                             className="bg-stone-50 border border-stone-100 rounded-xl px-4 py-2 text-sm outline-none focus:border-[#D5A853]"
                           />
                         </div>
@@ -680,8 +688,8 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
                           <label className="text-[10px] font-bold text-stone-400 ml-1">Waktu Selesai</label>
                           <input
                             type="datetime-local"
-                            value={event.endDate}
-                            onChange={(e) => updateEvent(index, "endDate", e.target.value)}
+                            value={event.eventEndDate}
+                            onChange={(e) => updateEvent(index, "eventEndDate", e.target.value)}
                             className="bg-stone-50 border border-stone-100 rounded-xl px-4 py-2 text-sm outline-none focus:border-[#D5A853]"
                           />
                         </div>
@@ -689,21 +697,21 @@ export function AddInvitationModal({ isAddModalOpen, isLoading, onClose, onSave,
 
                       <input
                         placeholder="Nama Lokasi (e.g. Grand Ballroom)"
-                        value={event.location}
-                        onChange={(e) => updateEvent(index, "location", e.target.value)}
+                        value={event.eventLocation}
+                        onChange={(e) => updateEvent(index, "eventLocation", e.target.value)}
                         className="w-full bg-stone-50 border border-stone-100 rounded-xl px-4 py-2 text-sm outline-none focus:border-[#D5A853]"
                       />
                       <textarea
                         placeholder="Alamat Lengkap Lokasi"
-                        value={event.address}
-                        onChange={(e) => updateEvent(index, "address", e.target.value)}
+                        value={event.eventAddress}
+                        onChange={(e) => updateEvent(index, "eventAddress", e.target.value)}
                         rows={2}
                         className="w-full bg-stone-50 border border-stone-100 rounded-xl px-4 py-2 text-sm outline-none focus:border-[#D5A853] resize-none"
                       />
                       <input
                         placeholder="Google Maps URL"
-                        value={event.mapUrl}
-                        onChange={(e) => updateEvent(index, "mapUrl", e.target.value)}
+                        value={event.eventMapUrl}
+                        onChange={(e) => updateEvent(index, "eventMapUrl", e.target.value)}
                         className="w-full bg-stone-50 border border-stone-100 rounded-xl px-4 py-2 text-[10px] font-mono outline-none focus:border-[#D5A853]"
                       />
                     </div>

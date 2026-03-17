@@ -6,6 +6,7 @@ export interface InvitationResponse {
   groomName: string
   templateName: string
   subscriptionPlan: string
+  price: number
   activeStatus: number
   templateCategory: string
   slug: string
