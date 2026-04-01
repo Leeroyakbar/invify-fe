@@ -23,7 +23,7 @@ export default function ThankYouFooterSection({ data }: Props) {
   }, [backgroundImages.length])
 
   return (
-    <section className="relative min-h-[90vh] md:min-h-screen overflow-hidden bg-[#0A0A0A] flex flex-col justify-between">
+    <section className="relative h-screen w-full overflow-hidden bg-[#0A0A0A] flex flex-col justify-between">
       {/* 1. DYNAMIC BACKGROUND WITH KEN BURNS EFFECT */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
@@ -42,7 +42,6 @@ export default function ThankYouFooterSection({ data }: Props) {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
         <div className="absolute inset-0 bg-black/40" />
       </div>
-
       {/* 2. THANK YOU CONTENT */}
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }} className="space-y-6">
@@ -65,7 +64,6 @@ export default function ThankYouFooterSection({ data }: Props) {
           </div>
         </motion.div>
       </div>
-
       {/* 3. BUSINESS FOOTER (INVIFY) */}
       <footer className="relative z-10 pb-12 pt-20">
         <div className="flex flex-col items-center gap-6">
