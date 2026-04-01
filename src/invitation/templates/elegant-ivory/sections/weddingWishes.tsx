@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { MessageSquare, Send, User, CheckCircle2, XCircle } from "lucide-react"
+import { Send, User, CheckCircle2, XCircle } from "lucide-react"
 import type { Invitation } from "../../../../types/Invitation"
 
 interface Props {
