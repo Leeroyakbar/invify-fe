@@ -14,6 +14,7 @@ import AudioPlayer from "../../../ui/audioPlayer"
 import { DEMO_INVITATIONS } from "../../engine/demoInvitationMap"
 import { HeroBackground } from "./sections/HeroBackground"
 import { HeroContent } from "./sections/HeroContent"
+import { Maximize } from "lucide-react"
 
 export default function IvoryTemplate() {
   const data: Invitation = DEMO_INVITATIONS["elegant-ivory"]
@@ -25,21 +26,42 @@ export default function IvoryTemplate() {
     setIsAudioPlaying(true)
   }
 
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error(`Error attempting to enable fullscreen: ${err.message}`)
+      })
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen()
+      }
+    }
+  }
+
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[#0A0A0A]">
+      {/* 1. AUDIO PLAYER & FLOATING BUTTON */}
       {isOpened && (
-        <AudioPlayer
-          src={data.audioUrl}
-          isPlaying={isAudioPlaying}
-          onToggle={() => setIsAudioPlaying(!isAudioPlaying)}
-          theme={{
-            variant: "modern",
-            position: "bottom-right",
-            bg: "bg-black/20",
-            border: "border-white/10",
-            iconColor: "text-white",
-          }}
-        />
+        <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-center gap-4">
+          {/* Tombol Fullscreen di Atas */}
+          <button onClick={toggleFullScreen} className="flex items-center justify-center bg-black/40 backdrop-blur-md border border-white/10 w-12 h-12 rounded-full shadow-2xl active:scale-90 transition-all hover:bg-white/10">
+            <Maximize size={18} className="text-white" />
+          </button>
+
+          {/* Audio Player di Bawahnya */}
+          <AudioPlayer
+            src={data.audioUrl}
+            isPlaying={isAudioPlaying}
+            onToggle={() => setIsAudioPlaying(!isAudioPlaying)}
+            theme={{
+              variant: "modern",
+              position: "relative", // UBAH ke relative agar mengikuti alur flexbox container ini
+              bg: "bg-black/20",
+              border: "border-white/10",
+              iconColor: "text-white",
+            }}
+          />
+        </div>
       )}
 
       <CurtainSection data={data} isOpened={isOpened} onOpen={handleOpen} />

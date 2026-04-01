@@ -24,6 +24,7 @@ export default function ThankYouFooterSection({ data }: Props) {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[#0A0A0A] flex flex-col justify-between">
+      {" "}
       {/* 1. DYNAMIC BACKGROUND WITH KEN BURNS EFFECT */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">

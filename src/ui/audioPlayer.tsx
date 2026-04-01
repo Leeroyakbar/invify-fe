@@ -4,7 +4,7 @@ import ReactPlayer from "react-player"
 
 interface AudioTheme {
   variant: "modern" | "noir"
-  position: "bottom-right" | "bottom-center"
+  position: "bottom-right" | "bottom-center" | "relative"
   bg: string
   border: string
   iconColor: string
@@ -18,7 +18,7 @@ interface AudioPlayerProps {
 }
 
 export default function AudioPlayer({ src, isPlaying, onToggle, theme }: AudioPlayerProps) {
-  const positionClass = theme.position === "bottom-center" ? "bottom-6 left-1/2 -translate-x-1/2" : "bottom-6 right-6"
+  const positionClass = theme.position === "bottom-center" ? "bottom-6 left-1/2 -translate-x-1/2" : theme.position === "bottom-right" ? "bottom-6 right-6" : theme.position
 
   return (
     <>
