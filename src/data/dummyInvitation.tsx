@@ -120,4 +120,5 @@ export const dummyInvitation: Invitation = {
       message: "Happy for you both! Semoga menjadi keluarga yang harmonis dan selalu rukun sampai kakek nenek.",
     },
   ],
+  coverImage: "",
 } satisfies Invitation

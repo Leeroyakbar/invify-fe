@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ArrowLeft, Download, Plus, Save, Trash2, Edit2, Upload, FileSpreadsheet } from "lucide-react"
+import { ArrowLeft, Plus, Save, Trash2, Edit2, FileSpreadsheet } from "lucide-react"
 import { useState, useRef, useCallback, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { toast } from "sonner"

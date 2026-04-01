@@ -11,34 +11,7 @@ import type { DashboardInvitationSummary } from "../../types/DashboardInvitation
 import type { TransactionResponse } from "../../types/TransactionResponse"
 
 export default function DashboardPage() {
-  const dataPendapatan = [
-    { name: "Jan", total: 4000000 },
-    { name: "Feb", total: 5200000 },
-    { name: "Mar", total: 4800000 },
-    { name: "Apr", total: 7000000 },
-    { name: "Mei", total: 6500000 },
-    { name: "Jun", total: 8200000 },
-    { name: "Jul", total: 9000000 },
-    { name: "Agu", total: 10500000 },
-    { name: "Sep", total: 9500000 },
-    { name: "Okt", total: 11000000 },
-    { name: "Nov", total: 12500000 },
-    { name: "Des", total: 14000000 },
-  ]
 
-  const dataUndangan = [
-    { name: "Jan", qty: 45 },
-    { name: "Feb", qty: 52 },
-    { name: "Mar", qty: 48 },
-    { name: "Mei", qty: 61 },
-    { name: "Jun", qty: 59 },
-    { name: "Jul", qty: 68 },
-    { name: "Agu", qty: 82 },
-    { name: "Sep", qty: 78 },
-    { name: "Okt", qty: 92 },
-    { name: "Nov", qty: 88 },
-    { name: "Des", qty: 105 },
-  ]
 
   const [summary, setSummary] = useState<DashboardSummaryResponse>({
     totalCustomer: 0,
