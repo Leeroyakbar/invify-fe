@@ -45,7 +45,7 @@ export default function InvitationPage({ data }: InvitationPageProps) {
 
       {/* CONTENT */}
       <div className="ml-0 lg:ml-[calc(100%-520px)] h-screen flex justify-center">
-        <div className="w-full max-w-[1200px] h-screen overflow-y-auto bg-white shadow-xl">
+        <div className="w-full max-w-300 h-screen overflow-y-auto bg-white shadow-xl">
           <Template data={data} isOpened={isOpened} onOpen={handleOpenInvitation} />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { easeOut, motion } from "framer-motion"
 
-export default function AnnouncementSection({ isOpened }: { isOpened: boolean }) {
+export default function AnnouncementSection({ isOpened, cover }: { isOpened: boolean, cover: string }) {
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
     visible: (i: number) => ({
@@ -35,7 +35,7 @@ export default function AnnouncementSection({ isOpened }: { isOpened: boolean })
         <motion.div initial={{ opacity: 0, scale: 1.1 }} animate={isOpened ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 2, delay: 1.2 }} className="w-full h-full p-4 md:p-12">
           {/* Frame Foto dengan Shadow Halus & Border */}
           <div className="w-full h-full relative group shadow-2xl">
-            <img src="/old-money/money-1.png" className="w-full h-full object-cover filter sepia-[0.2] brightness-[0.95]" alt="Couple" />
+            <img src={cover} className="w-full h-full object-cover filter sepia-[0.2] brightness-[0.95]" alt="Couple" />
             {/* Elegant Caption on Photo */}
             <div className="absolute bottom-6 right-6 text-white text-[9px] tracking-[0.4em] uppercase">Autumn Series — 2027</div>
           </div>

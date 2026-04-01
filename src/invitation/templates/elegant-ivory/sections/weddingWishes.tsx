@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
-import type { Invitation } from "../../../../types/Invitation"
 import { useState } from "react"
+import { MessageSquare, Send, User, CheckCircle2, XCircle } from "lucide-react"
+import type { Invitation } from "../../../../types/Invitation"
 
 interface Props {
   data: Invitation
@@ -12,68 +13,96 @@ export default function WeddingWishesSection({ data }: Props) {
   const [attendance, setAttendance] = useState<"hadir" | "tidak_hadir" | "">("")
 
   return (
-    <section className="bg-[#F8F6F2] px-6 py-12">
-      <div className="mb-16 flex items-center justify-center gap-4">
-        <span className="h-px w-20 bg-[#C8A97E]/60" />
-
-        {/* Heart SVG */}
-        <img src="/elegant-ivory/star.png" className="w-8" />
-        <span className="h-px w-20 bg-[#C8A97E]/60" />
-      </div>
+    <section className="relative bg-[#0A0A0A] px-6 py-24 overflow-hidden border-t border-white/5">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4A853]/5 blur-[100px] rounded-full pointer-events-none" />
 
       {/* Title */}
-      <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.8 }} className="mb-12 text-center font-playfair text-3xl text-[#2F3E46]">
-        <h2 className="font-playfair text-4xl text-[#2F3E46]">Wedding</h2>
-        <p className="mt-2 font-script text-4xl text-[#6B7280]">Wishes</p>
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative z-10 mb-16 text-center">
+        <MessageSquare className="mx-auto mb-4 text-[#D4A853]/60" size={24} strokeWidth={1.5} />
+        <span className="block font-lora text-[10px] tracking-[0.5em] text-[#D4A853] uppercase mb-3">Wishes & RSVPs</span>
+        <h2 className="font-bodoni italic text-5xl text-white">Guest Book</h2>
+        <div className="h-[1px] w-12 bg-[#D4A853]/30 mx-auto mt-6" />
       </motion.div>
 
-      {/* Card */}
-      <div className="mx-auto max-w-xl rounded-2xl bg-white px-6 py-8 shadow-md">
-        {/* Form */}
-        <div className="space-y-4">
-          <input type="text" placeholder="Nama" value={name} onChange={(e) => setName(e.target.value)} className="font-lora w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#C8A97E] focus:outline-none" />
+      <div className="mx-auto max-w-xl relative z-10">
+        {/* Form Card */}
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} className="bg-white/[0.03] border border-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl">
+          <div className="space-y-5">
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 text-white/20" size={16} />
+              <input
+                type="text"
+                placeholder="Nama Anda"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder:text-white/20 focus:border-[#D4A853]/50 focus:outline-none transition-all font-lora"
+              />
+            </div>
 
-          <textarea
-            placeholder="Ucapan & doa"
-            rows={4}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="font-lora w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#C8A97E] focus:outline-none"
-          />
+            <textarea
+              placeholder="Berikan ucapan & doa terbaik..."
+              rows={4}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-white placeholder:text-white/20 focus:border-[#D4A853]/50 focus:outline-none transition-all font-lora resize-none"
+            />
 
-          <select value={attendance} onChange={(e) => setAttendance(e.target.value as "hadir" | "tidak_hadir" | "")} className="font-lora w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-[#C8A97E] focus:outline-none">
-            <option value="">Konfirmasi Kehadiran</option>
-            <option value="hadir">Hadir</option>
-            <option value="tidak_hadir">Tidak Hadir</option>
-          </select>
+            <select
+              value={attendance}
+              onChange={(e) => setAttendance(e.target.value as "hadir" | "tidak_hadir" | "")}
+              className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm text-white/60 focus:border-[#D4A853]/50 focus:outline-none transition-all font-lora appearance-none"
+            >
+              <option value="" className="bg-[#1A1A1A]">
+                Konfirmasi Kehadiran
+              </option>
+              <option value="hadir" className="bg-[#1A1A1A]">
+                Saya Akan Hadir
+              </option>
+              <option value="tidak_hadir" className="bg-[#1A1A1A]">
+                Mohon Maaf, Berhalangan
+              </option>
+            </select>
 
-          <button className="font-lora w-full rounded-full bg-[#4F7C8A] py-2 text-sm text-white transition hover:bg-[#3d616d]">Kirim Ucapan</button>
-        </div>
-      </div>
+            <button className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-[#D4A853] to-[#B8860B] py-3.5 text-sm font-bold text-black transition-all hover:shadow-[0_0_20px_rgba(212,168,83,0.4)] flex items-center justify-center gap-2">
+              <span className="relative z-10">Kirim Ucapan</span>
+              <Send size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </motion.div>
 
-      {/* Wishes List */}
-      <div className="mx-auto mt-16 max-w-xl">
-        {/* Pembungkus Utama dengan Tinggi Terbatas (setara ~2.5 kartu) */}
-        <div className="relative rounded-xl border border-gray-100 bg-white/30 p-2">
-          <div
-            className="max-h-[320px] overflow-y-auto pr-2 space-y-4 scroll-smooth
-      /* Styling Scrollbar minimalis agar tidak merusak view */
-      scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
-          >
-            {data.guests.map((guest) => (
-              <div key={guest.id} className="rounded-xl bg-white p-4 shadow-sm border border-gray-50">
-                <div className="flex items-center justify-between">
-                  <p className="font-semibold text-[#2F3E46] text-sm">{guest.name}</p>
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${guest.isAttending ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600"}`}>{guest.isAttending ? "Hadir" : "Tidak Hadir"}</span>
-                </div>
-                <p className="mt-2 text-xs leading-relaxed text-[#6B7280]">{guest.message || "Barakallah semoga menjadi keluarga sakinah mawaddah warohmah 🤍"}</p>
-                <p className="mt-2 text-[9px] text-gray-400">1 hari lalu</p>
-              </div>
-            ))}
+        {/* Wishes List Display */}
+        <div className="mt-16 space-y-6">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="h-px flex-1 bg-white/10" />
+            <span className="font-lora text-[11px] text-white/40 tracking-widest uppercase">Messages from Loved Ones</span>
+            <div className="h-px flex-1 bg-white/10" />
           </div>
 
-          {/* Efek Fade di bawah agar user tahu itu bisa di-scroll */}
-          <div className="pointer-events-none absolute bottom-0 left-0 h-10 w-full rounded-b-xl bg-gradient-to-t from-white/80 to-transparent" />
+          <div className="relative">
+            <div className="max-h-[450px] overflow-y-auto pr-4 space-y-4 no-scrollbar">
+              {data.guests.map((guest, index) => (
+                <motion.div key={guest.id} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h4 className="font-semibold text-white/90 text-sm flex items-center gap-2">
+                        {guest.name}
+                        {guest.isAttending ? <CheckCircle2 size={12} className="text-green-500/60" /> : <XCircle size={12} className="text-red-500/60" />}
+                      </h4>
+                      <span className="text-[9px] text-white/30 font-lora uppercase tracking-tighter">1 hari lalu</span>
+                    </div>
+                    <span className={`text-[10px] px-2.5 py-1 rounded-md border font-medium ${guest.isAttending ? "border-green-500/20 bg-green-500/5 text-green-500/70" : "border-red-500/20 bg-red-500/5 text-red-500/70"}`}>
+                      {guest.isAttending ? "Hadir" : "Absen"}
+                    </span>
+                  </div>
+                  <p className="text-[13px] leading-relaxed text-white/60 font-lora italic">"{guest.message || "Semoga sakinah mawaddah warohmah."}"</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Fade Effect at bottom */}
+            <div className="pointer-events-none absolute bottom-0 left-0 h-20 w-full bg-gradient-to-t from-[#0A0A0A] to-transparent z-10" />
+          </div>
         </div>
       </div>
     </section>

@@ -6,13 +6,19 @@ interface CustomDropdownProps {
   label: string
   options: string[]
   value: string
+  disabled?: boolean
   onChange: (val: string) => void
 }
 
-export default function CustomDropdownSearch({ label, options, value, onChange }: CustomDropdownProps) {
+export default function CustomDropdownSearch({ label, options, value, onChange, disabled = false }: CustomDropdownProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
 
+  const handleToggle = () => {
+    if (!disabled) {
+      setIsOpen(!isOpen)
+    }
+  }
   // Filter options berdasarkan apa yang diketik admin
   const filteredOptions = options.filter((option) => option.toLowerCase().includes(searchTerm.toLowerCase()))
 
@@ -23,16 +29,19 @@ export default function CustomDropdownSearch({ label, options, value, onChange }
       <div className="relative">
         {/* Tombol Utama */}
         <button
-          type="button" // Biasakan tambah type="button" agar tidak trigger submit form
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-full bg-white border border-stone-100 rounded-xl py-2.5 px-4 text-sm text-stone-600 flex justify-between items-center hover:border-[#D4A853] transition-all shadow-sm"
+          type="button"
+          disabled={disabled}
+          onClick={handleToggle}
+          className={`w-full flex justify-between items-center py-2.5 px-4 rounded-xl border text-sm transition-all shadow-sm
+            ${disabled ? "bg-stone-100 border-stone-200 text-stone-400 cursor-not-allowed opacity-70" : "bg-white border-stone-100 text-stone-600 hover:border-[#D4A853] active:scale-[0.98]"}
+            `}
         >
           <span className={value ? "text-stone-800 font-medium" : "text-stone-400 italic"}>{value || `Pilih ${label}...`}</span>
           <ChevronDown size={14} className={`text-stone-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
         </button>
 
         <AnimatePresence>
-          {isOpen && (
+          {isOpen && !disabled && (
             <>
               {/* Overlay untuk menutup klik luar */}
               <div
@@ -60,6 +69,7 @@ export default function CustomDropdownSearch({ label, options, value, onChange }
                       className="w-full bg-stone-50 border-none rounded-lg py-2 pl-9 pr-4 text-xs outline-none focus:ring-1 focus:ring-[#D4A853]/30 transition-all"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
+                      disabled={disabled}
                     />
                   </div>
                 </div>
@@ -71,6 +81,7 @@ export default function CustomDropdownSearch({ label, options, value, onChange }
                       <button
                         key={opt}
                         type="button"
+                        disabled={disabled}
                         onClick={() => {
                           onChange(opt)
                           setIsOpen(false)

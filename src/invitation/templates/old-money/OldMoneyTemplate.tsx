@@ -44,7 +44,7 @@ export default function OldMoneyTemplate({ data, isOpened, onOpen }: TemplatePro
 
       {/* 4. MAIN CONTENT CONTAINER */}
       <div ref={containerRef} className="relative z-10 h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
-        <AnnouncementSection isOpened={isOpened} />
+        <AnnouncementSection isOpened={isOpened} cover={data.coverImage} />
         <BrideSection data={data} />
         <GroomSection data={data} />
         <EventSection data={data} />

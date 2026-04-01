@@ -7,73 +7,83 @@ interface Props {
   data: Invitation
 }
 
-const backgroundImages = [
-  "/modern/couple/love-story.jpg", // Ganti dengan path gambar Anda
-  "/modern/couple/couple-bg-2.jpeg",
-  "/modern/galery/galery-6.JPG",
-]
-
-const transitionDuration = 8000 // Ganti gambar setiap 8 detik (8000 ms)
+const transitionDuration = 6000 // Ganti gambar setiap 6 detik
 
 export default function ThankYouFooterSection({ data }: Props) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  // Mengambil gambar dari data galeri atau fallback ke array default
+  const backgroundImages = data.images?.slice(0, 3) || ["/modern/couple/love-story.jpg", "/modern/couple/couple-bg-2.jpeg", "/modern/galery/galery-6.JPG"]
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length)
     }, transitionDuration)
-
-    return () => clearInterval(interval) // Cleanup interval saat komponen di-unmount
-  }, [])
+    return () => clearInterval(interval)
+  }, [backgroundImages.length])
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#2F3E46] flex flex-col">
-      {/* Dynamic Background Images with Crossfade */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentImageIndex} // Kunci unik untuk setiap gambar agar AnimatePresence mendeteksi perubahan
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }} // Durasi fade in/out (1.5 detik)
-          className="absolute inset-0 h-[80%] bg-cover bg-center"
-          style={{
-            backgroundImage: `url('${backgroundImages[currentImageIndex]}')`,
-          }}
-        />
-      </AnimatePresence>
+    <section className="relative min-h-[90vh] md:min-h-screen overflow-hidden bg-[#0A0A0A] flex flex-col justify-between">
+      {/* 1. DYNAMIC BACKGROUND WITH KEN BURNS EFFECT */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImageIndex}
+            initial={{ opacity: 0, scale: 1.1 }} // Mulai sedikit lebih besar
+            animate={{ opacity: 0.4, scale: 1 }} // Zoom out perlahan
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2.5, ease: "easeOut" }}
+            className="absolute inset-0 h-full w-full bg-cover bg-center"
+            style={{ backgroundImage: `url('${backgroundImages[currentImageIndex]}')` }}
+          />
+        </AnimatePresence>
 
-      {/* GRADIENT OVERLAY (tetap agar konten terbaca) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-[#2F3E46]/80 to-[#2F3E46]" />
+        {/* Overlay Gradasi agar menyatu dengan tema Ivory Dark */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
 
-      {/* THANK YOU CONTENT */}
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pt-20 text-center text-white">
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: false }} transition={{ duration: 0.5, delay: 0.5 }}>
-          <Heart size={32} className="mx-auto mb-6 text-white/50" />
-          <h2 className="font-playfair text-4xl md:text-5xl">Terima Kasih</h2>
-        </motion.div>
+      {/* 2. THANK YOU CONTENT */}
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }} className="space-y-6">
+          <div className="flex items-center justify-center gap-4 mb-2">
+            <div className="h-[1px] w-8 bg-[#D4A853]/40" />
+            <Heart size={20} className="text-[#D4A853]/60 fill-[#D4A853]/20" />
+            <div className="h-[1px] w-8 bg-[#D4A853]/40" />
+          </div>
 
-        <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.6 }} viewport={{ once: false }} className="mt-6 max-w-md font-lora text-sm leading-relaxed text-white/80">
-          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir serta memberikan doa restu pada hari bahagia kami.
-        </motion.p>
+          <h2 className="font-bodoni italic text-5xl md:text-7xl text-white tracking-wide">Terima Kasih</h2>
 
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.7 }} viewport={{ once: false }} className="mt-12">
-          <p className="font-playfair text-2xl italic">
-            {data.brideName} <span className="text-xl not-italic">&</span> {data.groomName}
+          <p className="max-w-md mx-auto font-lora text-[13px] md:text-sm leading-relaxed text-white/70 italic px-4">
+            "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir serta memberikan doa restu pada hari bahagia kami."
           </p>
+
+          <div className="pt-8">
+            <p className="font-bodoni text-3xl text-[#D4A853]">
+              {data.brideName} <span className="font-lora text-xl text-white/40">&</span> {data.groomName}
+            </p>
+          </div>
         </motion.div>
       </div>
 
-      {/* FOOTER */}
-      <footer className="relative z-10 px-6 py-12 pt-20 text-center text-white">
-        <div className="mx-auto max-w-md space-y-4">
-          <div className="h-px w-12 bg-white/20 mx-auto" />
-          <div className="text-[10px] uppercase tracking-[0.2em] font-lora text-white/50">© {new Date().getFullYear()} — Undangan Pernikahan Digital</div>
+      {/* 3. BUSINESS FOOTER (INVIFY) */}
+      <footer className="relative z-10 pb-12 pt-20">
+        <div className="flex flex-col items-center gap-6">
+          {/* Divider Emas Tipis */}
+          <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-[#D4A853]/40 to-transparent" />
 
-          <p className="flex items-center justify-center gap-1.5 font-lora text-xs text-white/60">
-            Dibuat dengan <Heart size={12} className="fill-red-400 text-red-400" /> oleh
-            <span className="font-semibold text-white tracking-wider">INVIFY</span>
-          </p>
+          <div className="text-center space-y-3">
+            <p className="text-[10px] uppercase tracking-[0.4em] font-lora text-white/30">Official Digital Invitation</p>
+
+            <div className="flex flex-col items-center group cursor-pointer">
+              <p className="font-lora text-[11px] text-white/50 flex items-center gap-1.5 transition-colors group-hover:text-white">Created with love by</p>
+              <span className="font-bodoni text-xl tracking-[0.3em] text-white mt-1 group-hover:text-[#D4A853] transition-all duration-500">
+                INVIFY<span className="text-[#D4A853]">.</span>
+              </span>
+            </div>
+
+            <p className="text-[9px] text-white/20 tracking-widest font-lora">© {new Date().getFullYear()} — ALL RIGHTS RESERVED</p>
+          </div>
         </div>
       </footer>
     </section>

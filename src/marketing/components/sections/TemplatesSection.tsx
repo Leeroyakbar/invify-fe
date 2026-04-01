@@ -134,7 +134,7 @@ export default function TemplatesSection() {
             // Logika penentuan URL Gambar & Link Demo
             const isStatic = tpl.isStatic
             const imgSrc = isStatic ? tpl.previewImage : `${BE_URL}${tpl.previewImage}`
-            const demoLink = isStatic ? tpl.previewImage : `/demo/${tpl.templateName.toLowerCase().replace(/\s+/g, "-")}`
+            const demoLink = `/demo/${tpl.templateName.toLowerCase().replace(/\s+/g, "-")}`
             const waText = encodeURIComponent(`Halo Admin, saya ingin menggunakan template ${tpl.templateName} untuk acara pernikahan saya.`)
             const waUrl = `https://api.whatsapp.com/send?phone=6282273366718&text=${waText}`
 

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Camera, X, Maximize2 } from "lucide-react"
+import { X, Maximize2, Image as ImageIcon } from "lucide-react"
 import type { Invitation } from "../../../../types/Invitation"
 
 type Props = {
@@ -12,80 +12,84 @@ export default function GallerySection({ data }: Props) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   return (
-    <section className="relative bg-[#F8F6F2] px-6 py-12">
-      <div className="mb-20 flex items-center justify-center gap-4">
-        <span className="h-px w-20 bg-[#C8A97E]/60" />
+    <section className="relative bg-[#0A0A0A] px-6 py-24 overflow-hidden border-t border-white/5">
+      {/* Background Ambient Light */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#D4A853]/5 blur-[120px] rounded-full pointer-events-none" />
 
-        {/* Heart SVG */}
-        <svg width="18" height="16" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-70">
-          <path
-            d="M12 21s-7.5-4.7-10-8.9C-0.5 7.4 3.2 2 8 4.3
-         9.6 5.1 11 7 12 8.5
-         13 7 14.4 5.1 16 4.3
-         20.8 2 24.5 7.4 22 12.1
-         19.5 16.3 12 21 12 21z"
-            stroke="#C8A97E"
-            strokeWidth="1.4"
-            fill="none"
-          />
-        </svg>
-        <span className="h-px w-20 bg-[#C8A97E]/60" />
+      {/* Header */}
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative z-10 mb-16 text-center">
+        <ImageIcon className="mx-auto mb-4 text-[#D4A853]/60" size={24} strokeWidth={1.5} />
+        <span className="block font-lora text-[10px] tracking-[0.5em] text-[#D4A853] uppercase mb-3">Capturing Moments</span>
+        <h2 className="font-bodoni italic text-5xl text-white">Our Gallery</h2>
+        <div className="h-[1px] w-12 bg-[#D4A853]/30 mx-auto mt-6" />
+      </motion.div>
+
+      {/* Bento Gallery Layout */}
+      <div className="relative z-10 mx-auto max-w-4xl">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {images.map((src, index) => (
+            <GalleryItem key={src} src={src} index={index} onImageClick={() => setSelectedImage(src)} />
+          ))}
+        </div>
       </div>
+
       {/* Lightbox Modal */}
       <AnimatePresence>
         {selectedImage && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedImage(null)} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
-            <button className="absolute right-6 top-6 text-white/70 hover:text-white">
-              <X size={32} />
-            </button>
-            <motion.img initial={{ scale: 0.8 }} animate={{ scale: 1 }} src={selectedImage} className="max-h-[90vh] max-w-full rounded-lg object-contain" onClick={(e) => e.stopPropagation()} />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-12 backdrop-blur-md"
+          >
+            <motion.button initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} className="absolute right-6 top-6 text-white/50 hover:text-[#D4A853] transition-colors">
+              <X size={32} strokeWidth={1} />
+            </motion.button>
+
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative max-h-full max-w-5xl group" onClick={(e) => e.stopPropagation()}>
+              <img src={selectedImage} className="max-h-[85vh] w-auto rounded-sm shadow-2xl border border-white/10" alt="Selected" />
+              <div className="absolute -bottom-10 left-0 w-full text-center">
+                <p className="font-lora text-xs tracking-widest text-[#D4A853]/60 uppercase italic">The Wedding Gallery</p>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Header */}
-      <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.5 }} className="mb-12 text-center">
-        <Camera className="mx-auto mb-4 text-[#C8A97E]" size={28} />
-        <h2 className="font-playfair text-3xl text-[#2F3E46]">Gallery</h2>
-        <p className="mt-2 font-script text-3xl text-[#6B7280]">Our Moment</p>
-      </motion.div>
-
-      {/* Gallery Layout */}
-      <div className="mx-auto max-w-4xl">
-        {images.length > 0 && (
-          <div className="flex flex-col gap-4">
-            {/* 1. FOTO BESAR (Index 0) */}
-            <GalleryItem src={images[0]} isLarge onImageClick={() => setSelectedImage(images[0])} />
-
-            {/* 2. GRID FOTO KECIL (Index 1 ke atas) */}
-            <div className="grid grid-cols-2 gap-4">
-              {images.slice(1).map((src) => (
-                <GalleryItem key={src} src={src} onImageClick={() => setSelectedImage(src)} />
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
     </section>
   )
 }
 
-function GalleryItem({ src, isLarge = false, onImageClick }: { src: string; isLarge?: boolean; onImageClick: () => void }) {
+function GalleryItem({ src, index, onImageClick }: { src: string; index: number; onImageClick: () => void }) {
+  // Membuat variasi ukuran ala Bento Grid
+  const isWide = index === 0 || index === 5
+  const isTall = index === 1 || index === 4
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false }}
-      transition={{ duration: 1.5 }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: index * 0.1 }}
       onClick={onImageClick}
-      className={`group relative cursor-pointer overflow-hidden rounded-2xl shadow-sm ${isLarge ? "h-64 md:h-96 w-full" : "aspect-square w-full"}`}
+      className={`
+        group relative cursor-pointer overflow-hidden rounded-xl border border-white/5 bg-[#1A1A1A]
+        ${isWide ? "col-span-2 aspect-[16/9] md:aspect-auto md:h-64" : "aspect-square md:h-64"}
+        ${isTall ? "md:row-span-2 md:h-full" : ""}
+      `}
     >
-      <img src={src} alt="Gallery moment" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+      <img src={src} alt="Moment" className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1" />
 
-      {/* Overlay Hitam saat Hover */}
-      <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/30 flex items-center justify-center">
-        <Maximize2 className="text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" size={24} />
+      {/* Elegant Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center gap-3">
+        <div className="p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 scale-50 group-hover:scale-100 transition-transform duration-500">
+          <Maximize2 className="text-white" size={20} strokeWidth={1.5} />
+        </div>
+        <span className="font-lora text-[10px] tracking-[0.3em] text-white/80 uppercase">View Detail</span>
       </div>
+
+      {/* Decorative Border on Hover */}
+      <div className="absolute inset-4 border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
     </motion.div>
   )
 }

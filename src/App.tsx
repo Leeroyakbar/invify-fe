@@ -16,6 +16,9 @@ import TransactionPage from "./admin/pages/TransactionPage"
 import ReportPage from "./admin/pages/ReportPage"
 import SettingsPage from "./admin/pages/SettingPage"
 import ProtectedRoute from "./components/ProtectedRoute"
+import AdminInvitationDetailPage from "./admin/pages/AdminInvitationDetailPage"
+import ClassicNoir from "./invitation/templates/classic-noir/ClassicNoirTemplate"
+import IvoryTemplate from "./invitation/templates/elegant-ivory/IvoryTemplate"
 
 export default function App() {
   return (
@@ -44,7 +47,10 @@ export default function App() {
 
             {/* Placeholder untuk menu lainnya agar tidak error saat diklik */}
             <Route path="users" element={<UsersPage />} />
+
             <Route path="invitations" element={<AdminInvitationPage />} />
+            <Route path="invitations/detail/:id" element={<AdminInvitationDetailPage />} />
+
             <Route path="templates" element={<TemplatePage />} />
             <Route path="transactions" element={<TransactionPage />} />
             <Route path="reports" element={<ReportPage />} />
@@ -54,6 +60,8 @@ export default function App() {
 
         {/* --- DEMO ROUTES --- */}
         <Route path="/demo/:templateKey" element={<InvitationDemoPage />} />
+        <Route path="/demo/classic-noir" element={<ClassicNoir />} />
+        <Route path="/demo/elegant-ivory" element={<IvoryTemplate />} />
 
         {/* 404 Redirect (Optional) */}
         <Route path="*" element={<Navigate to="/" replace />} />

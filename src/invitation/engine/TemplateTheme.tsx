@@ -58,7 +58,7 @@ export const TEMPLATE_THEME: Record<
   },
 
   "old-money": {
-    desktopBg: "bg-[url('/classic-noir/photo-1.jpeg')] bg-cover bg-center",
+    desktopBg: "bg-[url('/old-money/cover.png')] bg-cover bg-center",
     audio: {
       variant: "noir",
       position: "bottom-right",

@@ -2,7 +2,6 @@ import { motion } from "framer-motion"
 import type { Invitation } from "../../../../types/Invitation"
 
 export default function GallerySection({ data }: { data: Invitation }) {
-  const photos = ["/classic-noir/photo-1.jpeg", "/classic-noir/photo-2.jpeg", "/classic-noir/photo-3.jpeg", "/classic-noir/photo-4.jpeg", "/classic-noir/photo-5.jpeg"]
 
   return (
     <section className="h-screen snap-start bg-[#F9F8F4] relative flex flex-col items-center justify-center overflow-hidden">
@@ -14,7 +13,7 @@ export default function GallerySection({ data }: { data: Invitation }) {
 
       {/* Main Gallery Display */}
       <div className="w-full flex gap-6 px-10 overflow-x-auto no-scrollbar snap-x snap-mandatory">
-        {photos.map((src, index) => (
+        {data.images.map((src, index) => (
           <div key={index} className="min-w-[80vw] md:min-w-[40vw] h-[60vh] snap-center flex items-center justify-center">
             {/* The Passe-Partout Frame */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }} className="bg-white p-6 md:p-12 shadow-[0_40px_100px_rgba(0,0,0,0.08)] border border-stone-100 flex flex-col">

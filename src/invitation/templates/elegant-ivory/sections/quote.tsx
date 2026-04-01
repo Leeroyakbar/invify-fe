@@ -1,69 +1,39 @@
-import { easeOut, motion } from "framer-motion"
+import { motion } from "framer-motion"
+import { useRef } from "react"
 
 interface QuoteSectionProps {
-  verse?: string
   translation?: string
   source?: string
 }
 
 export default function QuoteSection({
-  verse = "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
   translation = "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.",
-  source = "QS. Ar-Rum : 21",
+  source = "Q.S. Ar-Rum: 21",
 }: QuoteSectionProps) {
+  const sectionRef = useRef(null)
+
   return (
-    <section className="bg-white px-6 py-14 text-center">
-      <div className="mb-10 flex items-center justify-center gap-4">
-        <span className="h-px w-20 bg-[#C8A97E]/60" />
+    <section ref={sectionRef} className="relative h-[80vh] w-full overflow-visible">
+      {/* 2. CONTENT LAYER */}
+      <div className="relative z-20 h-full w-full flex items-center justify-center px-6">
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1.2 }} className="w-full max-w-lg">
+          {/* Frame Dekoratif */}
+          <div className="relative overflow-hidden rounded-[100px_20px_100px_20px] border border-white/10 bg-black/60 backdrop-blur-xl p-10 md:p-16 shadow-2xl">
+            <div className="mb-8 flex justify-center text-[#D4A853]">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                <path d="M12 22C12 22 12 18 10 16C8 14 4 14 4 14M12 22C12 22 12 18 14 16C16 14 20 14 20 14M12 22V12M12 12C12 12 12 8 14 6C16 4 20 4 20 4M12 12C12 12 12 8 10 6C8 4 4 4 4 4M12 12V2" strokeLinecap="round" />
+              </svg>
+            </div>
 
-        {/* Heart SVG */}
-        <svg width="18" height="16" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-70">
-          <path
-            d="M12 21s-7.5-4.7-10-8.9C-0.5 7.4 3.2 2 8 4.3
-         9.6 5.1 11 7 12 8.5
-         13 7 14.4 5.1 16 4.3
-         20.8 2 24.5 7.4 22 12.1
-         19.5 16.3 12 21 12 21z"
-            stroke="#C8A97E"
-            strokeWidth="1.4"
-            fill="none"
-          />
-        </svg>
-        <span className="h-px w-20 bg-[#C8A97E]/60" />
-      </div>
-
-      <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.5, ease: easeOut, delay: 0.1 }} className="mx-auto max-w-2xl">
-        {/* Arabic Verse */}
-        <p className="font-playfair text-xl leading-relaxed text-[#2F3E46] md:text-2xl">{verse}</p>
-
-        {/* Divider */}
-        <div className="mx-auto my-8 h-px w-24 bg-[#C8A97E]/60" />
-
-        {/* Translation */}
-        <p className="font-lora text-sm leading-relaxed text-[#6B7280] md:text-base">{translation}</p>
-
-        {/* Source */}
-        <p className="mt-6 font-lora text-xs tracking-widest text-[#8FA8A1] uppercase">{source}</p>
-      </motion.div>
-
-
-      <div className="mt-10 flex items-center justify-center gap-4">
-        <span className="h-px w-20 bg-[#C8A97E]/60" />
-
-        {/* Heart SVG */}
-        <svg width="18" height="16" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-70">
-          <path
-            d="M12 21s-7.5-4.7-10-8.9C-0.5 7.4 3.2 2 8 4.3
-         9.6 5.1 11 7 12 8.5
-         13 7 14.4 5.1 16 4.3
-         20.8 2 24.5 7.4 22 12.1
-         19.5 16.3 12 21 12 21z"
-            stroke="#C8A97E"
-            strokeWidth="1.4"
-            fill="none"
-          />
-        </svg>
-        <span className="h-px w-20 bg-[#C8A97E]/60" />
+            <div className="text-center">
+              <p className="font-lora text-sm md:text-base leading-loose italic text-white/90">"{translation}"</p>
+              <div className="mt-8">
+                <div className="h-[1px] w-12 bg-[#D4A853] mx-auto mb-4 opacity-50" />
+                <p className="font-lora text-xs font-bold tracking-[0.3em] text-[#D4A853] uppercase">{source}</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

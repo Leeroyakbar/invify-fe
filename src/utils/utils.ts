@@ -31,3 +31,16 @@ export const isTokenExpired = (token: string) => {
     return true
   }
 }
+export const formatRupiah = (number: number) => {
+  return new Intl.NumberFormat("id-ID").format(number)
+}
+
+export const formatNumber = (val: number) => new Intl.NumberFormat("id-ID").format(val)
+
+export const formatTanggal = (tanggal: string) => {
+  return new Date(tanggal).toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  })
+}

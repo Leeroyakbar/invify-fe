@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Users, Mail, Receipt, TrendingUp } from "lucide-react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts"
+import api from "../../api/axiosConfig"
+import type { DashboardSummaryResponse } from "../../types/DashboardSummaryResopnse"
+import { toast } from "sonner"
+import { formatNumber, formatRupiah, formatTanggal } from "../../utils/utils"
+import { type DashboardRevenueSummary } from "../../types/DashboardRevenueSummary"
+import type { DashboardInvitationSummary } from "../../types/DashboardInvitationSummary"
+import type { TransactionResponse } from "../../types/TransactionResponse"
 
 export default function DashboardPage() {
-  const stats = [
-    { name: "Total Pengguna", value: "1,234", change: "+12%", trend: "up", icon: Users },
-    { name: "Total Undangan", value: "856", change: "+8%", trend: "up", icon: Mail },
-    { name: "Total Transaksi", value: "543", change: "+15%", trend: "up", icon: Receipt },
-    { name: "Pendapatan", value: "Rp 125jt", change: "+23%", trend: "up", icon: TrendingUp },
-  ]
-
   const dataPendapatan = [
     { name: "Jan", total: 4000000 },
     { name: "Feb", total: 5200000 },
@@ -37,6 +39,126 @@ export default function DashboardPage() {
     { name: "Nov", qty: 88 },
     { name: "Des", qty: 105 },
   ]
+
+  const [summary, setSummary] = useState<DashboardSummaryResponse>({
+    totalCustomer: 0,
+    percentageChangeCustomer: 0,
+    totalRevenue: 0,
+    percentageChangeRevenue: 0,
+    totalTransaction: 0,
+    percentageChangeTransaction: 0,
+  })
+
+  const [revenueSummary, setRevenueSummary] = useState<DashboardRevenueSummary[]>([])
+  const [invitationSummary, setInvitationSummary] = useState<DashboardInvitationSummary[]>([])
+  const [transactionSummary, setTransactionSummary] = useState<TransactionResponse[]>([])
+  const fetchSummary = useCallback(async () => {
+    try {
+      const responseSummary = await api.get("/api/admin/dashboard/summary")
+      if (responseSummary.data.success) {
+        setSummary(responseSummary.data.data)
+      }
+
+      const responseRevenue = await api.get("/api/admin/dashboard/summary/revenue")
+      if (responseRevenue.data.success) {
+        setRevenueSummary(responseRevenue.data.data)
+      }
+
+      const responseInvitation = await api.get("/api/admin/dashboard/summary/invitation")
+      if (responseInvitation.data.success) {
+        setInvitationSummary(responseInvitation.data.data)
+      }
+
+      const responseTransaction = await api.get("/api/admin/dashboard/summary/transaction")
+      if (responseTransaction.data.success) {
+        setTransactionSummary(responseTransaction.data.data)
+      }
+    } catch (error) {
+      toast.error("Gagal mendapatkan summary")
+    }
+  }, [])
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      fetchSummary()
+    }, 500)
+    return () => clearTimeout(delayDebounceFn)
+  }, [fetchSummary])
+
+  const stats = [
+    {
+      name: "Total Pengguna",
+      value: summary ? formatNumber(summary.totalCustomer) : "0",
+      change: `${summary?.percentageChangeCustomer >= 0 ? "+" : ""}${summary?.percentageChangeCustomer}%`,
+      trend: (summary?.percentageChangeCustomer ?? 0) >= 0 ? "up" : "down",
+      icon: Users,
+    },
+    {
+      name: "Total Transaksi",
+      value: summary ? formatNumber(summary.totalTransaction) : "0",
+      change: `${summary?.percentageChangeTransaction >= 0 ? "+" : ""}${summary?.percentageChangeTransaction}%`,
+      trend: (summary?.percentageChangeTransaction ?? 0) >= 0 ? "up" : "down",
+      icon: Receipt,
+    },
+    {
+      name: "Pendapatan",
+      value: summary ? formatRupiah(summary.totalRevenue) : "Rp 0",
+      change: `${summary?.percentageChangeRevenue >= 0 ? "+" : ""}${summary?.percentageChangeRevenue}%`,
+      trend: (summary?.percentageChangeRevenue ?? 0) >= 0 ? "up" : "down",
+      icon: TrendingUp,
+    },
+    {
+      name: "Total Undangan", // Contoh jika ada data tambahan nanti
+      value: summary ? formatNumber(summary.totalTransaction) : "0",
+      change: "+0%",
+      trend: "up",
+      icon: Mail,
+    },
+  ]
+
+  const chartDataPendapatan = useMemo(() => {
+    const monthLabels = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
+
+    if (!revenueSummary || revenueSummary.length === 0) {
+      // Return array kosong atau dummy data jika belum ada data
+      return monthLabels.map((month) => ({ name: month, total: 0 }))
+    }
+
+    return revenueSummary.map((item) => ({
+      // Mengonversi month (2) menjadi "Feb" (index 1 di array monthLabels)
+      name: monthLabels[item.month - 1] || "Unknown",
+      total: item.revenue,
+      year: item.year, // Opsional, jika ingin ditampilkan di tooltip
+    }))
+  }, [revenueSummary])
+
+  const chartDataUndangan = useMemo(() => {
+    const monthLabels = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
+
+    if (!invitationSummary || invitationSummary.length === 0) {
+      return monthLabels.map((month) => ({ name: month, qty: 0 }))
+    }
+
+    return invitationSummary.map((item) => ({
+      name: monthLabels[item.month - 1] || "Unknown",
+      qty: item.qty,
+      year: item.year,
+    }))
+  }, [invitationSummary])
+
+  const chartDataTransaksi = useMemo(() => {
+    if (!transactionSummary || transactionSummary.length === 0) {
+      return []
+    }
+
+    return transactionSummary.map((item) => ({
+      name: item.fullName,
+      subsPlan: item.subscriptionPlan,
+      createdDate: formatTanggal(item.createdDate),
+      status: item.paymentStatus === 1 ? "Lunas" : "Belum Lunas",
+      trxAmount: formatRupiah(item.trxAmount),
+    }))
+  }, [transactionSummary])
 
   return (
     <div className="space-y-10">
@@ -71,10 +193,11 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Area Chart: Pendapatan Bulanan */}
         <div className="lg:col-span-2 bg-white p-8 rounded-3xl border border-stone-50 shadow-sm">
-          <h4 className="font-serif text-lg text-stone-800 mb-8 italic">Pendapatan Bulanan</h4>
-          <div className="h-[300px] w-full">
+          <h4 className="font-serif text-lg text-stone-800 mb-8 italic">Pendapatan Bulanan (Rp)</h4>
+          <div className="h-75 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={dataPendapatan}>
+              {/* PAKAI chartDataPendapatan DI SINI */}
+              <AreaChart data={chartDataPendapatan}>
                 <defs>
                   <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#D4A853" stopOpacity={0.1} />
@@ -83,8 +206,15 @@ export default function DashboardPage() {
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F5F5F5" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} tickFormatter={(value) => `${value / 1000000}jt`} />
-                <Tooltip contentStyle={{ borderRadius: "16px", border: "none", boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)" }} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} tickFormatter={(value) => (value >= 1000000 ? `${value / 1000000}jt` : formatNumber(value))} />
+                <Tooltip
+                  formatter={(value: number | string | undefined) => {
+                    if (value === undefined) return ["Rp 0", "Pendapatan"]
+                    const numericValue = typeof value === "string" ? parseFloat(value) : value
+                    return [formatRupiah(numericValue), "Pendapatan"]
+                  }}
+                  contentStyle={{ borderRadius: "16px", border: "none", boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)" }}
+                />
                 <Area type="monotone" dataKey="total" stroke="#D4A853" strokeWidth={3} fillOpacity={1} fill="url(#colorTotal)" />
               </AreaChart>
             </ResponsiveContainer>
@@ -94,12 +224,21 @@ export default function DashboardPage() {
         {/* Bar Chart: Jumlah Undangan */}
         <div className="bg-white p-8 rounded-3xl border border-stone-50 shadow-sm">
           <h4 className="font-serif text-lg text-stone-800 mb-8 italic">Undangan per Bulan</h4>
-          <div className="h-[300px] w-full">
+          <div className="h-75 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={dataUndangan}>
+              {/* PAKAI chartDataUndangan DI SINI */}
+              <BarChart data={chartDataUndangan}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F5F5F5" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} dy={10} />
-                <Tooltip cursor={{ fill: "#FDFBF7" }} contentStyle={{ borderRadius: "16px", border: "none", boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)" }} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} allowDecimals={false} />
+                <Tooltip
+                  cursor={{ fill: "#FDFBF7" }}
+                  formatter={(value: number | string | undefined) => {
+                    const numericValue = typeof value === "string" ? parseInt(value) : (value ?? 0)
+                    return [numericValue, "Jumlah Undangan"]
+                  }}
+                  contentStyle={{ borderRadius: "16px", border: "none", boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)" }}
+                />
                 <Bar dataKey="qty" fill="#D4A853" radius={[6, 6, 0, 0]} barSize={15} />
               </BarChart>
             </ResponsiveContainer>
@@ -125,15 +264,15 @@ export default function DashboardPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-stone-50 text-xs">
-              {[1, 2, 3, 4, 5].map((_, i) => (
+              {chartDataTransaksi.map((item, i) => (
                 <tr key={i} className="hover:bg-stone-50/30 transition-colors">
-                  <td className="px-8 py-5 font-bold text-stone-800">Andi & Sari</td>
-                  <td className="px-8 py-5 text-stone-500 font-light italic">Premium Package</td>
-                  <td className="px-8 py-5 text-stone-400 font-mono italic text-[10px]">2027-01-15</td>
+                  <td className="px-8 py-5 font-bold text-stone-800">{item.name}</td>
+                  <td className="px-8 py-5 text-stone-500 font-light italic">{item.subsPlan}</td>
+                  <td className="px-8 py-5 text-stone-400 font-mono italic text-[10px]">{item.createdDate}</td>
                   <td className="px-8 py-5">
-                    <span className="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[9px] font-bold uppercase tracking-tighter">Lunas</span>
+                    <span className="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[9px] font-bold uppercase tracking-tighter">{item.status}</span>
                   </td>
-                  <td className="px-8 py-5 text-right font-bold text-stone-800 italic">Rp 350.000</td>
+                  <td className="px-8 py-5 text-right font-bold text-stone-800 italic">Rp {item.trxAmount}</td>
                 </tr>
               ))}
             </tbody>

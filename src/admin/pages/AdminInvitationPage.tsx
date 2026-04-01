@@ -5,19 +5,26 @@ import CustomDropdown from "../components/CustomDropdown"
 import DataTable, { type Column } from "../components/DataTable"
 import { toast } from "sonner"
 import api from "../../api/axiosConfig"
-import { AddInvitationModal } from "../components/AddInvitationModal"
 import { type UserResponse } from "./UserPage"
 import { type TemplateResponse } from "../../types/TemplateResponse"
 import { type InvitationRequest } from "../../types/InvitationRequest"
 import { type InvitationResponse } from "../../types/InvitationResponse"
 import axios from "axios"
 import type { InvitationResponseDetail } from "../../types/InvitationResponseDetail"
+import { AddInvitationModal } from "../components/AddInvitationModal"
+import { Link } from "react-router-dom"
 
 const columns: Column<InvitationResponse>[] = [
   {
     header: "Pasangan",
     key: "coupleName",
     className: "font-bold text-stone-800",
+    render: (item) => (
+      <Link to={`/admin/invitations/detail/${item.invitationId}`} className="hover:text-[#D5A853] transition-colors cursor-pointer flex flex-col">
+        <span className="font-bold text-stone-800">{item.coupleName}</span>
+        <span className="text-[10px] text-stone-400 font-normal">Klik untuk kelola tamu</span>
+      </Link>
+    ),
   },
   {
     header: "Template",
@@ -147,14 +154,10 @@ export default function AdminInvitationPage() {
       let response
       if (selectedInvitation) {
         // Mode UPDATE
-        response = await api.put(`/api/admin/invitations/edit/${selectedInvitation.invitationId}`, newData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
+        response = await api.put(`/api/admin/invitations/edit/v2/${selectedInvitation.invitationId}`, newData)
       } else {
         // Mode CREATE
-        response = await api.post("/api/admin/invitations/create", newData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
+        response = await api.post("/api/admin/invitations/create/v2", newData)
       }
 
       if (response.data.success) {

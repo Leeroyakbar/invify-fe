@@ -1,97 +1,149 @@
-import { Download, Search } from "lucide-react"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Search } from "lucide-react"
 import DataTable, { type Column } from "../components/DataTable"
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import CustomDropdown from "../components/CustomDropdown"
 import { toast } from "sonner"
 import EditTransactionModal from "../components/EditTransactionModal"
+import type { TransactionResponse } from "../../types/TransactionResponse"
+import api from "../../api/axiosConfig"
+import { formatRupiah } from "../../utils/utils"
 
-export interface Transaction {
-  id: string
-  user: {
-    name: string
-    email: string
-  }
-  package: "Basic" | "Premium" | "Custom"
-  amount: number
-  status: "Lunas" | "Pending" | "Gagal"
-  method: string
-  date: string
-}
-
-const dummyTransactions: Transaction[] = [
+const dummyTransactions: TransactionResponse[] = [
   {
-    id: "TRX001",
-    user: { name: "Andi & Sari", email: "andi@email.com" },
-    package: "Premium",
-    amount: 350000,
-    status: "Lunas",
-    method: "Bank Transfer",
-    date: "2025-01-15 14:30",
+    trxId: "1",
+    trxNo: "TRX001",
+    fullName: "Andi & Sari",
+    email: "andi@email.com",
+    subscriptionPlan: "Premium",
+    trxAmount: 350000,
+    paymentStatus: 1,
+    paymentMethod: "Bank Transfer",
+    createdDate: "2025-01-15 14:30",
   },
   {
-    id: "TRX002",
-    user: { name: "Budi & Dewi", email: "budi@email.com" },
-    package: "Custom",
-    amount: 500000,
-    status: "Pending",
-    method: "E-Wallet",
-    date: "2025-01-15 12:15",
+    trxId: "2",
+    trxNo: "TRX002",
+    fullName: "Andi & Sari",
+    email: "andi@gmail.com",
+    subscriptionPlan: "Custom",
+    trxAmount: 500000,
+    paymentStatus: 0,
+    paymentMethod: "E-Wallet",
+    createdDate: "2025-01-15 12:15",
   },
 ]
 
 export default function TransactionPage() {
-  const [transactions, setTransactions] = useState<Transaction[]>(dummyTransactions)
+  const [transactions, setTransactions] = useState<TransactionResponse[]>(dummyTransactions)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null)
+  const [selectedTransaction, setSelectedTransaction] = useState<TransactionResponse | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("Semua Status")
+  const [revenue, setRevenue] = useState(0)
+  const [totalTransaction, setTotalTransaction] = useState(0)
+  const [totalPending, setTotalPending] = useState(0)
 
   // Definisi Kolom Tabel
-  const columns: Column<Transaction>[] = [
-    { header: "ID Transaksi", key: "id", className: "font-bold text-stone-800" },
+  const columns: Column<TransactionResponse>[] = [
+    { header: "ID Transaksi", key: "trxNo", className: "font-bold text-stone-800" },
     {
       header: "Pengguna",
       key: "user",
       render: (item) => (
         <div>
-          <p className="font-bold text-stone-800">{item.user.name}</p>
-          <p className="text-[10px] text-stone-400">{item.user.email}</p>
+          <p className="font-bold text-stone-800">{item.fullName}</p>
+          <p className="text-[10px] text-stone-400">{item.email}</p>
         </div>
       ),
     },
     {
       header: "Paket",
-      key: "package",
-      render: (item) => <span className="px-3 py-1 bg-stone-50 border border-stone-100 rounded-lg text-[10px] font-bold text-stone-600">{item.package}</span>,
+      key: "subscriptionPlan",
+      render: (item) => <span className="px-3 py-1 bg-stone-50 border border-stone-100 rounded-lg text-[10px] font-bold text-stone-600 capitalize">{item.subscriptionPlan.toLowerCase()}</span>,
     },
     {
       header: "Jumlah",
       key: "amount",
-      render: (item) => <span className="font-bold">Rp {item.amount.toLocaleString("id-ID")}</span>,
+      render: (item) => <span className="font-bold">Rp {item.trxAmount?.toLocaleString("id-ID")}</span>,
     },
     {
       header: "Status",
       key: "status",
       render: (item) => {
         const colors = {
-          Lunas: "bg-emerald-50 text-emerald-600 border-emerald-100",
-          Pending: "bg-amber-50 text-amber-600 border-amber-100",
-          Gagal: "bg-rose-50 text-rose-600 border-rose-100",
+          "1": "bg-emerald-50 text-emerald-600 border-emerald-100",
+          "0": "bg-amber-50 text-amber-600 border-amber-100",
+          "-1": "bg-rose-50 text-rose-600 border-rose-100",
         }
-        return <span className={`px-3 py-1 border rounded-full text-[10px] font-bold ${colors[item.status]}`}>{item.status}</span>
+
+        const statusKey = String(item.paymentStatus) as keyof typeof colors
+        const statusClass = colors[statusKey] || "bg-gray-50 text-gray-600 border-gray-100"
+
+        return <span className={`px-3 py-1 border rounded-full text-[10px] font-bold ${statusClass}`}>{item.paymentStatus === 1 ? "Lunas" : item.paymentStatus === 0 ? "Pending" : "Gagal"}</span>
       },
     },
-    { header: "Metode", key: "method" },
-    { header: "Tanggal", key: "date", className: "text-stone-400" },
+    { header: "Metode", key: "paymentMethod" },
+    {
+      header: "Tanggal",
+      key: "createdDate",
+      className: "text-stone-400",
+      render: (item) => {
+        const date = new Date(item.createdDate)
+        return date.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })
+      },
+    },
   ]
 
-  const handleDelete = (item: Transaction) => {
-    toast(`Hapus transaksi ${item.id} ?`, {
-      description: `Data untuk ${item.user.name} akan dihapus permanen.`,
+  const fetchTransaction = useCallback(async () => {
+    try {
+      const response = await api.post("api/admin/transaction/get-all-transactions", {
+        // Pastikan nama field sesuai dengan TransactionRequestDTO di Backend
+        trxNo: searchTerm,
+        fullName: searchTerm,
+        subscriptionPlan: searchTerm,
+        paymentStatus: statusFilter === "Semua Status" ? 1 : statusFilter === "Pending" ? 0 : -1,
+        page: 0, // Sebaiknya gunakan number, bukan string
+        size: 10,
+      })
+
+      if (response.data.success) {
+        setTransactions(response.data.data)
+      }
+    } catch (error) {
+      toast.error("Gagal mengambil data transaksi")
+      console.error(error)
+    }
+  }, [searchTerm, statusFilter])
+
+  const fetchSummary = useCallback(async () => {
+    try {
+      const response = await api.get("api/admin/transaction/summary")
+      if (response.data.success) {
+        setRevenue(response.data.data.totalRevenue)
+        setTotalTransaction(response.data.data.totalTransaction)
+        setTotalPending(response.data.data.totalPendingTransaction)
+      }
+    } catch (error) {
+      toast.error("Gagal mengambil summary transaksi")
+    }
+  }, [])
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      fetchTransaction()
+      fetchSummary()
+    }, 500)
+    return () => clearTimeout(delayDebounceFn)
+  }, [fetchTransaction, fetchSummary])
+
+  const handleDelete = (item: TransactionResponse) => {
+    toast(`Hapus transaksi ${item.trxNo} ?`, {
+      description: `Data untuk ${item.fullName} akan dihapus permanen.`,
       action: {
         label: "Hapus",
         onClick: () => {
-          setTransactions((prev) => prev.filter((t) => t.id !== item.id))
+          setTransactions((prev) => prev.filter((t) => t.trxId !== item.trxId))
           toast.success("Transaksi Berhasil Dihapus")
         },
       },
@@ -102,13 +154,13 @@ export default function TransactionPage() {
     })
   }
 
-  const handleEdit = (item: Transaction) => {
+  const handleEdit = (item: TransactionResponse) => {
     setSelectedTransaction(item)
     setIsEditModalOpen(true)
   }
 
-  const handleSaveEdit = (updatedData: Partial<Transaction>) => {
-    setTransactions((prev) => prev.map((t) => (t.id === selectedTransaction?.id ? { ...t, ...updatedData } : t)))
+  const handleSaveEdit = (updatedData: Partial<TransactionResponse>) => {
+    setTransactions((prev) => prev.map((t) => (t.trxId === selectedTransaction?.trxId ? { ...t, ...updatedData } : t)))
     setIsEditModalOpen(false)
     setSelectedTransaction(null)
   }
@@ -116,13 +168,13 @@ export default function TransactionPage() {
   const filteredTransactions = transactions.filter((t) => {
     // 1. Logika untuk Search Bar (Mencari di banyak kolom)
     const matchesSearch =
-      t.user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      t.user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      t.package.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      t.id.toLowerCase().includes(searchTerm.toLowerCase())
+      t.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      t.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      t.subscriptionPlan.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      t.trxNo.toLowerCase().includes(searchTerm.toLowerCase())
 
     // 2. Logika untuk Dropdown Status
-    const matchesStatus = statusFilter === "Semua Status" || t.status === statusFilter
+    const matchesStatus = statusFilter === "Semua Status" || statusFilter === "Lunas" ? t.paymentStatus === 1 : t.paymentStatus === 0
 
     // 3. Kedua kondisi HARUS terpenuhi
     return matchesSearch && matchesStatus
@@ -135,16 +187,16 @@ export default function TransactionPage() {
           <h1 className="text-3xl font-serif font-bold text-stone-800">Manajemen Transaksi</h1>
           <p className="text-stone-400 text-sm italic font-light">Pantau dan kelola semua transaksi pembayaran</p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-2.5 border border-stone-200 rounded-2xl text-sm font-bold text-stone-600 hover:bg-stone-50 transition-all">
+        {/* <button className="flex items-center gap-2 px-6 py-2.5 border border-stone-200 rounded-2xl text-sm font-bold text-stone-600 hover:bg-stone-50 transition-all">
           <Download size={18} /> Export
-        </button>
+        </button> */}
       </div>
 
       {/* SUMMARY CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <SummaryCard title="Total Pendapatan" value="Rp 1.150.000" />
-        <SummaryCard title="Transaksi Sukses" value="5" color="text-emerald-600" />
-        <SummaryCard title="Menunggu Pembayaran" value="2" color="text-amber-600" />
+        <SummaryCard title="Total Pendapatan" value={formatRupiah(revenue)} />
+        <SummaryCard title="Transaksi Sukses" value={totalTransaction.toString()} color="text-emerald-600" />
+        <SummaryCard title="Menunggu Pembayaran" value={totalPending.toString()} color="text-amber-600" />
       </div>
 
       {/* FILTER SECTION */}
@@ -181,7 +233,7 @@ export default function TransactionPage() {
       />
 
       {/* Modal Edit (Kita bisa buat komponen baru atau reuse modal yang ada) */}
-      {isEditModalOpen && <EditTransactionModal key={selectedTransaction?.id || "new"} isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} initialData={selectedTransaction} onSave={handleSaveEdit} />}
+      {isEditModalOpen && <EditTransactionModal key={selectedTransaction?.trxId || "new"} isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} initialData={selectedTransaction} onSave={handleSaveEdit} />}
     </div>
   )
 }
