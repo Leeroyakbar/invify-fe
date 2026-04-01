@@ -19,9 +19,8 @@ export default function WeddingWishesSection({ data }: Props) {
 
       {/* Title */}
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative z-10 mb-16 text-center">
-        <MessageSquare className="mx-auto mb-4 text-[#D4A853]/60" size={24} strokeWidth={1.5} />
-        <span className="block font-lora text-[10px] tracking-[0.5em] text-[#D4A853] uppercase mb-3">Wishes & RSVPs</span>
-        <h2 className="font-bodoni italic text-5xl text-white">Guest Book</h2>
+        {/* <MessageSquare className="mx-auto mb-4 text-[#D4A853]/60" size={24} strokeWidth={1.5} /> */}
+        <h2 className="font-bodoni italic text-4xl text-white">Wishes & RSVPs</h2>
         <div className="h-[1px] w-12 bg-[#D4A853]/30 mx-auto mt-6" />
       </motion.div>
 

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Maximize2, Image as ImageIcon } from "lucide-react"
+import { X, Maximize2 } from "lucide-react"
 import type { Invitation } from "../../../../types/Invitation"
 
 type Props = {
@@ -18,9 +18,9 @@ export default function GallerySection({ data }: Props) {
 
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative z-10 mb-16 text-center">
-        <ImageIcon className="mx-auto mb-4 text-[#D4A853]/60" size={24} strokeWidth={1.5} />
-        <span className="block font-lora text-[10px] tracking-[0.5em] text-[#D4A853] uppercase mb-3">Capturing Moments</span>
-        <h2 className="font-bodoni italic text-5xl text-white">Our Gallery</h2>
+        {/* <ImageIcon className="mx-auto mb-4 text-[#D4A853]/60" size={24} strokeWidth={1.5} />
+        <span className="block font-lora text-[10px] tracking-[0.5em] text-[#D4A853] uppercase mb-3">Capturing Moments</span> */}
+        <h2 className="font-bodoni italic text-4xl text-white">Our Moment</h2>
         <div className="h-[1px] w-12 bg-[#D4A853]/30 mx-auto mt-6" />
       </motion.div>
 

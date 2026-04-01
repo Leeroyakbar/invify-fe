@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import type { Invitation } from "../../../../types/Invitation"
-import { Copy, Gift, CreditCard, Check } from "lucide-react"
+import { Copy, CreditCard, Check } from "lucide-react"
 import { useState } from "react"
 
 interface Props {
@@ -24,9 +24,7 @@ export default function WeddingGiftsSection({ data }: Props) {
       <div className="relative z-10">
         {/* Title */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-          <Gift className="mx-auto mb-6 text-[#D4A853]/60" size={32} strokeWidth={1.5} />
-          <span className="block font-lora text-[10px] tracking-[0.5em] text-[#D4A853] uppercase mb-3">Love & Kindness</span>
-          <h2 className="font-bodoni italic text-5xl text-white">Wedding Gift</h2>
+          <h2 className="font-bodoni italic text-4xl text-white">Wedding Gift</h2>
           <div className="h-[1px] w-12 bg-[#D4A853]/30 mx-auto mt-6" />
 
           <p className="mt-8 font-lora text-[13px] leading-relaxed text-white/50 max-w-sm mx-auto italic">

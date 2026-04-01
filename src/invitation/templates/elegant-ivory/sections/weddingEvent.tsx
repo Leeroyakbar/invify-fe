@@ -19,7 +19,7 @@ export default function WeddingEventSection({ data }: Props) {
     <section className="relative z-10 bg-transparent px-4 py-20">
       {/* Header Section */}
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="text-center mb-16">
-        <h2 className="font-bodoni italic text-5xl text-white">The Wedding Event</h2>
+        <h2 className="font-bodoni italic text-4xl text-white">The Wedding Event</h2>
         <div className="mt-4 flex justify-center items-center gap-4">
           <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#C8A97E]" />
           <div className="w-2 h-2 rounded-full border border-[#C8A97E]" />

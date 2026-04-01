@@ -10,8 +10,7 @@ export default function BrideGroomSection({ data }: Props) {
     <section className="relative z-10 bg-transparent px-8 py-24 text-center">
       {/* Header Section - Dibuat lebih puitis */}
       <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="mb-20 flex flex-col items-center gap-2">
-        <span className="font-lora text-[9px] uppercase tracking-[0.6em] text-[#D4A853]">Introducing</span>
-        <h2 className="font-bodoni italic text-5xl text-white">The Happy Couple</h2>
+        <h2 className="font-bodoni italic text-4xl text-white">The Happy Couple</h2>
         <div className="h-[1px] w-8 bg-[#D4A853]/50 mt-4" />
       </motion.div>
 
@@ -19,8 +18,6 @@ export default function BrideGroomSection({ data }: Props) {
       <div className="flex flex-col gap-32">
         {/* Bride */}
         <PersonBlock image={data.bridePhoto} fullName={data.brideFullName} isBride={true} father={data.brideFather} mother={data.brideMother} delay={0.2} />
-
-        
 
         {/* Groom */}
         <PersonBlock image={data.groomPhoto} fullName={data.groomFullName} isBride={false} father={data.groomFather} mother={data.groomMother} delay={0.4} />
@@ -48,7 +45,7 @@ function PersonBlock({ image, fullName, isBride, father, mother, delay }: Person
       {/* Premium Arch Frame with Double Border */}
       <div className="relative mb-10 group">
         <div className="absolute -inset-2 rounded-t-full border border-[#D4A853]/20 scale-105 transition-transform duration-700 group-hover:scale-110" />
-        <div className="relative h-80 w-60 overflow-hidden rounded-t-full border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <div className="relative h-120 w-80 overflow-hidden rounded-t-full border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           <img src={image} alt={fullName} className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" />
           {/* Subtle Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />

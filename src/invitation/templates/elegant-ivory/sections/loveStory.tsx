@@ -27,8 +27,7 @@ export default function LoveStorySection({ data }: Props) {
       {/* Title Section */}
       <div className="relative z-10 mb-24 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-          <span className="block font-lora text-[10px] tracking-[0.5em] text-[#D4A853] uppercase mb-4">Our Journey</span>
-          <h2 className="font-bodoni italic text-5xl text-white mb-2">Love Story</h2>
+          <h2 className="font-bodoni italic text-4xl text-white mb-2">Love Story</h2>
           <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-[#D4A853] to-transparent mx-auto mt-6" />
         </motion.div>
       </div>
