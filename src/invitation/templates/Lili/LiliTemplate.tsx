@@ -16,6 +16,7 @@ export default function LiliTemplate() {
   const handleOpenInvitation = () => {
     setIsOpened(true)
     setIsAudioPlaying(true)
+    toggleFullScreen()
   }
 
   const toggleFullScreen = () => {
