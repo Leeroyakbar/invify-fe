@@ -4,9 +4,10 @@ import CurtainSection from "./sections/CurtainSection"
 import AudioPlayer from "../../../ui/audioPlayer"
 import { Maximize } from "lucide-react"
 import { motion } from "framer-motion"
+import HeroSection from "./sections/HeroSection"
 export default function LiliTemplate() {
   // Menggunakan data demo classic-noir
-  const data = DEMO_INVITATIONS["classic-noir"]
+  const data = DEMO_INVITATIONS["lili"]
   const [isOpened, setIsOpened] = useState(false)
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
 
@@ -30,26 +31,24 @@ export default function LiliTemplate() {
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[#0A0A0A]">
       {/* 1. FLOATING CONTROLS (Hanya muncul setelah dibuka) */}
-      {isOpened && (
-        <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-center gap-4">
-          <button onClick={toggleFullScreen} className="flex items-center justify-center bg-black/40 backdrop-blur-md border border-white/10 w-12 h-12 rounded-full shadow-2xl active:scale-90 transition-all hover:bg-white/10">
-            <Maximize size={18} className="text-white" />
-          </button>
+      <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-center gap-4">
+        <button onClick={toggleFullScreen} className="flex items-center justify-center bg-black/40 backdrop-blur-md border border-white/10 w-12 h-12 rounded-full shadow-2xl active:scale-90 transition-all hover:bg-white/10">
+          <Maximize size={18} className="text-white" />
+        </button>
 
-          <AudioPlayer
-            src={data.audioUrl}
-            isPlaying={isAudioPlaying}
-            onToggle={() => setIsAudioPlaying(!isAudioPlaying)}
-            theme={{
-              variant: "modern",
-              position: "relative",
-              bg: "bg-black/20",
-              border: "border-white/10",
-              iconColor: "text-white",
-            }}
-          />
-        </div>
-      )}
+        <AudioPlayer
+          src={data.audioUrl}
+          isPlaying={isAudioPlaying}
+          onToggle={() => setIsAudioPlaying(!isAudioPlaying)}
+          theme={{
+            variant: "modern",
+            position: "relative",
+            bg: "bg-black/20",
+            border: "border-white/10",
+            iconColor: "text-white",
+          }}
+        />
+      </div>
 
       {/* 2. CURTAIN SECTION (Full Screen, Animasi naik ke atas) */}
       <CurtainSection data={data} isOpened={isOpened} onOpen={handleOpenInvitation} />
@@ -110,31 +109,7 @@ export default function LiliTemplate() {
           <div className="relative z-10 h-full overflow-y-auto scroll-smooth no-scrollbar overflow-x-hidden">
             {isOpened && (
               <div className="flex flex-col w-full">
-                {/* HERO CONTENT: Transparan agar video terlihat */}
-                <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center text-white bg-transparent px-10">
-                  <span className="font-lora italic text-sm text-white/60 tracking-[0.3em] uppercase mb-6">Hello, We Are Getting Married</span>
-                  <h1 className="font-cormorant-upright text-7xl md:text-8xl leading-none mb-10">
-                    {data.brideName} <br /> & {data.groomName}
-                  </h1>
-                  <div className="w-px h-24 bg-gradient-to-b from-white/0 via-white/50 to-white/0 animate-pulse" />
-                  <p className="font-lora text-[10px] tracking-[0.5em] uppercase text-white/40 mt-8">Scroll Down</p>
-                </section>
-
-                {/* NEXT SECTIONS: Mulai menutupi video dengan overlay pekat */}
-                <div className="relative z-20 bg-black/80 backdrop-blur-xl border-t border-white/10">
-                  <div className="py-20 px-8 text-center text-white">
-                    <p className="font-alice text-2xl italic mb-6">"{data.storyMeet}"</p>
-                    <div className="h-px w-20 bg-white/20 mx-auto" />
-                  </div>
-
-                  {/* Di sini Anda tinggal memanggil section lainnya */}
-                  <div className="min-h-screen p-10 flex flex-col items-center justify-center border-t border-white/5 bg-black/40">
-                    <p className="text-white/20 font-lora uppercase tracking-[0.8em] text-[10px]">Upcoming Content</p>
-                  </div>
-                </div>
-
-                {/* Footer / Thank You Section (Solid Black) */}
-                <div className="relative z-20 bg-black py-20 border-t border-white/10 text-center text-white/30 text-[10px] tracking-widest uppercase">Created with love &bull; Invify</div>
+                <HeroSection data={data} />
               </div>
             )}
           </div>

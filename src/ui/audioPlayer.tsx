@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from "framer-motion"
 import { Play, Pause } from "lucide-react"
 import ReactPlayer from "react-player"
+import { useRef } from "react"
 
 interface AudioTheme {
   variant: "modern" | "noir"
@@ -18,13 +20,24 @@ interface AudioPlayerProps {
 }
 
 export default function AudioPlayer({ src, isPlaying, onToggle, theme }: AudioPlayerProps) {
+  // Gunakan tipe ReactPlayer agar TypeScript mengenali method .seekTo()
+  const playerRef = useRef<any>(null)
   const positionClass = theme.position === "bottom-center" ? "bottom-6 left-1/2 -translate-x-1/2" : theme.position === "bottom-right" ? "bottom-6 right-6" : theme.position
 
   return (
     <>
       {/* AUDIO ENGINE */}
       <div className="fixed w-1 h-1 opacity-0 pointer-events-none">
-        <ReactPlayer src={src} playing={isPlaying} loop volume={0.5} />
+        <ReactPlayer
+          ref={playerRef}
+          src={src}
+          playing={true} // 🔥 selalu load dari awal
+          muted={!isPlaying} // 🔥 mute dulu
+          loop
+          volume={1}
+          width="100%"
+          height="100%"
+        />
       </div>
 
       {/* CONTROL */}

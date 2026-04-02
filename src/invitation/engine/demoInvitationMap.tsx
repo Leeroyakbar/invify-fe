@@ -86,6 +86,21 @@ export const DEMO_INVITATIONS: Record<string, Invitation> = {
     images: ["/modern/galery/galery-1.png", "/modern/galery/galery-2.png"],
   } as Invitation,
 
+  lili: {
+    ...baseInvitation,
+    audioUrl: "https://www.youtube.com/watch?v=wbPM93Oz67A",
+    template: "classic-noir",
+    groomName: "Lee",
+    brideName: "Lili",
+    groomPhoto: "/modern/couple/groom-photo.png",
+    bridePhoto: "/modern/couple/bride-photo.png",
+    storyMeet: "Tidak ada yang kebetulan di dunia ini. Semua telah tersusun rapi oleh Sang Maha Kuasa. Pertemuan kami di awal perjalanan ini menjadi awal dari sebuah kisah yang tak pernah kami sangka sebelumnya.",
+    storyCommitment: "Dengan niat yang semakin kuat, kami melangkah lebih jauh. Mengikat janji, mempertemukan dua keluarga, dan menyatukan harapan untuk masa depan yang sama.",
+    storyMarriage: "Kini, dengan izin Allah SWT serta restu orang tua, kami memulai perjalanan baru dalam ikatan suci pernikahan. Sebuah kisah yang akan kami jaga, selamanya.",
+
+    images: ["/modern/galery/galery-1.png", "/modern/galery/galery-2.png"],
+  } as Invitation,
+
   "old-money": {
     ...baseInvitation,
     template: "old-money",
