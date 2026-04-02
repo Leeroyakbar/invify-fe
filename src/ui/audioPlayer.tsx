@@ -2,7 +2,7 @@
 import { motion } from "framer-motion"
 import { Play, Pause } from "lucide-react"
 import ReactPlayer from "react-player"
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 
 interface AudioTheme {
   variant: "modern" | "noir"
@@ -17,13 +17,19 @@ interface AudioPlayerProps {
   isPlaying: boolean
   onToggle: () => void
   theme: AudioTheme
+  startTime?: number
 }
 
-export default function AudioPlayer({ src, isPlaying, onToggle, theme }: AudioPlayerProps) {
+export default function AudioPlayer({ src, isPlaying, onToggle, theme, startTime }: AudioPlayerProps) {
   // Gunakan tipe ReactPlayer agar TypeScript mengenali method .seekTo()
   const playerRef = useRef<any>(null)
+  const internalPlayerRef = useRef<any>(null)
   const positionClass = theme.position === "bottom-center" ? "bottom-6 left-1/2 -translate-x-1/2" : theme.position === "bottom-right" ? "bottom-6 right-6" : theme.position
-
+  useEffect(() => {
+    if (isPlaying && internalPlayerRef.current) {
+      internalPlayerRef.current.seekTo(startTime || 0)
+    }
+  }, [isPlaying, startTime])
   return (
     <>
       {/* AUDIO ENGINE */}
@@ -31,12 +37,15 @@ export default function AudioPlayer({ src, isPlaying, onToggle, theme }: AudioPl
         <ReactPlayer
           ref={playerRef}
           src={src}
-          playing={true} // 🔥 selalu load dari awal
-          muted={!isPlaying} // 🔥 mute dulu
+          playing={isPlaying}
+          muted={!isPlaying}
           loop
           volume={1}
-          width="100%"
-          height="100%"
+          onReady={() => {
+            if (playerRef.current) {
+              internalPlayerRef.current = playerRef.current.getInternalPlayer()
+            }
+          }}
         />
       </div>
 
