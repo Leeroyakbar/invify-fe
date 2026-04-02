@@ -107,8 +107,8 @@ export default function LiliTemplate() {
           {/* VIDEO BACKGROUND (Statis di belakang konten kanan) */}
           {isOpened && (
             <div className="absolute inset-0 z-0">
-              <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-50" src="/classic-noir/video-1.mp4" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
+              <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-50" src="/classic-noir/video-1.webm" />
+              <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-black/60" />
             </div>
           )}
 

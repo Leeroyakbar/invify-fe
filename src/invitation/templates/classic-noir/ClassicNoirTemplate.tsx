@@ -78,7 +78,7 @@ export default function ClassicNoir() {
             {/* STICKY VIDEO ZONE */}
             <section className="relative h-auto snap-none">
               <div className="sticky top-0 h-screen w-full z-0 overflow-hidden">
-                <video autoPlay loop muted playsInline className="w-full h-full object-cover" src="/classic-noir/video-1.mp4" />
+                <video autoPlay loop muted playsInline className="w-full h-full object-cover" src="/classic-noir/video-1.webm" />
                 <div className="absolute inset-0 bg-black/70" />
               </div>
 
