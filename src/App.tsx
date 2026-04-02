@@ -19,6 +19,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import AdminInvitationDetailPage from "./admin/pages/AdminInvitationDetailPage"
 import ClassicNoir from "./invitation/templates/classic-noir/ClassicNoirTemplate"
 import IvoryTemplate from "./invitation/templates/elegant-ivory/IvoryTemplate"
+import LiliTemplate from "./invitation/templates/Lili/LiliTemplate"
 
 export default function App() {
   return (
@@ -62,6 +63,7 @@ export default function App() {
         <Route path="/demo/:templateKey" element={<InvitationDemoPage />} />
         <Route path="/demo/classic-noir" element={<ClassicNoir />} />
         <Route path="/demo/elegant-ivory" element={<IvoryTemplate />} />
+        <Route path="/demo/lili" element={<LiliTemplate />} />
 
         {/* 404 Redirect (Optional) */}
         <Route path="*" element={<Navigate to="/" replace />} />

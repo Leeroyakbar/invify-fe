@@ -3,6 +3,7 @@ import template1 from "../../../../public/templates/template-1.png"
 import template2 from "../../../../public/templates/template-2.png"
 import template3 from "../../../../public/templates/template-3.png"
 import template4 from "../../../../public/templates/template-4.png"
+import template5 from "../../../../public/templates/template-5.png"
 import { Link } from "react-router-dom"
 import api from "../../../api/axiosConfig"
 import type { TemplateResponse } from "../../../types/TemplateResponse"
@@ -28,6 +29,36 @@ type CombinedTemplate = TemplateResponse | StaticTemplate
 // Data Statis yang sudah disesuaikan agar strukturnya mirip/bisa dihandle bersama
 const staticTemplates = [
   {
+    templateId: "st-4",
+    templateName: "Classic Noir",
+    templateCategory: "Elegant",
+    popular: true,
+    src: "/demo/classic-noir",
+    previewImage: template3,
+    isStatic: true,
+  },
+
+  {
+    templateId: "st-3",
+    templateName: "Royal Elegance",
+    templateCategory: "Elegant",
+    popular: true,
+    src: "/demo/elegant-ivory",
+    previewImage: template1,
+    isStatic: true,
+  },
+
+  {
+    templateId: "st-2",
+    templateName: "Lili",
+    templateCategory: "Elegant",
+    popular: false,
+    src: "/demo/lili",
+    previewImage: template5,
+    isStatic: true,
+  },
+
+  {
     templateId: "st-1",
     templateName: "Old Money",
     templateCategory: "Elegant",
@@ -37,25 +68,7 @@ const staticTemplates = [
     isStatic: true,
   },
   {
-    templateId: "st-2",
-    templateName: "Elegant Ivory",
-    templateCategory: "Elegant",
-    popular: true,
-    src: "/demo/elegant-ivory",
-    previewImage: template1,
-    isStatic: true,
-  },
-  {
-    templateId: "st-3",
-    templateName: "Classic Noir",
-    templateCategory: "Elegant",
-    popular: true,
-    src: "/demo/classic-noir",
-    previewImage: template3,
-    isStatic: true,
-  },
-  {
-    templateId: "st-4",
+    templateId: "st-5",
     templateName: "Modern Love",
     templateCategory: "Floral",
     popular: false,
