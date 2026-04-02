@@ -22,7 +22,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
   }
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-between py-24 px-10 text-center text-white bg-transparent selection:bg-white/10">
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-between py-14 px-10 text-center text-white bg-transparent selection:bg-white/10">
       {/* 1. TOP SECTION: Date & "The Wedding Of" in one container */}
       <div className="flex flex-col items-center gap-12">
         {/* Date Row */}
@@ -32,20 +32,20 @@ export default function HeroSection({ data }: HeroSectionProps) {
         </motion.div>
 
         {/* The Wedding Of & Names */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center justify-between">
           <motion.p custom={0.4} initial="hidden" whileInView="visible" variants={fadeIn} className="text-[10px] tracking-[0.8em] uppercase text-white/40 font-inter mb-10 ml-[0.8em]">
             The Wedding Of
           </motion.p>
 
-          <motion.h1 custom={0.6} initial="hidden" whileInView="visible" variants={fadeIn} className="relative font-cormorant-upright text-6xl  leading-[1.1] tracking-tighter">
+          <motion.h1 custom={0.6} initial="hidden" whileInView="visible" variants={fadeIn} className="relative font-cormorant-upright text-[64px]  leading-[1.1] tracking-tighter">
             {/* Row 1: Bride & Ampersand */}
             <div className="flex items-center justify-center gap-6">
-              <span>Lili Rahma</span>
+              <span>Lili</span>
               <span className="font-cormorant text-6xl md:text-4xl text-white/20 italic lowercase">&</span>
             </div>
 
             {/* Row 2: Groom (Below) */}
-            <div className="block mt-2">Lee Roy</div>
+            <div className="block mt-2">LeeRoy</div>
           </motion.h1>
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
       {/* 2. BOTTOM SECTION: Quranic Verse & Scroll Indicator */}
       <div className="w-full max-w-xl space-y-12">
         <motion.div custom={0.8} initial="hidden" whileInView="visible" variants={fadeIn} className="space-y-6 px-4">
-          <p className="font-lora italic text-[14px] md:text-[16px] leading-[1.8] text-white/60 font-light italic">
+          <p className="font-lora text-[11px] md:text-[16px] leading-[1.8] text-white/60 font-light italic">
             "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
           </p>
           <p className="font-inter text-[9px] tracking-[0.5em] uppercase text-white/30">QS. Ar-Rum : 21</p>
