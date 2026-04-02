@@ -7,6 +7,10 @@ import { motion } from "framer-motion"
 import HeroSection from "./sections/HeroSection"
 import BrideSection from "./sections/BrideSection"
 import GroomSection from "./sections/GroomSection"
+import StorySection from "./sections/StorySection"
+import CountdownSection from "./sections/CountdownSection"
+import EventSection from "./sections/EventSection"
+import LiveStreamSection from "./sections/LiveStreamingSection"
 export default function LiliTemplate() {
   // Menggunakan data demo classic-noir
   const data = DEMO_INVITATIONS["lili"]
@@ -115,6 +119,10 @@ export default function LiliTemplate() {
                 <HeroSection data={data} />
                 <BrideSection data={data} />
                 <GroomSection data={data} />
+                <StorySection data={data} />
+                <CountdownSection data={data} />
+                <EventSection data={data} />
+                <LiveStreamSection data={data} />
               </div>
             )}
           </div>
