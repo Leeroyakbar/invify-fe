@@ -5,6 +5,8 @@ import AudioPlayer from "../../../ui/audioPlayer"
 import { Maximize } from "lucide-react"
 import { motion } from "framer-motion"
 import HeroSection from "./sections/HeroSection"
+import BrideSection from "./sections/BrideSection"
+import GroomSection from "./sections/GroomSection"
 export default function LiliTemplate() {
   // Menggunakan data demo classic-noir
   const data = DEMO_INVITATIONS["lili"]
@@ -110,6 +112,8 @@ export default function LiliTemplate() {
             {isOpened && (
               <div className="flex flex-col w-full">
                 <HeroSection data={data} />
+                <BrideSection data={data} />
+                <GroomSection data={data} />
               </div>
             )}
           </div>
