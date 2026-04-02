@@ -34,19 +34,7 @@ export default function AudioPlayer({ src, isPlaying, onToggle, theme, startTime
     <>
       {/* AUDIO ENGINE */}
       <div className="fixed w-1 h-1 opacity-0 pointer-events-none">
-        <ReactPlayer
-          ref={playerRef}
-          src={src}
-          playing={isPlaying}
-          muted={!isPlaying}
-          loop
-          volume={1}
-          onReady={() => {
-            if (playerRef.current) {
-              internalPlayerRef.current = playerRef.current.getInternalPlayer()
-            }
-          }}
-        />
+        <ReactPlayer ref={playerRef} src={src} playing={isPlaying} muted={!isPlaying} loop volume={1} />
       </div>
 
       {/* CONTROL */}

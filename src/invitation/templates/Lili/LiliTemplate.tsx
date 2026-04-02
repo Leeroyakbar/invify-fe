@@ -60,7 +60,7 @@ export default function LiliTemplate() {
       <div className="flex h-screen w-full">
         {/* LEFT SIDE: Desktop Static Panel */}
         {/* LEFT SIDE: Desktop Static Panel (Classic Noir Edition) */}
-        <div className="hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-520px)] bg-cover bg-center overflow-hidden" style={{ backgroundImage: `url('/lili/cover-left.jpg')` }}>
+        <div className="hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-520px)] bg-cover bg-center overflow-hidden" style={{ backgroundImage: `url('/lili/cover-left.webp')` }}>
           {/* Overlay Gradient Noir: Sangat halus untuk menjaga kejernihan foto */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
 

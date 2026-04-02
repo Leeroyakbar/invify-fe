@@ -17,7 +17,7 @@ export default function BrideSection({ data }: BrideSectionProps) {
   // Gunakan data dummy jika audioUrl dari Invitify kosong
   const igUsername = "username"
   const brideParentName = `${data.brideFather} & ${data.brideMother}`
-  const brideImageUrl = "/lili/bride.png" // URL foto referensi kamu
+  const brideImageUrl = "/lili/bride.webp" // URL foto referensi kamu
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-black text-white">

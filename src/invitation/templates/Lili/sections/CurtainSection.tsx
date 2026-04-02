@@ -25,7 +25,7 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
           className="fixed inset-0 z-150 flex h-screen w-full flex-col justify-between overflow-hidden text-white bg-black"
         >
           {/* Background - Menggunakan gambar lili/cover.JPG */}
-          <div className="absolute inset-0 bg-cover bg-center " style={{ backgroundImage: `url('/lili/cover.JPG')` }} />
+          <div className="absolute inset-0 bg-cover bg-center " style={{ backgroundImage: `url('/lili/cover.webp')` }} />
 
           {/* Overlay: Dibuat gradient agar teks bawah lebih pop */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/80 z-10" />
