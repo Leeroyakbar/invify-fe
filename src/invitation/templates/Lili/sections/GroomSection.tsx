@@ -37,15 +37,15 @@ export default function GroomSection({ data }: GroomSectionProps) {
           </div>
 
           {/* Nama Lengkap */}
-          <h1 className="font-cormorant-upright text-5xl md:text-6xl lg:text-7xl leading-tight font-light text-white">{data.groomFullName}</h1>
+          <h1 className="font-cormorant-upright text-5xl md:text-6xl lg:text-7xl leading-tight font-extralight text-white mr-20">{data.groomFullName}</h1>
 
           {/* Garis Dekoratif */}
-          <div className="h-[1px] w-24 bg-white/20 lg:w-32" />
+          <div className="h-px w-24 bg-white/20 lg:w-32" />
 
           {/* Silsilah Orang Tua */}
           <div className="space-y-3 font-inter font-light text-white/70">
-            <p className="text-[10px] lg:text-[11px] tracking-[0.3em] uppercase">Putra Pertama Dari</p>
-            <p className="text-sm lg:text-[15px] leading-relaxed tracking-wide">{groomParentName}</p>
+            <p className="text-[10px] lg:text-[11px] tracking-[0.3em] uppercase">Putra Ketiga Dari</p>
+            <p className="text-sm lg:text-[15px] leading-relaxed tracking-wide mr-20">{groomParentName}</p>
           </div>
 
           {/* Tombol Instagram */}

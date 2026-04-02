@@ -15,7 +15,7 @@ export default function BrideSection({ data }: BrideSectionProps) {
   }
 
   // Gunakan data dummy jika audioUrl dari Invitify kosong
-  const igUsername = "username"
+  const igUsername = data.brideInstagram || "username"
   const brideParentName = `${data.brideFather} & ${data.brideMother}`
   const brideImageUrl = "/lili/bride.webp" // URL foto referensi kamu
 
@@ -38,7 +38,7 @@ export default function BrideSection({ data }: BrideSectionProps) {
           </div>
 
           {/* Nama Lengkap (Mengkuti SS: Serif Besar, Tebal, Cormorant) */}
-          <h1 className="font-cormorant-upright text-5xl md:text-6xl lg:text-7xl leading-tight font-light text-white">{data.brideFullName}</h1>
+          <h1 className="font-cormorant-upright text-5xl md:text-6xl lg:text-7xl leading-tight font-extralight text-white mr-10">{data.brideFullName}</h1>
 
           {/* Garis Dekoratif Tipis (Mengikuti SS) */}
           <div className="h-[1px] w-24 bg-white/20 lg:w-32" />
