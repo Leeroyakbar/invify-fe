@@ -35,7 +35,7 @@ export default function HeroSection() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             <p className="font-inter text-white/40 text-xs lg:text-sm leading-relaxed tracking-wide">Meninggalkan cara lama, beralih ke estetika modern. Kami menciptakan pengalaman digital yang intim dan mendalam untuk setiap tamu Anda.</p>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mb-8 md:mb-0">
               <button onClick={kirimKeWhatsApp} className="group flex items-center justify-between bg-white text-black px-8 py-5 rounded-sm font-bold text-[10px] uppercase tracking-[0.3em] transition-all hover:bg-white/90">
                 Start Journey <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
               </button>
@@ -51,7 +51,7 @@ export default function HeroSection() {
           <motion.div initial={{ opacity: 0, scale: 0.8, rotate: 5 }} animate={{ opacity: 1, scale: 1, rotate: -2 }} transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] }} className="relative w-full max-w-[340px] aspect-[9/18]">
             {/* FRAMELESS MOCKUP */}
             <div className="absolute inset-0 bg-[#161616] rounded-[24px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] ring-1 ring-white/10">
-              <video autoPlay loop muted playsInline className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 transition-all duration-700" src="/classic-noir/video-1.webm" />
+              <video autoPlay loop muted playsInline className="w-full h-full object-cover transition-all duration-700" src="/classic-noir/video-1.webm" />
 
               {/* Floating Element over Video */}
               <div className="absolute top-12 left-0 w-full px-8">
