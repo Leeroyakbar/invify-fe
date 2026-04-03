@@ -1,91 +1,103 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Star, ChevronLeft, ChevronRight } from "lucide-react" // Import icon panah
+import { Star, ArrowLeft, ArrowRight, User } from "lucide-react"
+
 const testimonials = [
   {
     name: "Rahma & Lee",
     city: "Mandailing",
-    text: "Kami sangat puas dengan hasil undangannya. Fitur RSVP sangat membantu untuk menghitung jumlah tamu. Recommended banget!",
+    text: "Kami sangat puas dengan hasil undangannya. Fitur RSVP sangat membantu untuk menghitung jumlah tamu. Desainnya benar-benar di luar ekspektasi kami.",
   },
   {
     name: "Yani & Akbar",
     city: "Jakarta",
-    text: "Desainnya elegan dan proses pembuatannya cepat. Semua tamu kami memuji undangannya.",
+    text: "Desainnya elegan dan proses pembuatannya cepat. Semua tamu kami memuji undangannya karena terlihat sangat eksklusif dan mahal.",
   },
   {
     name: "Lili & Roy",
     city: "Surabaya",
-    text: "Praktis, modern, dan mudah dibagikan. Sangat cocok untuk pasangan zaman sekarang.",
+    text: "Praktis, modern, dan mudah dibagikan. Sangat cocok untuk pasangan zaman sekarang yang menginginkan efisiensi tanpa mengorbankan estetika.",
   },
 ]
 
 export default function TestimonialSection() {
   const [index, setIndex] = useState(0)
 
-  // Fungsi navigasi
   const next = () => setIndex((i) => (i + 1) % testimonials.length)
   const prev = () => setIndex((i) => (i - 1 + testimonials.length) % testimonials.length)
 
   return (
-    <section className="relative bg-gradient-to-b from-[#F6E6E3] to-[#FFF9F4] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 py-24" id="testimoni">
-        {/* HEADER */}
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-[#3B2F2F]">
-            Cerita Bahagia dari <br />
-            <span className="italic text-[#D4A853]">Pasangan</span> Kami
+    <section className="bg-[#0A0A0A] py-32 px-8 lg:px-16 border-t border-white/5" id="testimoni">
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        {/* LEFT SIDE: Heading */}
+        <div className="lg:col-span-5 space-y-6">
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-[10px] uppercase tracking-[0.5em] text-white/30 font-bold block">
+            Wall of Love
+          </motion.span>
+          <h2 className="font-cormorant-upright text-5xl md:text-6xl text-white leading-[1.1] uppercase tracking-tighter">
+            What They <br />
+            <span className="italic opacity-40">Say About Us</span>
           </h2>
-          <p className="mt-6 text-[#7A6F68]">Ribuan pasangan telah mempercayakan momen spesial mereka kepada kami</p>
+          <p className="font-inter text-white/40 text-xs uppercase tracking-widest leading-relaxed max-w-xs">Kepercayaan Anda adalah prioritas kami dalam merancang setiap detail kebahagiaan.</p>
+
+          {/* NAV BUTTONS: Compact & Simple */}
+          <div className="flex items-center gap-6 pt-8">
+            <button onClick={prev} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white transition-all active:scale-90">
+              <ArrowLeft size={18} strokeWidth={1.5} />
+            </button>
+            <button onClick={next} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white transition-all active:scale-90">
+              <ArrowRight size={18} strokeWidth={1.5} />
+            </button>
+          </div>
         </div>
 
-        {/* SLIDER WRAPPER */}
-        <div className="relative mt-16 max-w-4xl mx-auto flex items-center">
-          {/* TOMBOL PREV (Desktop) */}
-          <button onClick={prev} className="absolute -left-4 md:-left-16 z-10 p-3 rounded-full bg-white shadow-md text-[#3B2F2F] hover:bg-[#D4A853] hover:text-white transition-all group">
-            <ChevronLeft size={24} />
-          </button>
+        {/* RIGHT SIDE: The Card */}
+        <div className="lg:col-span-7">
+          <div className="relative h-[400px] flex items-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full bg-white/[0.02] border border-white/5 p-12 lg:p-16 rounded-sm relative"
+              >
+                {/* Visual Accent */}
+                <div className="absolute top-0 left-0 w-1 h-full bg-white/10" />
 
-          <AnimatePresence mode="wait">
-            <motion.div key={index} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.4 }} className="bg-white rounded-3xl shadow-lg p-10 text-center w-full">
-              {/* AVATAR */}
-              <div className="mx-auto w-16 h-16 rounded-full bg-[#D4A853] text-white flex items-center justify-center font-serif text-xl">
-                {testimonials[index].name
-                  .split(" ")
-                  .filter((word) => !["&", "dan", "and", "+"].includes(word.toLowerCase()))
-                  .map((n) => n[0])
-                  .slice(0, 2)
-                  .join("&")}
-              </div>
+                <div className="space-y-8">
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        size={12}
+                        fill="#D4A853" // Warna emas brand Invify
+                        className="text-[#D4A853]"
+                      />
+                    ))}
+                  </div>
 
-              {/* STARS */}
-              <div className="mt-4 flex justify-center gap-1 text-[#D4A853]">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={18} fill="currentColor" />
-                ))}
-              </div>
+                  <p className="font-inter text-lg md:text-xl text-white/80 leading-relaxed tracking-wide font-light">"{testimonials[index].text}"</p>
 
-              {/* TEXT */}
-              <p className="mt-6 text-[#3B2F2F] leading-relaxed italic text-lg">“{testimonials[index].text}”</p>
+                  <div className="pt-8 flex items-center gap-4 border-t border-white/5">
+                    {/* AVATAR DENGAN IKON PERSON */}
+                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40">
+                      <User size={16} strokeWidth={1.5} />
+                    </div>
 
-              {/* NAME */}
-              <div className="mt-6">
-                <p className="font-serif text-lg text-[#3B2F2F]">{testimonials[index].name}</p>
-                <p className="text-sm text-[#7A6F68]">{testimonials[index].city}</p>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                    <div>
+                      <h4 className="text-white text-[11px] uppercase tracking-[0.3em] font-bold">{testimonials[index].name}</h4>
+                      <p className="text-white/30 text-[9px] uppercase tracking-[0.2em] mt-1">Client from {testimonials[index].city}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
 
-          {/* TOMBOL NEXT (Desktop) */}
-          <button onClick={next} className="absolute -right-4 md:-right-16 z-10 p-3 rounded-full bg-white shadow-md text-[#3B2F2F] hover:bg-[#D4A853] hover:text-white transition-all group">
-            <ChevronRight size={24} />
-          </button>
-        </div>
-
-        {/* INDICATOR DOTS */}
-        <div className="mt-8 flex justify-center gap-3">
-          {testimonials.map((_, i) => (
-            <button key={i} onClick={() => setIndex(i)} className={`w-3 h-3 rounded-full transition-all duration-300 ${index === i ? "bg-[#D4A853] w-8" : "bg-[#D4A853]/30"}`} />
-          ))}
+            {/* Background Layer Effect (Stacking Cards Look) */}
+            <div className="absolute -z-10 top-4 -right-4 w-full h-full bg-white/[0.01] border border-white/[0.02] rounded-sm hidden lg:block" />
+          </div>
         </div>
       </div>
     </section>

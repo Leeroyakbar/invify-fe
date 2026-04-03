@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import { motion, AnimatePresence } from "framer-motion"
+import { Eye, ShoppingCart, Star } from "lucide-react"
+import { toast } from "sonner"
+import api from "../../../api/axiosConfig"
+import type { TemplateResponse } from "../../../types/TemplateResponse"
+
+// Import assets tetap sama
 import template1 from "../../../../public/templates/template-1.png"
 import template2 from "../../../../public/templates/template-2.png"
 import template3 from "../../../../public/templates/template-3.png"
 import template4 from "../../../../public/templates/template-4.png"
 import template5 from "../../../../public/templates/template-5.png"
-import { Link } from "react-router-dom"
-import api from "../../../api/axiosConfig"
-import type { TemplateResponse } from "../../../types/TemplateResponse"
-import { toast } from "sonner"
 
 const categories = ["Semua", "Elegant", "Modern", "Floral", "Minimalist"]
 
@@ -15,72 +19,26 @@ interface StaticTemplate {
   templateId: string
   templateName: string
   templateCategory: string
+  price: string
   popular: boolean
   src: string
   previewImage: string
   isStatic: boolean
-  // Properti opsional dari TemplateResponse agar tidak error saat mapping
   usedCount?: number
 }
 
-// Buat Union Type
 type CombinedTemplate = TemplateResponse | StaticTemplate
 
-// Data Statis yang sudah disesuaikan agar strukturnya mirip/bisa dihandle bersama
 const staticTemplates = [
-  {
-    templateId: "st-4",
-    templateName: "Classic Noir",
-    templateCategory: "Elegant",
-    popular: true,
-    src: "/demo/classic-noir",
-    previewImage: template3,
-    isStatic: true,
-  },
-
-  {
-    templateId: "st-3",
-    templateName: "Royal Elegance",
-    templateCategory: "Elegant",
-    popular: true,
-    src: "/demo/elegant-ivory",
-    previewImage: template1,
-    isStatic: true,
-  },
-
-  {
-    templateId: "st-2",
-    templateName: "Lili",
-    templateCategory: "Elegant",
-    popular: false,
-    src: "/demo/lili",
-    previewImage: template5,
-    isStatic: true,
-  },
-
-  {
-    templateId: "st-1",
-    templateName: "Old Money",
-    templateCategory: "Elegant",
-    popular: true, // tambahan untuk UI
-    src: "/demo/old-money",
-    previewImage: template4,
-    isStatic: true,
-  },
-  {
-    templateId: "st-5",
-    templateName: "Modern Love",
-    templateCategory: "Floral",
-    popular: false,
-    src: "/demo/modern",
-    previewImage: template2,
-    isStatic: true,
-  },
+  { templateId: "st-4", templateName: "Classic Noir", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/classic-noir", previewImage: template3, isStatic: true },
+  { templateId: "st-3", templateName: "Royal Elegance", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/elegant-ivory", previewImage: template1, isStatic: true },
+  { templateId: "st-2", templateName: "Lili", templateCategory: "Elegant", price: "100.000 - 150.000", popular: false, src: "/demo/lili", previewImage: template5, isStatic: true },
+  { templateId: "st-1", templateName: "Old Money", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/old-money", previewImage: template4, isStatic: true },
+  { templateId: "st-5", templateName: "Modern Love", templateCategory: "Floral", price: "100.000 - 150.000", popular: false, src: "/demo/modern", previewImage: template2, isStatic: true },
 ]
 
 export default function TemplatesSection() {
   const [active, setActive] = useState("Semua")
-  // Inisialisasi state dengan data statis terlebih dahulu
   const [templates, setTemplates] = useState<CombinedTemplate[]>(staticTemplates)
   const BE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -91,99 +49,98 @@ export default function TemplatesSection() {
         page: 0,
         size: 999,
       })
-
       if (response.data.success) {
-        const dbData = response.data.data
-        setTemplates([...dbData])
+        setTemplates([...response.data.data])
       }
     } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message)
-        toast.error(`Gagal: ${error.message}`)
-      } else {
-        toast.error("Terjadi kesalahan yang tidak diketahui")
-      }
+      console.error(error)
+      toast.error("Gagal memuat template terbaru")
     }
   }, [])
 
   useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      fetchTemplates()
-    }, 500)
-
-    return () => clearTimeout(delayDebounceFn)
+    const timer = setTimeout(() => fetchTemplates(), 500)
+    return () => clearTimeout(timer)
   }, [fetchTemplates])
 
-  // Filter berdasarkan category (menggunakan field yang sesuai di DB/Static)
   const filtered = active === "Semua" ? templates : templates.filter((t) => t.templateCategory.toLowerCase() === active.toLowerCase())
-  return (
-    <section id="template" className="bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-24">
-        {/* HEADER */}
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-[#3B2F2F]">
-            Pilih Template <span className="italic text-[#D4A853]">Favorit</span> Anda
-          </h2>
-          <p className="mt-6 text-[#7A6F68]">Berbagai pilihan desain premium siap digunakan untuk hari spesial Anda</p>
-        </div>
 
-        {/* FILTER */}
-        <div className="mt-12 flex flex-wrap justify-center gap-3">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`px-6 py-2 rounded-full text-sm transition border
-                ${active === cat ? "bg-[#D4A853] text-white border-[#D4A853]" : "bg-white text-[#7A6F68] border-black/10 hover:border-[#D4A853]"}`}
-            >
-              {cat}
-            </button>
-          ))}
+  return (
+    <section id="template" className="bg-[#0A0A0A] py-32 px-8 lg:px-16 border-t border-white/5">
+      <div className="max-w-[1400px] mx-auto">
+        {/* HEADER */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
+          <div className="max-w-xl">
+            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-[10px] uppercase tracking-[0.6em] text-white/30 font-bold mb-4 block">
+              Curated Selection
+            </motion.span>
+            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="font-cormorant-upright text-5xl md:text-7xl text-white leading-none uppercase tracking-tighter">
+              Timeless <span className="italic opacity-40 font-light text-white">Archives</span>
+            </motion.h2>
+          </div>
+
+          {/* FILTER - Minimalist Tabs */}
+          <div className="flex flex-wrap gap-6 border-b border-white/10 pb-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={`text-[10px] uppercase tracking-[0.3em] font-bold transition-all relative pb-2
+                  ${active === cat ? "text-white" : "text-white/30 hover:text-white/60"}`}
+              >
+                {cat}
+                {active === cat && <motion.div layoutId="activeCat" className="absolute bottom-0 left-0 right-0 h-[1px] bg-white" />}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* TEMPLATE GRID */}
-        <div className="mt-16 flex flex-wrap justify-center gap-10">
-          {filtered.map((tpl) => {
-            // Logika penentuan URL Gambar & Link Demo
-            const isStatic = tpl.isStatic
-            const imgSrc = isStatic ? tpl.previewImage : `${BE_URL}${tpl.previewImage}`
-            const demoLink = `/demo/${tpl.templateName.toLowerCase().replace(/\s+/g, "-")}`
-            const waText = encodeURIComponent(`Halo Admin, saya ingin menggunakan template ${tpl.templateName} untuk acara pernikahan saya.`)
-            const waUrl = `https://api.whatsapp.com/send?phone=6282273366718&text=${waText}`
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((tpl, i) => {
+              const isStatic = tpl.isStatic
+              const imgSrc = isStatic ? tpl.previewImage : `${BE_URL}${tpl.previewImage}`
+              const demoLink = `/demo/${tpl.templateName.toLowerCase().replace(/\s+/g, "-")}`
+              const waUrl = `https://api.whatsapp.com/send?phone=6282273366718&text=${encodeURIComponent(`Halo Admin, saya ingin memesan template ${tpl.templateName}`)}`
 
-            return (
-              <div
-                key={tpl.templateId || tpl.templateId}
-                className="group rounded-3xl border border-black/5 shadow-sm hover:shadow-xl transition overflow-hidden bg-white 
-                   w-full sm:w-[calc(50%-20px)] lg:w-[calc(33.333%-27px)] max-w-100"
-              >
-                {/* PREVIEW CONTAINER */}
-                <div className="relative aspect-3/4 flex items-center justify-center overflow-hidden">
-                  <img src={imgSrc} alt={tpl.templateName} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
+              return (
+                <motion.div layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.6, delay: i * 0.1 }} key={tpl.templateId} className="group">
+                  {/* IMAGE WRAPPER */}
+                  <div className="relative aspect-3/4 overflow-hidden bg-[#161616] mb-8 ring-1 ring-white/5 group-hover:ring-white/20 transition-all duration-500">
+                    <img src={imgSrc} alt={tpl.templateName} className="w-full h-full object-cover  group-hover:scale-105 transition-all duration-1000" />
 
-                  {/* Label Popular (Hanya jika data statis popular true atau usedCount tinggi di DB) */}
-                  {(tpl.popular || tpl.usedCount ? tpl.usedCount : 0 > 10) && <span className="absolute top-4 right-4 z-10 bg-[#D4A853] text-white text-xs px-3 py-1 rounded-full shadow-md">Popular</span>}
-                </div>
+                    {/* OVERLAY ACTION */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center gap-4">
+                      <Link to={demoLink} target="_blank" className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform">
+                        <Eye size={20} />
+                      </Link>
+                    </div>
 
-                {/* INFO & BUTTONS */}
-                <div className="p-6">
-                  <div className="mb-5">
-                    <h3 className="font-serif text-lg text-[#3B2F2F]">{tpl.templateName}</h3>
-                    <p className="mt-1 text-sm text-[#7A6F68] capitalize">{tpl.templateCategory.toLowerCase()}</p>{" "}
+                    {(tpl.popular || (tpl.usedCount || 0) > 10) && (
+                      <div className="absolute top-6 left-6 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 flex items-center gap-2">
+                        <Star size={10} className="text-white fill-white" />
+                        <span className="text-[9px] uppercase tracking-[0.2em] text-white font-bold">Featured</span>
+                      </div>
+                    )}
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <Link to={demoLink} target="_blank" className="py-2.5 px-4 text-center text-sm font-medium text-[#3B2F2F] border border-[#3B2F2F]/20 rounded-xl hover:bg-[#3B2F2F] hover:text-white transition-all">
-                      View Demo
-                    </Link>
-                    <button onClick={() => window.open(waUrl, "_blank")} className="py-2.5 px-4 text-sm font-medium text-white bg-[#3B2F2F] rounded-xl hover:bg-[#524343] shadow-md transition-all cursor-pointer">
-                      Order Now
+
+                  {/* INFO */}
+                  <div className="flex justify-between items-start">
+                    <div className="space-y-1">
+                      <h3 className="font-cormorant-upright text-2xl text-white tracking-wider uppercase group-hover:italic transition-all">{tpl.templateName}</h3>
+                      <p className="font-inter text-[10px] text-white/30 uppercase tracking-[0.3em]">Collection — {tpl.templateCategory}</p>
+                      <p className="font-inter text-[10px] text-white/30 uppercase tracking-[0.3em]">Rp. {tpl.price}</p>
+                    </div>
+
+                    <button onClick={() => window.open(waUrl, "_blank")} className="p-3 border border-white/10 text-white/40 hover:text-black hover:bg-white hover:border-white transition-all rounded-sm">
+                      <ShoppingCart size={18} strokeWidth={1} />
                     </button>
                   </div>
-                </div>
-              </div>
-            )
-          })}
+                </motion.div>
+              )
+            })}
+          </AnimatePresence>
         </div>
       </div>
     </section>

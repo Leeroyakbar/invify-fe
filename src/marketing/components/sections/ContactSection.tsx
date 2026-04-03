@@ -1,5 +1,6 @@
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react"
 import { useState } from "react"
+import { motion } from "framer-motion"
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -15,113 +16,119 @@ export default function ContactSection() {
     })
   }
 
-  const waLink = "https://wa.me/6282273366718"
-
   const kirimKeWhatsApp = () => {
-    const nomorWA = "6282273366718" // Gunakan kode negara tanpa tanda +
-
-    // Membentuk pesan utuh dengan encodeURIComponent agar karakter seperti spasi dan enter terbaca
-    const teks = `Halo Invify, saya ingin bertanya:
-    
-*Nama:* ${formData.nama}
-*Email:* ${formData.email}
-*Pesan:* ${formData.pesan}`
-
+    const nomorWA = "6282273366718"
+    const teks = `Halo Invify, saya ingin bertanya:\n\n*Nama:* ${formData.nama}\n*Email:* ${formData.email}\n*Pesan:* ${formData.pesan}`
     const url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(teks)}`
-
     window.open(url, "_blank")
   }
 
   return (
-    <section className="bg-gradient-to-b from-[#FFF7EF] to-[#FFFDFB]">
-      <div className="max-w-7xl mx-auto px-6 py-24" id="contact">
-        {/* HEADER */}
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-[#3B2F2F]">
-            Konsultasi Undangan <br />
-            <span className="italic text-[#D4A853]">Gratis</span>
-          </h2>
+    <section id="contact" className="bg-[#0A0A0A] py-32 px-8 lg:px-16 border-t border-white/5 relative overflow-hidden">
+      {/* Decorative Background Element */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
 
-          <p className="mt-6 text-[#7A6F68]">Hubungi kami untuk mendapatkan rekomendasi template terbaik</p>
-        </div>
+      <div className="max-w-[1400px] mx-auto">
+        <div className="grid lg:grid-cols-2 gap-24 items-start">
+          {/* LEFT: Branding & Info */}
+          <div className="space-y-12">
+            <div>
+              <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-[10px] uppercase tracking-[0.6em] text-white/30 font-bold mb-4 block">
+                Get In Touch
+              </motion.span>
+              <h2 className="font-cormorant-upright text-5xl md:text-7xl text-white leading-none uppercase tracking-tighter">
+                Let's Craft <br />
+                <span className="italic opacity-40">Your Story</span>
+              </h2>
+            </div>
 
-        {/* CONTENT */}
-        <div className="mt-16 grid md:grid-cols-2 gap-12 items-start">
-          {/* INFO */}
-          <div className="space-y-6">
-            <p className="text-[#7A6F68] leading-relaxed">Tim Invify siap membantu Anda mewujudkan undangan pernikahan digital yang elegan dan berkesan. Konsultasi gratis tanpa komitmen.</p>
+            <p className="font-inter text-white/40 text-xs md:text-sm leading-relaxed tracking-widest uppercase max-w-md">Tim Invify siap mewujudkan visi pernikahan digital Anda. Konsultasikan konsep Anda secara gratis bersama kami.</p>
 
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F6E6E3] text-[#D4A853] flex items-center justify-center">
-                  <Phone size={20} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 border-t border-white/5">
+              <div className="space-y-2">
+                <p className="text-[10px] uppercase tracking-widest text-white/20 font-bold">Contact</p>
+                <div className="flex items-center gap-3 text-white/60 hover:text-white transition-colors cursor-pointer">
+                  <Phone size={14} strokeWidth={1} />
+                  <span className="text-xs tracking-wider">+62 822-7336-6718</span>
                 </div>
-                <div>
-                  <p className="text-sm text-[#7A6F68]">WhatsApp</p>
-                  <p className="font-medium text-[#3B2F2F]">+62 822-7336-6718</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F6E6E3] text-[#D4A853] flex items-center justify-center">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <p className="text-sm text-[#7A6F68]">Email</p>
-                  <p className="font-medium text-[#3B2F2F]">id.invify@gmail.com</p>
+                <div className="flex items-center gap-3 text-white/60 hover:text-white transition-colors cursor-pointer">
+                  <Mail size={14} strokeWidth={1} />
+                  <span className="text-xs tracking-wider">id.invify@gmail.com</span>
                 </div>
               </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F6E6E3] text-[#D4A853] flex items-center justify-center">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <p className="text-sm text-[#7A6F68]">Lokasi</p>
-                  <p className="font-medium text-[#3B2F2F]">Panyabungan, Mandaling Natal</p>
+              <div className="space-y-2">
+                <p className="text-[10px] uppercase tracking-widest text-white/20 font-bold">Location</p>
+                <div className="flex items-center gap-3 text-white/60">
+                  <MapPin size={14} strokeWidth={1} />
+                  <span className="text-xs tracking-wider uppercase">Mandailing Natal, ID</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* FORM */}
-          <div className="bg-white rounded-3xl shadow-lg p-8">
-            <form className="space-y-5">
-              <input
-                type="text"
-                name="nama" // Pastikan name sama dengan key di state
-                placeholder="Nama Lengkap"
-                value={formData.nama}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#D4A853]"
-              />
-              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#D4A853]" />
-              <textarea rows={4} name="pesan" placeholder="Pesan" value={formData.pesan} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#D4A853]" />
+          {/* RIGHT: Minimalist Form */}
+          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} className="bg-white/[0.02] border border-white/10 p-8 md:p-12 rounded-sm backdrop-blur-sm">
+            <form className="space-y-8">
+              <div className="group relative">
+                <input
+                  type="text"
+                  name="nama"
+                  placeholder="FULL NAME"
+                  value={formData.nama}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 text-[10px] tracking-[0.3em] text-white focus:outline-none focus:border-white transition-colors placeholder:text-white/20 uppercase"
+                />
+              </div>
 
-              <button type="button" onClick={kirimKeWhatsApp} className="w-full py-4 rounded-full bg-[#D4A853] text-white hover:bg-[#C59A45] transition font-medium">
-                Kirim Pesan
-              </button>
+              <div className="group relative">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="EMAIL ADDRESS"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 text-[10px] tracking-[0.3em] text-white focus:outline-none focus:border-white transition-colors placeholder:text-white/20 uppercase"
+                />
+              </div>
 
-              <p className="text-center text-sm text-[#7A6F68]">atau</p>
+              <div className="group relative">
+                <textarea
+                  rows={3}
+                  name="pesan"
+                  placeholder="YOUR MESSAGE"
+                  value={formData.pesan}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 text-[10px] tracking-[0.3em] text-white focus:outline-none focus:border-white transition-colors placeholder:text-white/20 uppercase resize-none"
+                />
+              </div>
 
-              <button type="button" onClick={() => window.open(waLink, "_blank")} className="block text-center w-full py-4 rounded-full border border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white transition font-medium">
-                Hubungi via WhatsApp
+              <button type="button" onClick={kirimKeWhatsApp} className="w-full group flex items-center justify-between py-6 border-b border-white/20 hover:border-white transition-all text-white">
+                <span className="text-[10px] font-bold tracking-[0.5em] uppercase">Send via WhatsApp</span>
+                <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
-      </div>
 
-      <div className="my-24 text-center">
-        <p className="flex items-center justify-center gap-2 text-sm text-[#9C8F86]">
-          <span>❤️</span>
-          Mulai perjalanan cinta Anda
-          <span>❤️</span>
-        </p>
+        {/* FINAL CALL TO ACTION (FOOTER AREA) */}
+        <div className="mt-48 pt-24 border-t border-white/5 text-center relative">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="space-y-12">
+            <div className="inline-flex items-center gap-4 text-white/20">
+              <div className="h-[1px] w-8 bg-white/10" />
+              <span className="text-[10px] uppercase tracking-[0.8em]">A New Chapter Awaits</span>
+              <div className="h-[1px] w-8 bg-white/10" />
+            </div>
 
-        <h3 className="mt-6 font-serif text-3xl md:text-4xl text-[#3B2F2F]">Buat Undangan Digital Anda Sekarang</h3>
+            <h3 className="font-cormorant-upright text-4xl md:text-6xl text-white uppercase tracking-tighter">
+              Ready to Begin <br />
+              <span className="italic opacity-30">Your Journey?</span>
+            </h3>
 
-        <button className="mt-10 px-10 py-4 rounded-full bg-[#D4A853] text-white font-medium hover:bg-[#C59A45] transition shadow-md">Mulai Buat Undangan</button>
+            <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="bg-white text-black px-12 py-5 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-white/90 transition-all rounded-sm">
+              Start Creating Now
+            </button>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
