@@ -98,7 +98,23 @@ export const DEMO_INVITATIONS: Record<string, Invitation> = {
     storyCommitment: "Dengan niat yang semakin kuat, kami melangkah lebih jauh. Mengikat janji, mempertemukan dua keluarga, dan menyatukan harapan untuk masa depan yang sama.",
     storyMarriage: "Kini, dengan izin Allah SWT serta restu orang tua, kami memulai perjalanan baru dalam ikatan suci pernikahan. Sebuah kisah yang akan kami jaga, selamanya.",
 
-    images: ["/modern/galery/galery-1.png", "/modern/galery/galery-2.png"],
+    images: [
+      "/lili/gallery-1.webp", // Foto Utama (Horizontal)
+      "/lili/gallery-2.webp", // Foto Potret
+      "/lili/gallery-3.webp", // Foto Potret
+      "/lili/gallery-4.webp", // Foto Potret
+      "/lili/gallery-5.webp",
+      "/lili/gallery-6.webp",
+      "/lili/gallery-7.webp",
+      "/lili/gallery-8.webp",
+      "/lili/gallery-9.webp",
+      "/lili/gallery-10.webp",
+      "/lili/gallery-11.webp",
+      "/lili/gallery-12.webp",
+      "/lili/gallery-13.webp",
+      "/lili/gallery-14.webp",
+      "/lili/gallery-15.webp",
+    ],
   } as Invitation,
 
   "old-money": {

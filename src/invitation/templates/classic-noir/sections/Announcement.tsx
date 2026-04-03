@@ -35,7 +35,7 @@ export default function AnnouncementVideoSection({ data, isOpened }: { data: Inv
   return (
     <section className="h-screen snap-start relative overflow-hidden bg-black" id="home">
       {/* Video Background dengan Penyesuaian Opacity */}
-      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-80" src="/classic-noir/video-1.mp4" />
+      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-80" src="/classic-noir/video-1.webm" />
 
       {/* Overlay Cinematic (Vignette Effect) */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 pointer-events-none" />
@@ -47,7 +47,6 @@ export default function AnnouncementVideoSection({ data, isOpened }: { data: Inv
           animate={isOpened ? "visible" : "hidden"} // KUNCINYA DI SINI
           viewport={{ once: false, amount: 0.4 }}
           className="flex flex-col items-center"
-
         >
           <motion.span custom={0.5} variants={fadeInUp} className="text-[10px] tracking-[0.6em] uppercase mb-6 opacity-60">
             The Wedding of

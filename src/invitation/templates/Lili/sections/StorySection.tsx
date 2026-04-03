@@ -34,7 +34,7 @@ export default function StorySection({ data }: StorySectionProps) {
 
         {/* 2. TITLE SECTION */}
         <motion.div {...fadeUp} className="mb-16 text-center lg:text-left">
-          <h2 className="text-4xl lg:text-5xl font-cormorant-upright text-white tracking-[0.1em] uppercase">Journey of Love</h2>
+          <h2 className="text-3xl lg:text-4xl font-cormorant-upright text-white tracking-[0.1em] uppercase">Journey of Love</h2>
           <div className="h-[1px] w-full bg-gradient-to-r from-white/40 via-white/10 to-transparent mt-6" />
         </motion.div>
 
