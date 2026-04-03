@@ -8,7 +8,7 @@ import type { TemplateResponse } from "../../../types/TemplateResponse"
 
 // Import assets tetap sama
 import template1 from "../../../../public/templates/template-1.png"
-import template2 from "../../../../public/templates/template-2.png"
+// import template2 from "../../../../public/templates/template-2.png"
 import template3 from "../../../../public/templates/template-3.png"
 import template4 from "../../../../public/templates/template-4.png"
 import template5 from "../../../../public/templates/template-5.png"
@@ -31,10 +31,10 @@ type CombinedTemplate = TemplateResponse | StaticTemplate
 
 const staticTemplates = [
   { templateId: "st-4", templateName: "Classic Noir", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/classic-noir", previewImage: template3, isStatic: true },
-  { templateId: "st-3", templateName: "Royal Elegance", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/elegant-ivory", previewImage: template1, isStatic: true },
-  { templateId: "st-2", templateName: "Lili", templateCategory: "Elegant", price: "100.000 - 150.000", popular: false, src: "/demo/lili", previewImage: template5, isStatic: true },
-  { templateId: "st-1", templateName: "Old Money", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/old-money", previewImage: template4, isStatic: true },
-  { templateId: "st-5", templateName: "Modern Love", templateCategory: "Floral", price: "100.000 - 150.000", popular: false, src: "/demo/modern", previewImage: template2, isStatic: true },
+  { templateId: "st-3", templateName: "Royal Elegance", templateCategory: "Elegant", price: "100.000 - 150.000", popular: false, src: "/demo/elegant-ivory", previewImage: template1, isStatic: true },
+  { templateId: "st-2", templateName: "Lili", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/lili", previewImage: template5, isStatic: true },
+  { templateId: "st-1", templateName: "Old Money", templateCategory: "Elegant", price: "100.000 - 150.000", popular: false, src: "/demo/old-money", previewImage: template4, isStatic: true },
+  // { templateId: "st-5", templateName: "Modern Love", templateCategory: "Floral", price: "100.000 - 150.000", popular: false, src: "/demo/modern", previewImage: template2, isStatic: true },
 ]
 
 export default function TemplatesSection() {
@@ -108,17 +108,23 @@ export default function TemplatesSection() {
                 <motion.div layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.6, delay: i * 0.1 }} key={tpl.templateId} className="group">
                   {/* IMAGE WRAPPER */}
                   <div className="relative aspect-3/4 overflow-hidden bg-[#161616] mb-8 ring-1 ring-white/5 group-hover:ring-white/20 transition-all duration-500">
-                    <img src={imgSrc} alt={tpl.templateName} className="w-full h-full object-cover  group-hover:scale-105 transition-all duration-1000" />
+                    {/* Link Utama yang menutupi seluruh area gambar */}
+                    <Link to={demoLink} target="_blank" className="absolute inset-0 z-10 block" aria-label={`Preview ${tpl.templateName}`} />
 
-                    {/* OVERLAY ACTION */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center gap-4">
-                      <Link to={demoLink} target="_blank" className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform">
+                    <img src={imgSrc} alt={tpl.templateName} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
+
+                    {/* OVERLAY ACTION - Sekarang hanya untuk visual desktop */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center gap-4 pointer-events-none">
+                      {/* Pointer-events-none agar tidak menghalangi Link utama di atasnya */}
+                      <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center scale-90 group-hover:scale-100 transition-transform duration-500">
                         <Eye size={20} />
-                      </Link>
+                      </div>
+                      <span className="text-[9px] uppercase tracking-[0.3em] text-white font-bold">Live Preview</span>
                     </div>
 
+                    {/* FEATURED BADGE - Z-index lebih tinggi agar tetap terlihat */}
                     {(tpl.popular || (tpl.usedCount || 0) > 10) && (
-                      <div className="absolute top-6 left-6 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 flex items-center gap-2">
+                      <div className="absolute top-6 left-6 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 flex items-center gap-2 z-20">
                         <Star size={10} className="text-white fill-white" />
                         <span className="text-[9px] uppercase tracking-[0.2em] text-white font-bold">Featured</span>
                       </div>

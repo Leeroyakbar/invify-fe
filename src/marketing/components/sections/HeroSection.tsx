@@ -74,12 +74,12 @@ export default function HeroSection() {
       </div>
 
       {/* FOOTER INFO LINE */}
-      <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end pointer-events-none">
+      <div className="absolute bottom-0 mb-4 md:mb-0 md:bottom-12 md:left-12 md:right-12 flex justify-between items-end pointer-events-none">
         <div className="space-y-2 hidden lg:block">
-          <p className="text-white/10 text-[9px] uppercase tracking-[0.5em]">Crafted in Mandailing</p>
-          <div className="h-[1px] w-24 bg-white/10" />
+          <p className="text-white/20 text-[9px] uppercase tracking-[0.5em]">Crafted in Mandailing</p>
+          <div className="h-px w-24 bg-white/20" />
         </div>
-        <p className="text-white/10 text-[9px] uppercase tracking-[0.5em]">Available for Global Booking</p>
+        <p className="text-white/20 text-[9px] uppercase tracking-[0.5em]">Available for Global Booking</p>
       </div>
     </section>
   )

@@ -16,7 +16,7 @@ import { HeroBackground } from "./sections/HeroBackground"
 import { HeroContent } from "./sections/HeroContent"
 import { Maximize } from "lucide-react"
 
-export default function IvoryTemplate() {
+export default function RoyalEleganceTemplate() {
   const data: Invitation = DEMO_INVITATIONS["elegant-ivory"]
   const [isOpened, setIsOpened] = useState(false)
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
