@@ -1,13 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence, easeOut } from "framer-motion"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import type { Invitation } from "../../../../types/Invitation"
 
 interface GallerySectionProps {
   data: Invitation
+  onStateChange: (state: boolean) => void
 }
 
-export default function GallerySection({ data }: GallerySectionProps) {
+export default function GallerySection({ data, onStateChange }: GallerySectionProps) {
   const [selectedImg, setSelectedImg] = useState<number | null>(null)
 
   const images = [
@@ -31,6 +32,9 @@ export default function GallerySection({ data }: GallerySectionProps) {
   const nextImg = () => setSelectedImg((prev) => (prev !== null && prev < images.length - 1 ? prev + 1 : 0))
   const prevImg = () => setSelectedImg((prev) => (prev !== null && prev > 0 ? prev - 1 : images.length - 1))
 
+  useEffect(() => {
+    onStateChange(selectedImg !== null)
+  }, [onStateChange, selectedImg])
   return (
     <section className="relative w-full py-28 px-6 flex flex-col items-center overflow-hidden bg-black">
       {/* 1. ELEMEN BACKGROUND (LAYER PALING BAWAH) */}

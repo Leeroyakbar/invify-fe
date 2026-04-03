@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { DEMO_INVITATIONS } from "../../engine/demoInvitationMap"
 import CurtainSection from "./sections/CurtainSection"
 import AudioPlayer from "../../../ui/audioPlayer"
@@ -16,6 +16,7 @@ import RSVPSection from "./sections/RSVPSection"
 import WishesSection from "./sections/WishesSection"
 import GiftSection from "./sections/GiftSection"
 import ClosingSection from "./sections/ClosingSection"
+import MobileNavbar from "./sections/MobileNavbar"
 
 export default function LiliTemplate() {
   const data = DEMO_INVITATIONS["lili"]
@@ -39,9 +40,12 @@ export default function LiliTemplate() {
       }
     }
   }
-
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [isAnyModalOpen, setIsAnyModalOpen] = useState(false)
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[#0A0A0A]">
+      {/* NAVBAR HANYA MUNCUL JIKA SUDAH DIBUKA */}
+      {isOpened && <MobileNavbar containerRef={scrollContainerRef} hide={isAnyModalOpen} />}
       {/* 1. FLOATING CONTROLS */}
       <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-center gap-4">
         <button onClick={toggleFullScreen} className="flex items-center justify-center bg-black/40 backdrop-blur-md border border-white/10 w-12 h-12 rounded-full shadow-2xl active:scale-90 transition-all hover:bg-white/10">
@@ -104,6 +108,7 @@ export default function LiliTemplate() {
 
           {/* SCROLLABLE LAYERS (Z-Index 10) */}
           <div
+            ref={scrollContainerRef}
             className="relative z-10 h-full overflow-y-auto scroll-smooth overflow-x-hidden bg-transparent custom-scroll"
             style={{
               scrollbarGutter: "stable", // Mencegah layout bergeser saat scrollbar muncul
@@ -112,16 +117,30 @@ export default function LiliTemplate() {
             {isOpened && (
               <div className="flex flex-col w-full">
                 {/* Gunakan bg-[#0A0A0A] pada section yang ingin menutup video sepenuhnya */}
-                <HeroSection data={data} />
-                <BrideSection data={data} />
-                <GroomSection data={data} />
-                <StorySection data={data} />
+                <div id="hero">
+                  <HeroSection data={data} />
+                </div>
+                <div id="couple">
+                  <BrideSection data={data} />
+                  <GroomSection data={data} />
+                </div>
+                <div id="story">
+                  <StorySection data={data} />
+                </div>
                 <CountdownSection data={data} />
-                <EventSection data={data} />
+                <div id="event">
+                  <EventSection data={data} />
+                </div>
                 <LiveStreamSection data={data} />
-                <GallerySection data={data} />
+
+                <div id="gallery">
+                  <GallerySection data={data} onStateChange={(isOpen) => setIsAnyModalOpen(isOpen)} />
+                </div>
                 <RSVPSection />
-                <WishesSection />
+
+                <div id="wishes">
+                  <WishesSection />
+                </div>
                 <GiftSection data={data} />
                 <ClosingSection data={data} />
               </div>
