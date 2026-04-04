@@ -20,6 +20,7 @@ import AdminInvitationDetailPage from "./admin/pages/AdminInvitationDetailPage"
 import ClassicNoir from "./invitation/templates/classic-noir/ClassicNoirTemplate"
 import LiliTemplate from "./invitation/templates/Lili/LiliTemplate"
 import RoyalEleganceTemplate from "./invitation/templates/royal-elegance/RoyalElegance"
+import RahmaTemplate from "./invitation/templates/rahma/RahmaTemplate"
 // import ModernTemplate from "./invitation/templates/modern/ModernTemplate"
 
 export default function App() {
@@ -65,6 +66,7 @@ export default function App() {
         <Route path="/demo/classic-noir" element={<ClassicNoir />} />
         <Route path="/demo/royal-elegance" element={<RoyalEleganceTemplate />} />
         <Route path="/demo/lili" element={<LiliTemplate />} />
+        <Route path="/demo/rahma" element={<RahmaTemplate />} />
         {/* <Route path="/demo/modern-love" element={<ModernTemplate />} /> */}
 
         {/* 404 Redirect (Optional) */}
