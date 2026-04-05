@@ -7,6 +7,7 @@ import HeroSection from "./sections/HeroSection"
 import CoupleSection from "./sections/CoupleSection"
 import { Music, Music2 } from "lucide-react"
 import ReactPlayer from "react-player" // Import react-player
+import CountdownSection from "./sections/CountdownSection"
 
 // List gambar background untuk sisi kanan yang akan berganti
 const backgroundImages = [
@@ -138,7 +139,7 @@ export default function RahmaTemplate() {
                 <div id="couple">
                   <CoupleSection data={data} />
                 </div>
-
+                <CountdownSection data={data} />
                 <div id="story" className="bg-black/60 backdrop-blur-md min-h-screen border-t border-white/10">
                   {/* <StorySection data={data} /> */}
                 </div>
