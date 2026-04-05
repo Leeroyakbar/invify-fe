@@ -62,7 +62,7 @@ export default function RahmaTemplate() {
       {isOpened && (
         <button
           onClick={() => setIsPlaying(!isPlaying)}
-          className="fixed bottom-10 right-6 z-50 w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white transition-all hover:bg-white/20"
+          className="fixed bottom-6 right-6 z-50 w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white transition-all hover:bg-white/20"
         >
           {isPlaying ? (
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}>
