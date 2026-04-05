@@ -9,7 +9,7 @@ export default function HeroSection({ data }: { data: Invitation }) {
         <img
           src="/rahma/gallery-10.webp" // Ganti dengan path foto utama pengantin
           alt="Hero Background"
-          className="w-full h-full object-cover object-[0%_center] md:object-[90%_center]"
+          className="w-full h-full object-cover object-[70%_center] md:object-[90%_center]"
         />
         {/* 2. Dark Overlay - Menjaga kontras teks */}
         <div className="absolute inset-0 bg-black/40" />
