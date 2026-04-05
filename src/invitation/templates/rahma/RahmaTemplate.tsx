@@ -5,6 +5,8 @@ import CurtainSection from "./sections/CurtainSection" // Pastikan path sesuai
 import NavbarSection from "./sections/NavbarSection"
 import HeroSection from "./sections/HeroSection"
 import CoupleSection from "./sections/CoupleSection"
+import { Music, Music2 } from "lucide-react"
+import ReactPlayer from "react-player" // Import react-player
 
 // List gambar background untuk sisi kanan yang akan berganti
 const backgroundImages = [
@@ -25,6 +27,7 @@ export default function RahmaTemplate() {
   const [isOpened, setIsOpened] = useState(false)
   const [currentBg, setCurrentBg] = useState(0)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
     if (isOpened) {
@@ -37,10 +40,39 @@ export default function RahmaTemplate() {
 
   const handleOpenInvitation = () => {
     setIsOpened(true)
+    setIsPlaying(true) // Musik otomatis menyala saat undangan dibuka
   }
+
+  useEffect(() => {
+    if (isOpened) {
+      const interval = setInterval(() => {
+        setCurrentBg((prev) => (prev + 1) % backgroundImages.length)
+      }, 5000)
+      return () => clearInterval(interval)
+    }
+  }, [isOpened])
 
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[#0A0A0A]">
+      {/* HIDDEN MUSIC PLAYER */}
+      <div className="hidden">
+        <ReactPlayer src={data.audioUrl} playing={isPlaying} loop={true} volume={0.8} width="0" height="0" />
+      </div>
+      {/* FLOATING MUSIC BUTTON */}
+      {isOpened && (
+        <button
+          onClick={() => setIsPlaying(!isPlaying)}
+          className="fixed bottom-10 right-6 z-50 w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white transition-all hover:bg-white/20"
+        >
+          {isPlaying ? (
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}>
+              <Music size={18} />
+            </motion.div>
+          ) : (
+            <Music2 size={18} className="opacity-50" />
+          )}
+        </button>
+      )}
       {/* NAVBAR & CURTAIN */}
       {isOpened && <NavbarSection containerRef={scrollContainerRef} />}
       <CurtainSection data={data} isOpened={isOpened} onOpen={handleOpenInvitation} />
