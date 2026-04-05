@@ -4,6 +4,7 @@ import { DEMO_INVITATIONS } from "../../engine/demoInvitationMap"
 import CurtainSection from "./sections/CurtainSection" // Pastikan path sesuai
 import NavbarSection from "./sections/NavbarSection"
 import HeroSection from "./sections/HeroSection"
+import CoupleSection from "./sections/CoupleSection"
 
 // List gambar background untuk sisi kanan yang akan berganti
 const backgroundImages = [
@@ -96,16 +97,14 @@ export default function RahmaTemplate() {
           <div ref={scrollContainerRef} className="relative z-10 h-full overflow-y-auto scroll-smooth custom-scroll">
             {isOpened && (
               <div className="flex flex-col w-full">
-                {/* Hero Section langsung dipanggil tanpa wrapper tambahan yang merusak layout */}
-                <HeroSection data={data} />
+                {/* Hero Section langsung dipanggil tanpa wrapper tambahan yang meru`sa`k layout */}
+                <div id="hero">
+                  <HeroSection data={data} />
+                </div>
 
                 {/* Section Couple */}
-                <div id="couple" className="relative bg-black/60 backdrop-blur-md border-t border-white/10 p-10 min-h-screen">
-                  <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="text-white">
-                    <h3 className="font-cormorant text-4xl italic mb-6">The Couple</h3>
-                    <p className="text-white/70 font-light leading-relaxed mb-8">On Maintance</p>
-                    {/* Di sini nanti tempat <BrideGroomSection /> */}
-                  </motion.div>
+                <div id="couple">
+                  <CoupleSection data={data} />
                 </div>
 
                 <div id="story" className="bg-black/60 backdrop-blur-md min-h-screen border-t border-white/10">

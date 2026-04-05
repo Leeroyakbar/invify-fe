@@ -58,7 +58,7 @@ export default function MobileNavbar({ containerRef }: { containerRef: React.Ref
               <div className="flex flex-col gap-6">
                 {menuItems.map((item, i) => (
                   <motion.button key={item.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + i * 0.05, duration: 0.8 }} onClick={() => scrollToSection(item.id)} className="text-left group">
-                    <span className="font-inter text-2xl text-white/90 group-hover:text-white group-hover:pl-2 transition-all duration-500 block">{item.name}</span>
+                    <span className="font-montserrat text-2xl text-white/90 group-hover:text-white group-hover:pl-2 transition-all duration-500 block">{item.name}</span>
                   </motion.button>
                 ))}
               </div>

@@ -5,17 +5,24 @@ import type { Invitation } from "../../../../types/Invitation"
 export default function HeroSection({ data }: { data: Invitation }) {
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden flex flex-col justify-between p-8 md:p-12">
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/rahma/gallery-10.webp" // Ganti dengan path foto utama pengantin
+          alt="Hero Background"
+          className="w-full h-full object-cover object-[0%_center] md:object-[90%_center]"
+        />
+        {/* 2. Dark Overlay - Menjaga kontras teks */}
+        <div className="absolute inset-0 bg-black/40" />
+        {/* Gradient tambahan untuk memperkuat nuansa deep di bawah */}
+        <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/80" />
+      </div>
       {/* Top Info: Montserrat */}
       <div className="relative z-10 flex justify-between items-start pt-4">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }}>
           <p className="font-montserrat text-[9px] uppercase tracking-[0.4em] text-white/70 leading-relaxed">
-            Save the Date <br />
-            For the Wedding of
+            Sincerely Invited <br />
+            The Wedding Celebration
           </p>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4 }} className="text-right">
-          <p className="font-montserrat text-[9px] uppercase tracking-[0.4em] text-white/70">{data.guestName || "Guest Name"}</p>
         </motion.div>
       </div>
 

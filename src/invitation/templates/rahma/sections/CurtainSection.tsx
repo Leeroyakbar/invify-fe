@@ -19,7 +19,7 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
           className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[#0A0A0A] overflow-hidden"
         >
           {/* Background Image with Overlay */}
-          <div className="absolute inset-0 bg-cover bg-center opacity-60 scale-105" style={{ backgroundImage: `url('/rahma/curtain-bg.webp')` }} />
+          <div className="absolute inset-0 bg-cover bg-center opacity-60 scale-105" style={{ backgroundImage: `url('/rahma/gallery-8.webp')` }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
 
           {/* Content */}
@@ -28,13 +28,13 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
               Wedding Invitation
             </motion.p>
 
-            <motion.h1 initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.7, duration: 1 }} className="font-cormorant text-white text-5xl md:text-7xl font-light italic">
+            <motion.h1 initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.7, duration: 1 }} className="font-cinzel text-white text-5xl md:text-7xl font-light">
               {data.brideName} & {data.groomName}
             </motion.h1>
 
             <div className="mt-20 flex flex-col items-center">
               <p className="text-white/40 text-xs uppercase tracking-widest mb-4">Kepada Yth.</p>
-              <h2 className="font-cormorant text-white text-3xl italic mb-10">{data.guestName || "Guest Name"}</h2>
+              <h2 className="font-montserrat text-white text-xl mb-10">{data.guestName || "Guest Name"}</h2>
 
               <motion.button
                 whileHover={{ scale: 1.05 }}
