@@ -36,8 +36,10 @@ export default function GallerySection({ data }: { data: Invitation }) {
       {/* HEADER */}
       <div className="text-center mb-12">
         <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="font-cinzel text-3xl text-white tracking-[0.2em] uppercase">Momen Kita</h2>
-          <p className="font-montserrat text-[10px] text-white/40 mt-4 italic">"I was created in time to fill your time..."</p>
+          <h2 className="font-cinzel text-3xl text-white tracking-[0.2em] uppercase">Our Moment</h2>
+          <p className="font-montserrat text-[10px] text-white/40 mt-4 italic">
+            "Setiap foto adalah satu detak jantung yang terabadikan. Selamat datang di potongan-potongan memori kami, di mana setiap sudutnya menyimpan tawa, doa, dan janji yang sedang kami tuju."
+          </p>
         </motion.div>
       </div>
 

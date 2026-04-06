@@ -11,6 +11,9 @@ import CountdownSection from "./sections/EventSection"
 import StorySection from "./sections/LovestorySection"
 import GallerySection from "./sections/GallerySection"
 import GiftSection from "./sections/GiftSection"
+import RSVPSection from "./sections/RSVPSection"
+import WishesSection from "./sections/WishesSection"
+import ClosingSection from "./sections/ClosingSection"
 
 // List gambar background untuk sisi kanan yang akan berganti
 const backgroundImages = [
@@ -154,6 +157,12 @@ export default function RahmaTemplate() {
                 <div id="gift">
                   <GiftSection data={data} />
                 </div>
+
+                <div id="rsvp">
+                  <RSVPSection />
+                  <WishesSection data={data} />
+                </div>
+                <ClosingSection data={data} />
               </div>
             )}
           </div>
@@ -163,8 +172,19 @@ export default function RahmaTemplate() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        .custom-scroll::-webkit-scrollbar { width: 3px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
+        .custom-scroll::-webkit-scrollbar {
+          width: 5px;
+          background-color: #0A0A0A; /* Latar belakang scrollbar dibuat gelap solid */
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+          background-color: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+        }
+        /* Menghilangkan panah scrollbar di beberapa browser */
+        .custom-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255, 255, 255, 0.2) #0A0A0A;
+        }
       `,
         }}
       />

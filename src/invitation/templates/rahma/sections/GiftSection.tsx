@@ -48,7 +48,7 @@ export default function GiftSection({ data }: { data: Invitation }) {
         {/* 2. HEADER & TOGGLE BUTTON */}
         <div className="text-center mb-12 space-y-8">
           <div className="space-y-4">
-            <h2 className="font-cinzel text-4xl text-white tracking-widest uppercase">Wedding Gift</h2>
+            <h2 className="font-cinzel text-3xl text-white tracking-widest uppercase">Wedding Gift</h2>
             <p className="font-montserrat text-[12px] text-white/40 max-w-md mx-auto leading-relaxed">Doa restu Anda sudah lebih dari cukup. Namun bagi yang ingin memberikan tanda kasih, silakan klik tombol di bawah ini.</p>
           </div>
 
