@@ -19,12 +19,12 @@ export default function HeroSection({ data }: { data: Invitation }) {
       <motion.div style={{ y: yBg }} className="absolute inset-0 z-0">
         <img src="/rahma/gallery-10.webp" alt="Hero Background" className="w-full h-full object-cover object-[70%_center] md:object-[90%_center] opacity-70" />
         {/* Multilayer Overlay untuk kedalaman visual */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0A0A0A]" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-[#0A0A0A]" />
         <div className="absolute inset-0 bg-black/20 backdrop-grayscale-[20%]" />
       </motion.div>
 
       {/* 2. TOP CONTENT: Editorial Label */}
-      <div className="relative z-10 flex flex-col gap-4">
+      <div className="relative z-10 flex flex-col gap-4">   
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.2, delay: 0.5 }} className="flex items-center gap-3">
           <div className="h-[1px] w-8 bg-white/40" />
           <p className="font-montserrat text-[9px] uppercase tracking-[0.6em] text-white/60 leading-relaxed">The Wedding Celebration</p>
