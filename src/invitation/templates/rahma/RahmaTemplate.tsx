@@ -10,6 +10,7 @@ import ReactPlayer from "react-player" // Import react-player
 import CountdownSection from "./sections/EventSection"
 import StorySection from "./sections/LovestorySection"
 import GallerySection from "./sections/GallerySection"
+import GiftSection from "./sections/GiftSection"
 
 // List gambar background untuk sisi kanan yang akan berganti
 const backgroundImages = [
@@ -148,6 +149,10 @@ export default function RahmaTemplate() {
 
                 <div id="gallery">
                   <GallerySection data={data} />
+                </div>
+
+                <div id="gift">
+                  <GiftSection data={data} />
                 </div>
               </div>
             )}
