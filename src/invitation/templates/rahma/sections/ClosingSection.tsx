@@ -89,7 +89,6 @@ export default function ClosingSection({ data }: { data: Invitation }) {
             <span className="font-montserrat text-[9px] text-white/40 tracking-widest uppercase">STUDIO</span>
           </div>
         </div>
-        <p className="font-montserrat text-[6px] text-white/10 tracking-[0.4em] uppercase">© 2026 CodeWithLee • All Rights Reserved</p>
       </footer>
     </section>
   )

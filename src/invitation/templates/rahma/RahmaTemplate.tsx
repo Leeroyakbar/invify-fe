@@ -11,9 +11,8 @@ import CountdownSection from "./sections/EventSection"
 import StorySection from "./sections/LovestorySection"
 import GallerySection from "./sections/GallerySection"
 import GiftSection from "./sections/GiftSection"
-import RSVPSection from "./sections/RSVPSection"
-import WishesSection from "./sections/WishesSection"
 import ClosingSection from "./sections/ClosingSection"
+import RSVPAndWishes from "./sections/RSVPWishesSection"
 
 // List gambar background untuk sisi kanan yang akan berganti
 const backgroundImages = [
@@ -47,7 +46,7 @@ export default function RahmaTemplate() {
 
   const handleOpenInvitation = () => {
     setIsOpened(true)
-    setIsPlaying(true) // Musik otomatis menyala saat undangan dibuka
+    setIsPlaying(true)
   }
 
   useEffect(() => {
@@ -159,8 +158,7 @@ export default function RahmaTemplate() {
                 </div>
 
                 <div id="rsvp">
-                  <RSVPSection />
-                  <WishesSection data={data} />
+                  <RSVPAndWishes data={data} />
                 </div>
                 <ClosingSection data={data} />
               </div>
