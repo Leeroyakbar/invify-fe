@@ -99,7 +99,7 @@ export default function CoupleSection({ data }: { data: Invitation }) {
             <span className="absolute -top-16 -left-10 font-cinzel text-[140px] text-white/5 font-bold select-none leading-none">{data.groomName.charAt(0)}</span>
 
             <motion.div style={{ rotate: rotateGroom }} className="relative z-10">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-tr-[130px] rounded-bl-[30px] border border-white/10 shadow-2xl bg-black">
+              <div className="relative aspect-4/5 overflow-hidden rounded-tr-[130px] rounded-bl-[30px] border border-white/10 shadow-2xl bg-black">
                 <AnimatePresence initial={false} mode="popLayout">
                   <motion.div key={groomPhotos[groomPhotoIndex]} style={{ y: yParallax }} className="absolute inset-0 w-full h-full">
                     <motion.img

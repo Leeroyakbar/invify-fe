@@ -15,9 +15,9 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
           initial={{ opacity: 1 }}
           exit={{
             clipPath: "inset(0 0 100% 0)", // Efek tirai menyusut ke atas
-            transition: { duration: 1.5, ease: [0.82, 0, 0.18, 1] },
+            transition: { duration: 2.5, ease: [0.82, 0, 0.18, 1] },
           }}
-          className="fixed inset-0 z-[200] flex flex-col bg-[#050505] overflow-hidden"
+          className="fixed inset-0 z-200 flex flex-col bg-[#050505] overflow-hidden"
         >
           {/* 1. Background Image - Full Height, Desaturated */}
           <motion.div
