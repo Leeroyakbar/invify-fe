@@ -9,7 +9,6 @@ const menuItems = [
   { name: "Gallery", id: "gallery" },
   { name: "RSVP", id: "rsvp" },
   { name: "Gift", id: "gift" },
-  { name: "Souvenir Card", id: "souvenir" },
 ]
 
 export default function MobileNavbar({ containerRef }: { containerRef: React.RefObject<HTMLDivElement | null> }) {
@@ -65,7 +64,7 @@ export default function MobileNavbar({ containerRef }: { containerRef: React.Ref
 
               {/* Footer Menu */}
               <div className="mt-12 pt-8 border-t border-white/5">
-                <p className="text-[9px] uppercase tracking-[0.5em] text-white/20">Invify — Rahma Template</p>
+                <p className="text-[9px] uppercase tracking-[0.5em] text-white/20">Invify — Digital Invitation</p>
               </div>
             </div>
           </motion.div>

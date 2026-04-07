@@ -81,26 +81,26 @@ export default function EventSection({ data }: { data: Invitation }) {
 
               <div className="space-y-6">
                 {/* Date & Time */}
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/40 group-hover:text-white transition-colors">
+                <div className="flex items-start gap-4 group">
+                  {/* Tambahkan shrink-0 di sini */}
+                  <div className="w-8 h-8 shrink-0 rounded-full bg-white/5 flex items-center justify-center text-white/40 group-hover:text-white transition-colors border border-white/10">
                     <Calendar size={14} />
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-montserrat text-[10px] text-white/30 uppercase tracking-widest mb-1">When</span>
                     <p className="font-cinzel text-xs text-white/80 tracking-widest">{event.date}</p>
                     <p className="font-montserrat text-[10px] text-white/50 mt-1">{event.time} WIB</p>
                   </div>
                 </div>
 
                 {/* Venue */}
-                <div className="flex items-start gap-4 text-left">
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/40 group-hover:text-white transition-colors">
+                <div className="flex items-start gap-4 group">
+                  {/* Tambahkan shrink-0 di sini juga */}
+                  <div className="w-8 h-8 shrink-0 rounded-full bg-white/5 flex items-center justify-center text-white/40 group-hover:text-white transition-colors border border-white/10">
                     <MapPin size={14} />
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-montserrat text-[10px] text-white/30 uppercase tracking-widest mb-1">Where</span>
                     <p className="font-cinzel text-xs text-white/80 tracking-widest leading-relaxed uppercase">{event.venue}</p>
-                    <p className="font-montserrat text-[10px] text-white/40 mt-2 leading-relaxed italic">{event.location}</p>
+                    <p className="font-montserrat text-[10px] text-white/40 mt-2 leading-relaxed italic max-w-50">{event.location}</p>
                   </div>
                 </div>
               </div>
