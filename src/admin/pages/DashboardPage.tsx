@@ -178,14 +178,15 @@ export default function DashboardPage() {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F5F5F5" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} dy={10} />
                 <YAxis axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} tickFormatter={(value) => (value >= 1000000 ? `${value / 1000000}jt` : formatNumber(value))} />
-                <Tooltip<number | string, string>
-                  formatter={(value) => {
+                <Tooltip
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  formatter={(value: any) => {
                     if (value === undefined || value === null) return ["Rp 0", "Pendapatan"]
 
                     const numericValue = typeof value === "string" ? parseFloat(value) : value
 
-                    // Jalankan logika formatting kamu
-                    return [`Rp ${numericValue}`, "Pendapatan"]
+                    // Pastikan return array berisi [string, string]
+                    return [`Rp ${numericValue.toLocaleString("id-ID")}`, "Pendapatan"]
                   }}
                 />
                 <Area type="monotone" dataKey="total" stroke="#D4A853" strokeWidth={3} fillOpacity={1} fill="url(#colorTotal)" />
@@ -206,9 +207,14 @@ export default function DashboardPage() {
                 <YAxis axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} allowDecimals={false} />
                 <Tooltip
                   cursor={{ fill: "#FDFBF7" }}
-                  formatter={(value: number | string | undefined) => {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  formatter={(value: any) => {
+                    // Amankan konversi ke angka, jika null/undefined otomatis jadi 0
                     const numericValue = typeof value === "string" ? parseInt(value) : (value ?? 0)
-                    return [numericValue, "Jumlah Undangan"]
+
+                    // OPTIMASI: Bungkus numericValue dengan template literal agar tipenya menjadi string
+                    // Kamu juga bisa menggunakan format ribuan seperti: `${numericValue.toLocaleString("id-ID")}`
+                    return [`${numericValue}`, "Jumlah Undangan"]
                   }}
                   contentStyle={{ borderRadius: "16px", border: "none", boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)" }}
                 />
