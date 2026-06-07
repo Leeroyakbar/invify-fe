@@ -11,8 +11,6 @@ import type { DashboardInvitationSummary } from "../../types/DashboardInvitation
 import type { TransactionResponse } from "../../types/TransactionResponse"
 
 export default function DashboardPage() {
-
-
   const [summary, setSummary] = useState<DashboardSummaryResponse>({
     totalCustomer: 0,
     percentageChangeCustomer: 0,
@@ -180,13 +178,15 @@ export default function DashboardPage() {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F5F5F5" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} dy={10} />
                 <YAxis axisLine={false} tickLine={false} tick={{ fill: "#A8A29E", fontSize: 10 }} tickFormatter={(value) => (value >= 1000000 ? `${value / 1000000}jt` : formatNumber(value))} />
-                <Tooltip
-                  formatter={(value: number | string | undefined) => {
-                    if (value === undefined) return ["Rp 0", "Pendapatan"]
+                <Tooltip<number | string, string>
+                  formatter={(value) => {
+                    if (value === undefined || value === null) return ["Rp 0", "Pendapatan"]
+
                     const numericValue = typeof value === "string" ? parseFloat(value) : value
-                    return [formatRupiah(numericValue), "Pendapatan"]
+
+                    // Jalankan logika formatting kamu
+                    return [`Rp ${numericValue}`, "Pendapatan"]
                   }}
-                  contentStyle={{ borderRadius: "16px", border: "none", boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)" }}
                 />
                 <Area type="monotone" dataKey="total" stroke="#D4A853" strokeWidth={3} fillOpacity={1} fill="url(#colorTotal)" />
               </AreaChart>
