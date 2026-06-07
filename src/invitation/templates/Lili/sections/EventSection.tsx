@@ -7,11 +7,14 @@ interface EventSectionProps {
 }
 
 export default function EventSection({ data }: EventSectionProps) {
+  // OPTIMASI ANIMASI: Fokus memoles transisi agar sangat smooth saat di-scroll
   const fadeUp = {
-    initial: { opacity: 0, y: 20 },
+    initial: { opacity: 0, y: 35 }, // Naik sedikit lebih tinggi agar transisinya terasa dinamis
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 1.2, ease: [0.19, 1, 0.22, 1] },
+    viewport: {
+      once: true,
+      amount: 0.15, // Animasi langsung jalan saat 15% bagian card masuk layar (anti-delay/hilang)
+    },
   }
 
   const events = [
@@ -35,7 +38,17 @@ export default function EventSection({ data }: EventSectionProps) {
     <section className="relative w-full py-24 px-8 flex flex-col items-center">
       <div className="relative z-10 w-full max-w-lg space-y-24">
         {events.map((event, index) => (
-          <motion.div key={index} {...fadeUp} transition={{ delay: index * 0.2 }} className="text-center space-y-6">
+          <motion.div
+            key={index}
+            {...fadeUp}
+            // Menggunakan cubic-bezier [0.215, 0.610, 0.355, 1] (efek easeOutCubic yang super mulus di mobile)
+            transition={{
+              duration: 0.9,
+              ease: [0.215, 0.61, 0.355, 1],
+              delay: index * 0.15, // Delay dipercepat sedikit agar jedanya pas saat scroll
+            }}
+            className="text-center space-y-6"
+          >
             {/* Label Event */}
             <div className="space-y-2">
               <h2 className="text-3xl lg:text-4xl font-cormorant-upright text-white tracking-wider uppercase font-light">{event.label}</h2>
