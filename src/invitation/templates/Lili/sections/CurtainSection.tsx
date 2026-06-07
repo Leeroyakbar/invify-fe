@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, easeIn } from "framer-motion"
 import type { Invitation } from "../../../../types/Invitation"
 
 interface CurtainProps {
@@ -50,23 +50,25 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
             {/* BOTTOM SECTION */}
             <div className="space-y-2">
               {/* TITLE + NAME */}
-              <div>
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 1, ease: easeIn }}>
                 <h1 className="font-cormorant-upright text-6xl md:text-8xl leading-[0.85] tracking-tighter">
                   {data.brideName}
                   <span className="block font-alice text-2xl md:text-3xl text-white/20 my-4 italic lowercase">and</span>
                   {data.groomName}
                 </h1>
-              </div>
-              <div className="space-y-4">
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.3 }} transition={{ delay: 0.5, duration: 1.5, ease: easeIn }} className="space-y-4">
                 <p className="text-[8px] tracking-[0.4em] uppercase text-white/40 font-inter">Special Invite To</p>
                 <h3 className="font-playfair text-xl md:text-2xl font-light italic text-white">{data.guestName}</h3>
                 <div className="h-[1px] w-12 bg-white/20 mx-auto mt-6" />
-              </div>
+              </motion.div>
 
-              <button onClick={onOpen} className="group relative border border-white/30 px-12 py-4 text-[10px] tracking-[0.5em] uppercase overflow-hidden transition-all hover:border-white">
-                <span className="relative z-10 transition-colors duration-500 group-hover:text-black font-bold">Buka Undangan</span>
-                <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-              </button>
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.3 }} transition={{ delay: 1.2, duration: 1.5, ease: easeIn }}>
+                <button onClick={onOpen} className="group relative border border-white/30 px-12 py-4 text-[10px] tracking-[0.5em] uppercase overflow-hidden transition-all hover:border-white">
+                  <span className="relative z-10 transition-colors duration-500 group-hover:text-black font-bold">Buka Undangan</span>
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                </button>
+              </motion.div>
             </div>
           </div>
         </motion.section>

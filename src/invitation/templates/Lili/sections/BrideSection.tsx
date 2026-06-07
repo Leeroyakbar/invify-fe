@@ -11,13 +11,13 @@ export default function BrideSection({ data }: BrideSectionProps) {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: false, amount: 0.3 },
-    transition: { duration: 2.5, ease: [0.19, 1, 0.22, 1] as const },
+    transition: { duration: 3.5, ease: [0.19, 1, 0.22, 1] as const },
   }
 
   // Gunakan data dummy jika audioUrl dari Invitify kosong
   const igUsername = data.brideInstagram || "username"
   const brideParentName = `${data.brideFather} & ${data.brideMother}`
-  const brideImageUrl = "/lili/bride.webp" // URL foto referensi kamu
+  const brideImageUrl = "/lili/bride.webp"
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-black text-white">
@@ -50,7 +50,7 @@ export default function BrideSection({ data }: BrideSectionProps) {
           </div>
 
           {/* Tombol Instagram Minimalis (Mengikuti SS: Oval, Kapsul, Outline Putih) */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }} className="pt-6 lg:pt-8">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }} className="pt-6 lg:pt-8">
             <a
               href={`https://instagram.com/${igUsername}`}
               target="_blank"

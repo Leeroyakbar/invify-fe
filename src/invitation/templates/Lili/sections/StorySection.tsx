@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { easeIn, motion } from "framer-motion"
 import type { Invitation } from "../../../../types/Invitation"
 
 interface StorySectionProps {
@@ -10,7 +10,7 @@ export default function StorySection({ data }: StorySectionProps) {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: false, amount: 0.1 },
-    transition: { duration: 1.2, ease: [0.19, 1, 0.22, 1] as const },
+    transition: { duration: 2.5, ease: easeIn },
   }
 
   const stories = [
@@ -33,7 +33,7 @@ export default function StorySection({ data }: StorySectionProps) {
         </div>
 
         {/* 2. TITLE SECTION */}
-        <motion.div {...fadeUp} className="mb-16 text-center lg:text-left">
+        <motion.div {...fadeUp} transition={{ duration: 1.2, ease: easeIn }} className="mb-16 text-center lg:text-left">
           <h2 className="text-3xl lg:text-4xl font-cormorant-upright text-white tracking-[0.1em] uppercase">Journey of Love</h2>
           <div className="h-[1px] w-full bg-gradient-to-r from-white/40 via-white/10 to-transparent mt-6" />
         </motion.div>
@@ -41,7 +41,7 @@ export default function StorySection({ data }: StorySectionProps) {
         {/* 3. STORY CONTENT */}
         <div className="space-y-12 mb-20">
           {stories.map((story, index) => (
-            <motion.div key={index} {...fadeUp} transition={{ delay: index * 0.1 }} className="space-y-3">
+            <motion.div key={index} {...fadeUp} transition={{ delay: index * 0.3 }} className="space-y-3">
               <h3 className="text-white/90 font-inter text-[13px] font-bold tracking-widest uppercase">{story.title}</h3>
               <p className="text-white/60 font-inter text-[13px] leading-relaxed font-light text-justify">{story.content}</p>
             </motion.div>
