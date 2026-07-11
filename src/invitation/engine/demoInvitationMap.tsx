@@ -99,21 +99,21 @@ export const DEMO_INVITATIONS: Record<string, Invitation> = {
     storyMarriage: "Kini, dengan izin Allah SWT serta restu orang tua, kami memulai perjalanan baru dalam ikatan suci pernikahan. Sebuah kisah yang akan kami jaga, selamanya.",
 
     images: [
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-1.webp", // Foto Utama (Horizontal)
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-2.webp", // Foto Potret
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-3.webp", // Foto Potret
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-4.webp", // Foto Potret
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-5.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-6.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-7.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-8.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-9.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-10.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-11.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-12.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-13.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-14.webp",
-      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-15.webp",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-1.webp?width=600", // Foto Utama (Horizontal)
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-2.webp?width=600", // Foto Potret
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-3.webp?width=600", // Foto Potret
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-4.webp?width=600", // Foto Potret
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-5.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-6.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-7.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-8.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-9.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-10.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-11.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-12.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-13.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-14.webp?width=600",
+      "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/gallery-15.webp?width=600",
     ],
   } as Invitation,
 
