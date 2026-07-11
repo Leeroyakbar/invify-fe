@@ -12,58 +12,121 @@ export default function HeroSection({ data }: HeroSectionProps) {
   const dayMonth = `${dateParts[0]}/${dateParts[1]}`
   const year = dateParts[2]
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
+  // Formula transisi masuk yang super smooth (Cubic Bezier Premium)
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: 30 },
     visible: (delay: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay, duration: 1.2, ease: [0.22, 1, 0.36, 1] as const },
+      transition: {
+        delay,
+        duration: 1.4,
+        ease: [0.16, 1, 0.3, 1] as const
+      },
     }),
   }
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-between py-14 px-10 text-center text-white bg-transparent selection:bg-white/10">
-      {/* 1. TOP SECTION: Date & "The Wedding Of" in one container */}
-      <div className="flex flex-col items-center gap-12">
-        {/* Date Row */}
-        <motion.div custom={0.2} initial="hidden" whileInView="visible" variants={fadeIn} className="flex justify-center items-center gap-12 md:gap-20 text-[12px] md:text-[14px] tracking-[0.5em] text-white/80 font-inter uppercase">
-          <span>{dayMonth}</span>
-          <span>{year}</span>
-        </motion.div>
+      <section className="relative min-h-screen w-full flex flex-col justify-between pt-20 pb-12 px-8 text-center text-white bg-transparent selection:bg-white/10 subpixel-antialiased">
 
-        {/* The Wedding Of & Names */}
-        <div className="flex flex-col items-center justify-between">
-          <motion.p custom={0.4} initial="hidden" whileInView="visible" variants={fadeIn} className="text-[10px] tracking-[0.8em] uppercase text-white/40 font-inter mb-10 ml-[0.8em]">
+        {/* 1. TOP SECTION: Tanggal & "The Wedding Of" */}
+        <div className="w-full flex flex-col items-center space-y-10">
+
+          {/* Date Container dengan Garis Bingkai Halus */}
+          <motion.div
+              custom={0.2}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInVariants}
+              className="flex items-center gap-6 text-[11px] md:text-[13px] tracking-[0.5em] text-white/80 font-inter uppercase font-medium"
+          >
+            <span className="opacity-40 h-[1px] w-8 bg-white" />
+            <span>{dayMonth}</span>
+            <span className="opacity-40">•</span>
+            <span>{year}</span>
+            <span className="opacity-40 h-px w-8 bg-white" />
+          </motion.div>
+
+          {/* Branding Text */}
+          <motion.p
+              custom={0.4}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInVariants}
+              className="text-[9px] tracking-[0.9em] uppercase text-white/30 font-inter font-bold pl-[0.9em]"
+          >
             The Wedding Of
           </motion.p>
+        </div>
 
-          <motion.h1 custom={0.6} initial="hidden" whileInView="visible" variants={fadeIn} className="relative font-cormorant-upright text-[64px]  leading-[1.1] tracking-tighter">
-            {/* Row 1: Bride & Ampersand */}
-            <div className="flex items-center justify-center gap-6">
-              <span>Lili</span>
-              <span className="font-cormorant text-6xl md:text-4xl text-white/20 italic lowercase">&</span>
-            </div>
+        {/* 2. MIDDLE SECTION: Arsitektur Nama Pengantin */}
+        <div className="relative w-full my-auto py-10 flex flex-col items-center justify-center">
 
-            {/* Row 2: Groom (Below) */}
-            <div className="block mt-2">LeeRoy</div>
+          {/* Ampersand Raksasa Elegan sebagai Latar Belakang Teks Nama */}
+          <motion.span
+              custom={0.5}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 0.05, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2, ease: "easeOut" }}
+              className="absolute font-cormorant text-[12rem] md:text-[16rem] italic text-white pointer-events-none select-none z-0"
+          >
+            &
+          </motion.span>
+
+          {/* Susunan Typo Nama Utama */}
+          <motion.h1
+              custom={0.7}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInVariants}
+              className="relative z-10 font-cormorant-upright text-5xl sm:text-6xl md:text-7xl leading-[1.1] tracking-[0.08em] uppercase font-light text-white/95 flex flex-col items-center gap-1 md:gap-3"
+          >
+            <span className="block">{data.brideName || "Lili"}</span>
+            <span className="block font-alice text-lg md:text-xl text-white/30 my-1 lowercase italic tracking-normal">and</span>
+            <span className="block text-white/90">{data.groomName || "LeeRoy"}</span>
           </motion.h1>
         </div>
-      </div>
 
-      {/* 2. BOTTOM SECTION: Quranic Verse & Scroll Indicator */}
-      <div className="w-full max-w-xl space-y-12">
-        <motion.div custom={0.8} initial="hidden" whileInView="visible" variants={fadeIn} className="space-y-6 px-4">
-          <p className="font-lora text-[11px] md:text-[16px] leading-[1.8] text-white/60 font-light italic">
-            "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
-          </p>
-          <p className="font-inter text-[9px] tracking-[0.5em] uppercase text-white/30">QS. Ar-Rum : 21</p>
-        </motion.div>
+        {/* 3. BOTTOM SECTION: Kutipan Ayat & Petunjuk Scroll */}
+        <div className="w-full max-w-lg mx-auto flex flex-col items-center space-y-12">
 
-        {/* Minimalist Scroll Indicator */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }} className="flex flex-col items-center gap-2">
-          <ChevronDown size={20} className="text-white/20 stroke-[1px]" />
-        </motion.div>
-      </div>
-    </section>
+          {/* Kutipan Ayat */}
+          <motion.div
+              custom={0.9}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInVariants}
+              className="space-y-4 px-4 relative z-10"
+          >
+            <p className="font-lora text-[12px] md:text-[14px] leading-[1.9] text-white/60 font-light italic tracking-wide">
+              "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
+            </p>
+            <div className="h-px w-6 bg-white/10 mx-auto my-2" />
+            <p className="font-inter text-[8px] tracking-[0.5em] uppercase text-white/30 font-bold">QS. Ar-Rum : 21</p>
+          </motion.div>
+
+          {/* Minimalist Interaktif Scroll Indicator (Bergerak Loop Naik Turun) */}
+          <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 5 }}
+              transition={{
+                delay: 1.6,
+                duration: 1.2,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+              className="flex flex-col items-center gap-1 cursor-pointer"
+          >
+            <ChevronDown size={18} className="text-white/30 stroke-[1.25px]" />
+          </motion.div>
+        </div>
+
+      </section>
   )
 }
