@@ -44,10 +44,10 @@ export default function Navbar() {
   return (
     <>
       {/* 1. MAIN NAVIGATION BAR (Sticky) */}
-      <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${scrolled ? "py-4" : "py-8"}`}>
-        <div className="max-w-[1440px] mx-auto px-8 lg:px-12 flex items-center justify-between">
+      <header className={`fixed top-0 left-0 w-full z-100 transition-all duration-500 ${scrolled ? "py-4" : "py-8"}`}>
+        <div className="max-w-360 mx-auto px-8 lg:px-12 flex items-center justify-between">
           {/* LOGO */}
-          <Link to="/" className="flex items-center gap-3 z-[110]">
+          <Link to="/" className="flex items-center gap-3 z-110">
             <img src="/logo-without-text-3.png" alt="Invify" className={`w-7 transition-all `} />
             <span className={`font-cormorant-upright text-2xl tracking-widest uppercase transition-colors text-white`}>Invify</span>
           </Link>
@@ -62,16 +62,16 @@ export default function Navbar() {
           </nav>
 
           {/* RIGHT SIDE: TOGGLE BUTTON */}
-          <div className="flex items-center gap-6 z-[110]">
+          <div className="flex items-center gap-6 z-110">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`group flex items-center gap-3 px-4 py-2 rounded-full transition-all ${scrolled || isOpen ? "bg-white/10 backdrop-blur-md border border-white/20 text-white" : "bg-black text-white"}`}
             >
               <span className="text-[10px] uppercase tracking-[0.2em] font-bold hidden sm:block">{isOpen ? "Close" : "Menu"}</span>
               <div className="relative w-5 h-4 flex flex-col justify-between">
-                <span className={`w-full h-[1.5px] bg-current transition-all duration-300 ${isOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
+                <span className={`w-full h-[1.5px] bg-current transition-all duration-300 ${isOpen ? "rotate-45 translate-y-1.75" : ""}`} />
                 <span className={`w-full h-[1.5px] bg-current transition-all duration-300 ${isOpen ? "opacity-0" : ""}`} />
-                <span className={`w-full h-[1.5px] bg-current transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+                <span className={`w-full h-[1.5px] bg-current transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-1.75" : ""}`} />
               </div>
             </button>
           </div>
@@ -86,7 +86,7 @@ export default function Navbar() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-            className="fixed inset-0 z-[90] bg-[#0A0A0A] text-white flex flex-col justify-center overflow-hidden"
+            className="fixed inset-0 z-90 bg-[#0A0A0A] text-white flex flex-col justify-center overflow-hidden"
           >
             {/* Background Texture/Noise */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
@@ -101,8 +101,8 @@ export default function Navbar() {
               >
                 {/* Perubahan Utama: Hapus h-full dan object-cover, gunakan aspect-ratio */}
                 <img
-                  src="/frame.webp" // Gunakan salah satu foto template noir kamu
-                  className="w-full aspect-[3/4] object-contain brightness-50 shadow-2xl ring-1 ring-white/5"
+                  src="https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/frame.webp"
+                  className="w-full aspect-3/4 object-contain brightness-50 shadow-2xl ring-1 ring-white/5"
                   alt="Navigation Preview"
                 />
               </motion.div>
