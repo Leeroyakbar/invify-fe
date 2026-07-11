@@ -12,6 +12,7 @@ interface GallerySectionProps {
 export default function GallerySection({ data, onStateChange }: GallerySectionProps) {
   const [selectedImg, setSelectedImg] = useState<number | null>(null)
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const images = useMemo(() => {
     if (!data?.images || data.images.length === 0) return []
 
