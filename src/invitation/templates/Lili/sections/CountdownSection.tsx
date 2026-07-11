@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import type { Invitation } from "../../../../types/Invitation"
+import {createGoogleCalendarLink} from "../../../../utils/utils.ts";
 
 interface CountdownSectionProps {
   data: Invitation
@@ -45,14 +46,6 @@ export default function CountdownSection({ data }: CountdownSectionProps) {
       y: 0,
       transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] as const }
     },
-  }
-
-  // Fungsi utilitas untuk ekspor kalender
-  const handleAddToCalendar = () => {
-    // const title = `The Wedding of ${data.brideName} & ${data.groomName}`
-    const dateStr = data.eventDate.replace(/-/g, "")
-    const url = `https://google.com{encodeURIComponent(title)}&dates=${dateStr}T090000Z/${dateStr}T170000Z`
-    window.open(url, "_blank")
   }
 
   return (
@@ -122,7 +115,7 @@ export default function CountdownSection({ data }: CountdownSectionProps) {
               variants={luxuryFadeUp}
           >
             <button
-                onClick={handleAddToCalendar}
+                onClick={() => window.open(createGoogleCalendarLink(data), "_blank")}
                 className="group relative border border-white/10 px-12 py-4 text-[9px] tracking-[0.5em] uppercase overflow-hidden transition-all duration-500 hover:border-white rounded-none backdrop-blur-xs active:scale-95 shadow-xl"
             >
             <span className="relative z-10 transition-colors duration-500 group-hover:text-black font-semibold pl-[0.5em]">

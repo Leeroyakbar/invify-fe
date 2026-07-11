@@ -18,65 +18,98 @@ export default function AnnouncementVideoSection({ data, isOpened }: { data: Inv
     }
   }
 
-  // Varian animasi untuk teks
+  // Varian animasi masuk sinematik (Cubic Bezier Premium)
   const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 25 },
     visible: (custom: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 1,
+        duration: 1.4,
         delay: custom,
-        ease: [0.22, 1, 0.36, 1] as const,
+        ease: [0.16, 1, 0.3, 1] as const,
       },
     }),
   }
 
   return (
-    <section className="h-screen snap-start relative overflow-hidden bg-black" id="home">
-      {/* Video Background dengan Penyesuaian Opacity */}
-      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-80" src="/classic-noir/video-1.webm" />
+      <section className="h-screen snap-start relative overflow-hidden bg-[#0a0a0a]" id="home">
+        {/* Video Background - Diposisikan aman lewat hardware acceleration */}
+        <video
+            autoPlay loop muted playsInline preload="auto"
+            className="absolute inset-0 w-full h-full object-cover opacity-50 transform-gpu mix-blend-lighten"
+            src="https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/video-1.webm"
+        />
 
-      {/* Overlay Cinematic (Vignette Effect) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 pointer-events-none" />
+        {/* Advanced Noir Multilayer Overlay (Vignette & Shadow perlindungan kontras) */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(10,10,10,0.85)_100%)] z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/40 via-transparent to-[#0a0a0a] z-10 pointer-events-none" />
 
-      {/* Konten Utama */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 text-white">
-        <motion.div
-          initial="hidden"
-          animate={isOpened ? "visible" : "hidden"} // KUNCINYA DI SINI
-          viewport={{ once: false, amount: 0.4 }}
-          className="flex flex-col items-center"
-        >
-          <motion.span custom={0.5} variants={fadeInUp} className="text-[10px] tracking-[0.6em] uppercase mb-6 opacity-60">
-            The Wedding of
-          </motion.span>
+        {/* Bingkai Garis Tipis Teatrikal Poster Film */}
+        <div className="absolute inset-6 border border-white/4 z-10 pointer-events-none" />
 
-          <motion.h1 custom={0.8} variants={fadeInUp} className="font-serif text-4xl md:text-6xl mb-6 flex flex-col md:flex-row gap-2 md:gap-6 items-center italic">
-            <span className="not-italic">{data?.brideName.split(" ")[0]}</span>
-            <span className="text-xl md:text-3xl opacity-40">&</span>
-            <span className="not-italic">{data?.groomName.split(" ")[0]}</span>
-          </motion.h1>
+        {/* KONTEN UTAMA */}
+        <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-8 text-white">
 
-          <motion.div custom={1.1} variants={fadeInUp} className="flex flex-col items-center">
-            <div className="w-12 h-[1px] bg-white/30 mb-4" />
-            <p className="tracking-[0.3em] text-[11px] uppercase font-light">{eventDateFormatted}</p>
-          </motion.div>
-        </motion.div>
-      </div>
+          <motion.div
+              initial="hidden"
+              animate={isOpened ? "visible" : "hidden"}
+              className="flex flex-col items-center relative z-10 w-full"
+          >
+            {/* Subtitle Atas */}
+            <motion.span
+                custom={0.4}
+                variants={fadeInUp}
+                className="text-[9px] tracking-[0.7em] uppercase mb-8 text-white/40 font-sans font-bold pl-[0.7em]"
+            >
+              The Wedding Celebration
+            </motion.span>
 
-      {/* SCROLL INDICATOR (Gaya Minimalis) */}
-      <motion.a onClick={scrollToSection} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 cursor-pointer group">
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-[8px] tracking-[0.4em] uppercase opacity-30 group-hover:opacity-100 transition-opacity duration-500 mb-2">Scroll</span>
-          <div className="relative flex flex-col items-center">
-            <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
-              <ChevronDown className="w-5 h-5 text-white/40" strokeWidth={1} />
+            {/* Judul Nama Utama (Gaya Poster Sinema Klasik) */}
+            <motion.h1
+                custom={0.6}
+                variants={fadeInUp}
+                className="font-serif text-4xl sm:text-5xl md:text-6xl mb-8 flex flex-col items-center gap-1 uppercase tracking-widest font-light leading-tight text-white/95"
+            >
+              <span>{data?.brideName.split(" ")[0]}</span>
+              <span className="font-sans text-[11px] tracking-[0.4em] text-white/20 my-1 block lowercase italic">— and —</span>
+              <span>{data?.groomName.split(" ")[0]}</span>
+            </motion.h1>
+
+            {/* Blok Penutup Tanggal Gantung */}
+            <motion.div custom={0.8} variants={fadeInUp} className="flex flex-col items-center w-full">
+              <div className="w-8 h-px bg-white/20 mb-4" />
+              <p className="tracking-[0.4em] text-[10px] sm:text-[11px] uppercase text-white/60 font-sans font-medium pl-[0.4em]">
+                {eventDateFormatted}
+              </p>
             </motion.div>
-            <ChevronDown className="w-5 h-5 text-white/10 -mt-3" strokeWidth={1} />
-          </div>
+          </motion.div>
         </div>
-      </motion.a>
-    </section>
+
+        {/* SCROLL INDICATOR INTERAKTIF CINEMATIC */}
+        <motion.a
+            onClick={scrollToSection}
+            initial={{ opacity: 0 }}
+            animate={isOpened ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 1.4, duration: 0.8 }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 cursor-pointer group select-none"
+        >
+          <div className="flex flex-col items-center gap-1">
+          <span className="text-[8px] tracking-[0.5em] uppercase text-white/30 group-hover:text-white/70 transition-colors duration-400 pl-[0.5em] mb-2 font-bold">
+            Scroll
+          </span>
+            <div className="relative flex flex-col items-center h-8 w-4 overflow-hidden">
+              {/* Animasi panah bergulir lurus ke bawah konstan */}
+              <motion.div
+                  animate={{ y: ["-100%", "100%"] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute"
+              >
+                <ChevronDown className="w-4 h-4 text-white/50 stroke-[1.25px]" />
+              </motion.div>
+            </div>
+          </div>
+        </motion.a>
+      </section>
   )
 }
