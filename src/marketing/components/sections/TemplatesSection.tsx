@@ -7,10 +7,10 @@ import api from "../../../api/axiosConfig"
 import type { TemplateResponse } from "../../../types/TemplateResponse"
 
 // Import assets tetap sama
-import template1 from "../../../../public/templates/template-1.png"
+// import template1 from "../../../../public/templates/template-1.png"
 // import template2 from "../../../../public/templates/template-2.png"
 import template3 from "../../../../public/templates/template-3.png"
-import template4 from "../../../../public/templates/template-4.png"
+// import template4 from "../../../../public/templates/template-4.png"
 import template5 from "../../../../public/templates/template-5.png"
 import rahmaTemplate from "../../../../public/templates/rahma-template.webp"
 
@@ -34,8 +34,8 @@ const staticTemplates = [
   { templateId: "st-4", templateName: "Classic Noir", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/classic-noir", previewImage: template3, isStatic: true },
   { templateId: "st-2", templateName: "Lili", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/lili", previewImage: template5, isStatic: true },
   { templateId: "st-6", templateName: "Rahma", templateCategory: "Elegant", price: "100.000 - 150.000", popular: true, src: "/demo/rahma", previewImage: rahmaTemplate, isStatic: true },
-  { templateId: "st-3", templateName: "Royal Elegance", templateCategory: "Elegant", price: "100.000 - 150.000", popular: false, src: "/demo/elegant-ivory", previewImage: template1, isStatic: true },
-  { templateId: "st-1", templateName: "Old Money", templateCategory: "Elegant", price: "100.000 - 150.000", popular: false, src: "/demo/old-money", previewImage: template4, isStatic: true },
+  // { templateId: "st-3", templateName: "Royal Elegance", templateCategory: "Elegant", price: "100.000 - 150.000", popular: false, src: "/demo/elegant-ivory", previewImage: template1, isStatic: true },
+  // { templateId: "st-1", templateName: "Old Money", templateCategory: "Elegant", price: "100.000 - 150.000", popular: false, src: "/demo/old-money", previewImage: template4, isStatic: true },
   // { templateId: "st-5", templateName: "Modern Love", templateCategory: "Floral", price: "100.000 - 150.000", popular: false, src: "/demo/modern", previewImage: template2, isStatic: true },
 ]
 
