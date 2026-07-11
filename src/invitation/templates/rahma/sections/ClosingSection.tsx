@@ -5,7 +5,7 @@ import { Heart } from "lucide-react"
 
 export default function ClosingSection({ data }: { data: Invitation }) {
   const [currentImage, setCurrentImage] = useState(0)
-  const images = data.images.length > 0 ? data.images : ["/rahma/gallery-15.webp"]
+  const images = data.images.length > 0 ? data.images : ["https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-15.webp"]
 
   useEffect(() => {
     if (images.length <= 1) return

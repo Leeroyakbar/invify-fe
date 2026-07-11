@@ -34,7 +34,7 @@ export default function GiftSection({ data }: { data: Invitation }) {
       <div className="max-w-5xl mx-auto px-6 mb-20">
         <motion.div initial={{ opacity: 0, scale: 1.1 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5 }} className="relative h-75 md:h-100 rounded-2xl overflow-hidden shadow-2xl border border-white/5">
           {/* Silahkan ganti src dengan foto landscape favoritmu */}
-          <img src="/rahma/gallery-6.webp" className="w-full h-full object-cover grayscale-30 brightness-75" alt="Landscape Decoration" />
+          <img src="https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-6.webp" className="w-full h-full object-cover grayscale-30 brightness-75" alt="Landscape Decoration" />
           <div className="absolute inset-0 bg-linear-to-t from-[#0f0f0f] via-transparent to-transparent" />
 
           <div className="absolute bottom-10 left-10 space-y-2">
