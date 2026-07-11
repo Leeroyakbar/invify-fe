@@ -20,7 +20,7 @@ export default function LiveStreamSection({ data }: LiveStreamSectionProps) {
       <motion.div {...fadeUp} className="relative z-10 w-full py-20 max-w-sm overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-[#0F0F0F]">
         {/* Background Image: Object-cover memastikan foto terpotong rapi, bukan ditarik/stretch */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <img src="/lili/gallery-3.webp" alt="Live Background" className="w-full h-full object-cover opacity-30 scale-110 transition-transform duration-[3s] hover:scale-100" />
+          <img src={data.images[2]} alt="Live Background" className="w-full h-full object-cover opacity-30 scale-110 transition-transform duration-[3s] hover:scale-100" />
           <div className="absolute inset-0 bg-linear-to-t from-[#0F0F0F] via-transparent to-[#0F0F0F]/80" />
         </div>
 

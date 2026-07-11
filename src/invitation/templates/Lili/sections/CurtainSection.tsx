@@ -12,6 +12,7 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
   const day = dateParts[0]
   const month = dateParts[1]
   const year = dateParts[2]
+  const urlBackground = 'https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/cover.webp';
 
   return (
     <AnimatePresence>
@@ -25,10 +26,12 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
           className="fixed inset-0 z-150 flex h-screen w-full flex-col justify-between overflow-hidden text-white bg-black"
         >
           {/* Background - Menggunakan gambar lili/cover.JPG */}
-          <div className="absolute inset-0 bg-cover bg-center " style={{ backgroundImage: `url('/lili/cover.webp')` }} />
-
+          <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${urlBackground})` }}
+          />
           {/* Overlay: Dibuat gradient agar teks bawah lebih pop */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/80 z-10" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/40 to-black/80 z-10" />
 
           {/* Frame Bingkai Halus: Menggunakan inset-8 agar lebih spacious */}
           <div className="absolute inset-8 border border-white/10 z-20 pointer-events-none" />

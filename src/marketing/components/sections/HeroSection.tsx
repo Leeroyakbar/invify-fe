@@ -50,8 +50,17 @@ export default function HeroSection() {
         <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
           <motion.div initial={{ opacity: 0, scale: 0.8, rotate: 5 }} animate={{ opacity: 1, scale: 1, rotate: -2 }} transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] }} className="relative w-full max-w-[340px] aspect-[9/18]">
             {/* FRAMELESS MOCKUP */}
-            <div className="absolute inset-0 bg-[#161616] rounded-[24px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] ring-1 ring-white/10">
-              <video autoPlay loop muted playsInline className="w-full h-full object-cover transition-all duration-700" src="/classic-noir/video-1.webm" />
+            {/* FRAMELESS MOCKUP */}
+            <div className="absolute inset-0 bg-[#161616] rounded-3xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] ring-1 ring-white/10">
+              <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  className="w-full h-full object-cover transition-all duration-700"
+                  src="https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/sign/invify-bucket/video-1.webm?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iN2QyMDIwYi0wYmI3LTQzODgtYWU3Yy05MWQ4MGRkMGEyYTkiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbnZpZnktYnVja2V0L3ZpZGVvLTEud2VibSIsInNjb3BlIjoiZG93bmxvYWQiLCJpYXQiOjE3ODM3MzIyNTMsImV4cCI6MTgxNTI2ODI1M30.O7i4RC1AbUYRyxi8cHIzbKOXQabOE2GYy1Ppa3SkIUI"
+              />
 
               {/* Floating Element over Video */}
               <div className="absolute top-12 left-0 w-full px-8">
@@ -59,6 +68,7 @@ export default function HeroSection() {
                 <p className="font-cormorant-upright text-white text-2xl tracking-[0.2em] uppercase">Private Event</p>
               </div>
             </div>
+
 
             {/* FLOATING CARD DECORATION */}
             <motion.div

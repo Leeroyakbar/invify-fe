@@ -22,6 +22,8 @@ export default function LiliTemplate() {
   const data = DEMO_INVITATIONS["lili"]
   const [isOpened, setIsOpened] = useState(false)
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
+  const coverLeft = 'https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/cover-left.webp';
+  const videoBackground = 'https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/video-1.webm';
 
   const handleOpenInvitation = () => {
     setIsOpened(true)
@@ -70,14 +72,14 @@ export default function LiliTemplate() {
 
       <div className="flex h-screen w-full">
         {/* LEFT SIDE (Desktop Static) */}
-        <div className="hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-520px)] bg-cover bg-center overflow-hidden" style={{ backgroundImage: `url('/lili/cover-left.webp')` }}>
+        <div className="hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-520px)] bg-cover bg-center overflow-hidden" style={{ backgroundImage: `url('${coverLeft}')` }}>
           <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/10 to-transparent" />
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
           <div className="relative z-10 w-full h-full flex flex-col justify-end items-start p-20">
             <div className="max-w-2xl">
               <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} className="mb-8">
                 <span className="text-white/50 tracking-[0.8em] uppercase text-[9px] font-inter block mb-2">The Wedding Of</span>
-                <div className="h-[1px] w-12 bg-white/30" />
+                <div className="h-px w-12 bg-white/30" />
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 1 }}>
                 <h1 className="font-cormorant-upright text-[100px] xl:text-[120px] text-white leading-[0.85] tracking-tighter">
@@ -93,16 +95,16 @@ export default function LiliTemplate() {
               </motion.div>
             </div>
           </div>
-          <div className="absolute left-8 bottom-20 w-[1px] h-32 bg-gradient-to-t from-white/40 to-transparent" />
+          <div className="absolute left-8 bottom-20 w-px h-32 bg-linear-to-t from-white/40 to-transparent" />
         </div>
 
         {/* RIGHT SIDE: Content Area */}
-        <div className="ml-0 lg:ml-[calc(100%-520px)] w-full lg:w-[520px] h-screen bg-[#0A0A0A] shadow-2xl relative overflow-hidden">
+        <div className="ml-0 lg:ml-[calc(100%-520px)] w-full lg:w-130 h-screen bg-[#0A0A0A] shadow-2xl relative overflow-hidden">
           {/* VIDEO BACKGROUND (Z-Index 0) */}
           {isOpened && (
             <div className="absolute inset-0 z-0">
-              <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-50" src="/classic-noir/video-1.webm" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
+              <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-50" src={videoBackground} />
+              <div className="absolute inset-0 bg-linear-to-b from-black/80 via-transparent to-black/80" />
             </div>
           )}
 

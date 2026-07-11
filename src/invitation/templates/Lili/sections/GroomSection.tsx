@@ -17,7 +17,7 @@ export default function GroomSection({ data }: GroomSectionProps) {
   // Mengambil data dari Invitation Interface
   const igUsername = data.groomInstagram || "username"
   const groomParentName = `${data.groomFather} & ${data.groomMother}`
-  const groomImageUrl = "/lili/groom.webp"
+  const groomImageUrl = "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/lili/groom.webp"
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-black text-white border-t border-white/5">

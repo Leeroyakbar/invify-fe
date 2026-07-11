@@ -18,7 +18,7 @@ export default function ClosingSection({ data }: ClosingSectionProps) {
     <section className="relative w-full min-h-screen flex flex-col items-center justify-between overflow-hidden">
       {/* BACKGROUND IMAGE WITH VIGNETTE */}
       <div className="absolute inset-0 z-0">
-        <img src="/lili/gallery-3.webp" alt="Closing" className="w-full h-full object-cover" />
+        <img src={data.images[2]} alt="Closing" className="w-full h-full object-cover" />
         {/* Overlay Noir Gradient - Lebih gelap di atas dan bawah untuk teks */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black/90" />
       </div>

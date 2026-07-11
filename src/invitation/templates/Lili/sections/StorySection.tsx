@@ -19,16 +19,18 @@ export default function StorySection({ data }: StorySectionProps) {
     { title: "Chapter Three: Hari Pernikahan", content: data.storyMarriage },
   ]
 
+  const storyImgHeader = [data.images[1], data.images[2]]
+
   return (
     <section className="relative min-h-screen w-full py-24 px-8 lg:px-16 flex flex-col items-center">
       <div className="relative z-10 w-full max-w-xl">
         {/* 1. PHOTO DISPLAY (Elegant Rounded) */}
         <div className="grid grid-cols-2 gap-3 mb-20">
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5 }} className="aspect-square rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
-            <img src="/lili/gallery-2.webp" alt="Moment 1" className="w-full h-full object-cover" />
+            <img src={storyImgHeader[0]} alt="Moment 1" className="w-full h-full object-cover" />
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, delay: 0.2 }} className="aspect-square rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
-            <img src="/lili/gallery-3.webp" alt="Moment 2" className="w-full h-full object-cover" />
+            <img src={storyImgHeader[1]} alt="Moment 2" className="w-full h-full object-cover" />
           </motion.div>
         </div>
 
