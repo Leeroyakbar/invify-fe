@@ -8,6 +8,7 @@ type CurtainProps = {
 }
 
 export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps) {
+  const backgroundImage = 'https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-8.webp';
   return (
     <AnimatePresence>
       {!isOpened && (
@@ -24,8 +25,8 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 20, ease: "linear" }}
-            className="absolute inset-0 bg-cover bg-center grayscale-[30%] brightness-[0.4]"
-            style={{ backgroundImage: `url('/rahma/gallery-8.webp')` }}
+            className="absolute inset-0 bg-cover bg-center grayscale-30 brightness-[0.4]"
+            style={{ backgroundImage: `url(${backgroundImage})` }}
           />
 
           {/* 2. MAIN CONTENT - Editorial Style */}
@@ -43,14 +44,14 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
                   <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="font-montserrat text-[10px] uppercase tracking-[0.8em] text-white/50">
                     Est. 2027
                   </motion.p>
-                  <h1 className="font-cinzel text-white text-4xl tracking-[0.1em] uppercase leading-none">
+                  <h1 className="font-cinzel text-white text-4xl tracking-widest uppercase leading-none">
                     {data.brideName} <br />
                     <span className="text-white/30">&</span> {data.groomName}
                   </h1>
                 </div>
 
                 {/* Quote langsung di bawah nama dengan margin yang pas */}
-                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 0.6, x: 0 }} transition={{ delay: 1.2, duration: 2 }} className="max-w-[220px]">
+                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 0.6, x: 0 }} transition={{ delay: 1.2, duration: 2 }} className="max-w-55">
                   <p className="font-reenie-beanie text-2xl text-white/90 leading-snug tracking-wide italic">"Two souls with but a single thought, two hearts that beat as one."</p>
                 </motion.div>
               </div>
@@ -75,9 +76,9 @@ export default function CurtainSection({ data, isOpened, onOpen }: CurtainProps)
 
                 {/* Garis yang memanjang saat di-hover */}
                 <div className="flex items-center">
-                  <div className="h-[1px] w-12 bg-white/40 group-hover:w-20 group-hover:bg-white transition-all duration-500" />
+                  <div className="h-px w-12 bg-white/40 group-hover:w-20 group-hover:bg-white transition-all duration-500" />
                   {/* Menambahkan Arrow kecil sebagai tanda fungsionalitas */}
-                  <motion.span className="text-[14px] ml-[-5px] opacity-0 group-hover:opacity-100 transition-opacity duration-500">→</motion.span>
+                  <motion.span className="text-[14px] -ml-1.25 opacity-0 group-hover:opacity-100 transition-opacity duration-500">→</motion.span>
                 </div>
               </motion.button>
             </div>

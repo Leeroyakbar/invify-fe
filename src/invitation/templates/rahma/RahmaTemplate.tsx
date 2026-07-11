@@ -16,16 +16,16 @@ import RSVPAndWishes from "./sections/RSVPWishesSection"
 
 // List gambar background untuk sisi kanan yang akan berganti
 const backgroundImages = [
-  "/rahma/gallery-1.webp",
-  "/rahma/gallery-2.webp",
-  "/rahma/gallery-3.webp",
-  "/rahma/gallery-4.webp",
-  "/rahma/gallery-5.webp",
-  "/rahma/gallery-6.webp",
-  "/rahma/gallery-7.webp",
-  "/rahma/gallery-8.webp",
-  "/rahma/gallery-9.webp",
-  "/rahma/gallery-10.webp",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-1.webp?width=600",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-2.webp?width=600",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-3.webp?width=600",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-4.webp?width=600",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-5.webp?width=600",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-6.webp?width=600",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-7.webp?width=600",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-8.webp?width=600",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-9.webp?width=600",
+  "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-10.webp?width=600",
 ]
 
 export default function RahmaTemplate() {
@@ -34,6 +34,8 @@ export default function RahmaTemplate() {
   const [currentBg, setCurrentBg] = useState(0)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+
+  const coverLeft = 'https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/cover-left.webp';
 
   useEffect(() => {
     if (isOpened) {
@@ -86,7 +88,7 @@ export default function RahmaTemplate() {
       <div className="flex h-screen w-full">
         {/* LEFT SIDE (Desktop Fixed) */}
         <div className="hidden lg:flex fixed left-0 top-0 h-screen w-[calc(100%-520px)] overflow-hidden pointer-events-none z-20">
-          <motion.div initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 2 }} className="w-full h-full bg-cover bg-center relative" style={{ backgroundImage: `url('/rahma/cover-left.webp')` }}>
+          <motion.div initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 2 }} className="w-full h-full bg-cover bg-center relative" style={{ backgroundImage: `url(${coverLeft})` }}>
             <div className="absolute inset-0 bg-black/40" />
             <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-80" />
             <div className="absolute inset-0 bg-linear-to-r from-black/40 via-transparent to-transparent" />

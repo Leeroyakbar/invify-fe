@@ -168,7 +168,7 @@ export default function EventSection({ data }: { data: Invitation }) {
           <motion.img
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 10 }}
-            src="/rahma/gallery-3.webp" // Ganti dengan foto couple yang paling cinematic
+            src="https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-2.webp" // Ganti dengan foto couple yang paling cinematic
             className="w-full h-full object-cover object-[40%_center] opacity-60 grayscale-30"
           />
           <div className="absolute inset-0 bg-linear-to-t from-[#0F0F0F] via-transparent to-transparent" />

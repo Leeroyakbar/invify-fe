@@ -21,19 +21,19 @@ export default function StorySection({ data }: { data: Invitation }) {
     {
       title: "The First Meet",
       content: data.storyMeet,
-      image: "/rahma/gallery-6.webp",
+      image: "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-6.webp",
       align: "left",
     },
     {
       title: "The Commitment",
       content: data.storyCommitment,
-      image: "/rahma/gallery-4.webp",
+      image: "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-4.webp",
       align: "right",
     },
     {
       title: "The Journey Begins",
       content: data.storyMarriage,
-      image: "/rahma/gallery-15.webp",
+      image: "https://wjvcqywqsqphkcygwxui.supabase.co/storage/v1/object/public/invify-bucket/rahma/gallery-15.webp",
       align: "left",
     },
   ]
