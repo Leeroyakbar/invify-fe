@@ -28,7 +28,6 @@ export default function LiliTemplate() {
   const handleOpenInvitation = () => {
     setIsOpened(true)
     setIsAudioPlaying(true)
-    toggleFullScreen()
   }
 
   const toggleFullScreen = () => {
@@ -49,7 +48,7 @@ export default function LiliTemplate() {
       {/* NAVBAR HANYA MUNCUL JIKA SUDAH DIBUKA */}
       {isOpened && <MobileNavbar containerRef={scrollContainerRef} hide={isAnyModalOpen} />}
       {/* 1. FLOATING CONTROLS */}
-      <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-center gap-4">
+      <div className="fixed bottom-6 right-6 z-100 flex flex-col items-center gap-4">
         <button onClick={toggleFullScreen} className="flex items-center justify-center bg-black/40 backdrop-blur-md border border-white/10 w-12 h-12 rounded-full shadow-2xl active:scale-90 transition-all hover:bg-white/10">
           <Maximize size={18} className="text-white" />
         </button>
